@@ -1,0 +1,1 @@
+@layer ui{.ol-loading svg{-webkit-animation:none;animation:none}.ol-loading__circle{--un-fill-opacity: 1;fill:hsl(var(--ol-colors-primary-500-hsl) / var(--un-fill-opacity));opacity:0}.ol-loading{--el-mask-color: #ffffff80;--el-loading-spinner-size: 4rem;--el-loading-fullscreen-spinner-size: 4rem}}
