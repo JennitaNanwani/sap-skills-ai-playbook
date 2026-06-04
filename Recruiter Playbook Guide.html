@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP Skills & AI Recruiter Playbook — How to Use</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',Arial,sans-serif;background:#F5F6F8;color:#1A1D23;font-size:13px;line-height:1.6;}
+
+  .page{max-width:960px;margin:0 auto;padding:32px 24px 48px;}
+
+  /* Header */
+  .hdr{background:linear-gradient(135deg,#0D1B30 0%,#1A0830 100%);border-radius:12px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .hdr-left{display:flex;align-items:center;gap:16px;}
+  .hdr-logo{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg,#D6185A,#FF6FA0);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0;}
+  .hdr-title{color:#fff;font-size:20px;font-weight:800;margin-bottom:3px;}
+  .hdr-sub{color:rgba(255,255,255,.6);font-size:12px;}
+  .hdr-badge{background:rgba(214,24,90,.18);border:1px solid rgba(214,24,90,.4);border-radius:20px;padding:4px 12px;color:#FF6FA0;font-size:11px;font-weight:700;white-space:nowrap;}
+
+  /* Section label */
+  .section-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:#9CA3AF;margin-bottom:10px;margin-top:24px;}
+
+  /* Cards grid */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+
+  .card{background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:16px 18px;}
+  .card-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:10px;flex-shrink:0;}
+  .card-title{font-size:13px;font-weight:700;color:#1A1D23;margin-bottom:4px;}
+  .card-desc{font-size:12px;color:#4B5563;line-height:1.55;}
+
+  /* Tab steps */
+  .tabs-list{display:flex;flex-direction:column;gap:8px;}
+  .tab-row{background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;}
+  .tab-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .tab-name{font-size:13px;font-weight:700;color:#1A1D23;margin-bottom:2px;}
+  .tab-desc{font-size:12px;color:#4B5563;line-height:1.5;}
+  .tab-tag{display:inline-block;padding:1px 7px;border-radius:8px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle;}
+  .tag-recruiter{background:#FEF0F5;color:#C41454;border:1px solid #F9C8D8;}
+  .tag-hm{background:#F0FDF4;color:#047857;border:1px solid #A7F3D0;}
+
+  /* How-to steps */
+  .steps{display:flex;flex-direction:column;gap:6px;}
+  .step{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#fff;border:1px solid #E5E7EB;border-radius:8px;}
+  .step-dot{width:20px;height:20px;border-radius:50%;background:#0070F2;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .step strong{color:#1A1D23;}
+  .step span{color:#4B5563;font-size:12px;}
+
+  /* Tips */
+  .tips{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .tip{padding:12px 14px;border-radius:8px;font-size:12px;line-height:1.55;}
+  .tip-do{background:#F0FDF4;border:1px solid #A7F3D0;color:#065F46;}
+  .tip-dont{background:#FEF2F2;border:1px solid #FECACA;color:#7F1D1D;}
+  .tip-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;}
+  .tip-do .tip-label{color:#047857;}
+  .tip-dont .tip-label{color:#B91C1C;}
+
+  /* Feature pills */
+  .features{display:flex;flex-wrap:wrap;gap:8px;}
+  .feat{display:flex;align-items:center;gap:7px;padding:8px 12px;background:#fff;border:1px solid #E5E7EB;border-radius:8px;font-size:12px;font-weight:500;}
+  .feat-icon{font-size:14px;}
+
+  /* Footer */
+  .footer{margin-top:28px;padding:14px 20px;background:#fff;border:1px solid #E5E7EB;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .footer-left{font-size:11.5px;color:#6B7280;}
+  .footer-left strong{color:#1A1D23;}
+  .footer-badge{background:#FEF0F5;border:1px solid #F9C8D8;border-radius:20px;padding:3px 10px;font-size:10.5px;font-weight:700;color:#C41454;}
+
+  /* Highlight box */
+  .highlight{background:linear-gradient(135deg,#EFF6FF,#F5F3FF);border:1px solid #BFDBFE;border-radius:10px;padding:14px 18px;margin-bottom:0;}
+  .highlight-title{font-size:13px;font-weight:700;color:#1E40AF;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+  .highlight ul{padding-left:16px;}
+  .highlight li{font-size:12px;color:#1E3A8A;line-height:1.7;}
+
+  @media print{
+    body{background:#fff;}
+    .page{padding:16px;}
+    .hdr{border-radius:8px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="hdr">
+    <div class="hdr-left">
+      <div class="hdr-logo">S</div>
+      <div>
+        <div class="hdr-title">SAP Skills &amp; AI Recruiter Playbook</div>
+        <div class="hdr-sub">Tech Talent Discovery &nbsp;·&nbsp; How to Use Guide &nbsp;·&nbsp; 2026</div>
+      </div>
+    </div>
+    <div class="hdr-badge">&#128274; SAP Internal — Recruiter Use Only</div>
+  </div>
+
+  <!-- What is it -->
+  <div class="section-label">What is the Playbook?</div>
+  <div class="highlight">
+    <div class="highlight-title">&#128218; Your end-to-end hiring toolkit for Tech &amp; Engineering roles</div>
+    <ul>
+      <li>A single-page tool that guides you from job profile through to offer — structured around SAP's Skills &amp; AI hiring framework.</li>
+      <li>Everything auto-saves in your browser — close the tab and your work will be there when you return.</li>
+      <li>Contains a <strong>Recruiter view</strong> (default) and an <strong>HM View</strong> you can use on-screen during the RSM conversation.</li>
+    </ul>
+  </div>
+
+  <!-- Tabs -->
+  <div class="section-label">The 6 Tabs — What Each One Does</div>
+  <div class="tabs-list">
+    <div class="tab-row">
+      <div class="tab-num">1</div>
+      <div>
+        <div class="tab-name">Workflow <span class="tab-tag tag-recruiter">Recruiter</span></div>
+        <div class="tab-desc">Your end-to-end hiring map — 4 steps from Job Profile to Skill Evaluation. Use this as your process anchor at the start of every new requisition.</div>
+      </div>
+    </div>
+    <div class="tab-row">
+      <div class="tab-num">2</div>
+      <div>
+        <div class="tab-name">Strategy Meeting <span class="tab-tag tag-recruiter">Recruiter</span></div>
+        <div class="tab-desc">Structured RSM form with a directional questionnaire (Q1–11), Skills &amp; Interviewer Allocation, Next Steps, and a free-text Summary box. Export your notes or send a Post-Strategy Email directly from here. Supports BrightHire mode.</div>
+      </div>
+    </div>
+    <div class="tab-row">
+      <div class="tab-num">3</div>
+      <div>
+        <div class="tab-name">Skills Prioritization <span class="tab-tag tag-recruiter">Recruiter</span> <span class="tab-tag tag-hm">HM View</span></div>
+        <div class="tab-desc">Embedded tool for agreeing the 5 Must-Have tech skills with your HM. Walk the HM through this on-screen during the RSM. Use the Send Email button to share the agreed skills summary.</div>
+      </div>
+    </div>
+    <div class="tab-row">
+      <div class="tab-num">4</div>
+      <div>
+        <div class="tab-name">Interview Guide <span class="tab-tag tag-recruiter">Recruiter</span></div>
+        <div class="tab-desc">7 standardised interview questions for Tech &amp; Engineering roles, each with "What to Listen For" guidance. Export or email directly to the interview panel.</div>
+      </div>
+    </div>
+    <div class="tab-row">
+      <div class="tab-num">5</div>
+      <div>
+        <div class="tab-name">Job Descriptions <span class="tab-tag tag-recruiter">Recruiter</span></div>
+        <div class="tab-desc">Pre-built JD templates and guidance for SAP E&amp;T roles. Use to sense-check or improve a JD before posting.</div>
+      </div>
+    </div>
+    <div class="tab-row">
+      <div class="tab-num">6</div>
+      <div>
+        <div class="tab-name">FAQ <span class="tab-tag tag-recruiter">Recruiter</span> <span class="tab-tag tag-hm">HM View</span></div>
+        <div class="tab-desc">Answers to common recruiter questions on skills, AI, and the hiring process. A separate HM-specific FAQ is visible when HM View is active.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to run an RSM -->
+  <div class="section-label">How to Run a Strategy Meeting with the Playbook</div>
+  <div class="steps">
+    <div class="step"><div class="step-dot">1</div><div><strong>Before the call</strong> <span>— Open the Strategy Meeting tab. Fill in HM name, REQ ID, and date. Review Q1–11 to pick the questions most relevant to this role.</span></div></div>
+    <div class="step"><div class="step-dot">2</div><div><strong>During the call</strong> <span>— Type notes directly into the questionnaire fields. Switch to HM View and open Skills Prioritization to agree the 5 Must-Have skills on-screen with the HM.</span></div></div>
+    <div class="step"><div class="step-dot">3</div><div><strong>Skills agreement</strong> <span>— Use the Skills Prioritization tab to walk the HM through Must Have / Nice to Have / Not Required. Fill in the Skills &amp; Interviewer Allocation section.</span></div></div>
+    <div class="step"><div class="step-dot">4</div><div><strong>After the call</strong> <span>— Complete Next Steps checkboxes. Add your Recruiter Summary. Click <strong>Send Email</strong> to copy the formatted summary and open Outlook — paste with Ctrl+V.</span></div></div>
+    <div class="step"><div class="step-dot">5</div><div><strong>Export for records</strong> <span>— Click <strong>Export &amp; Download RSM Notes</strong> to save a full HTML copy of your notes for file-keeping or sharing with a covering recruiter.</span></div></div>
+  </div>
+
+  <!-- Key features -->
+  <div class="section-label">Key Features at a Glance</div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-icon" style="background:#FEF0F5;">&#128101;</div>
+      <div class="card-title">HM View</div>
+      <div class="card-desc">Shows a simplified view for walking the HM through skills on-screen. <strong>Never share the playbook link</strong> with the HM — this is a recruiter demo tool only.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#F0FDF4;">&#127908;</div>
+      <div class="card-title">BrightHire Mode</div>
+      <div class="card-desc">Toggle on if you recorded the RSM via BrightHire. Paste the AI summary into the BrightHire box — it replaces the questionnaire in the Post-Strategy Email.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#EFF6FF;">&#128190;</div>
+      <div class="card-title">Auto-Save &amp; Sessions</div>
+      <div class="card-desc">All fields save automatically in your browser. Use <strong>Save Session</strong> to store named drafts for different HMs or requisitions and reload them anytime.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#FEF0F5;">&#128233;</div>
+      <div class="card-title">Send Email</div>
+      <div class="card-desc">One click copies a fully formatted email to your clipboard and opens Outlook. Press <strong>Ctrl+V</strong> in the Outlook compose window to paste — tables and colours included.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#F5F3FF;">&#128221;</div>
+      <div class="card-title">Strategy Summary Box</div>
+      <div class="card-desc">For notes captured outside the tool (e.g. informal call or Teams chat). Fill this instead of — or in addition to — the questionnaire. Included in your export.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#F0FDF4;">&#128196;</div>
+      <div class="card-title">Export RSM Notes</div>
+      <div class="card-desc">Downloads a complete HTML record of your RSM — questionnaire, skills, next steps, and summary. Use for file-keeping or briefing a covering recruiter.</div>
+    </div>
+  </div>
+
+  <!-- Dos and Don'ts -->
+  <div class="section-label">Dos &amp; Don'ts</div>
+  <div class="tips">
+    <div class="tip tip-do">
+      <div class="tip-label">&#10003; Do</div>
+      Use HM View on your screen during the RSM — walk the HM through skills live.<br><br>
+      Toggle BrightHire mode if you recorded the meeting — paste the AI summary instead of typing notes.<br><br>
+      Save a named session for each requisition so you can switch between HMs without losing work.<br><br>
+      Use the directional questionnaire as a guide — pick the questions relevant to the conversation, not all 11.
+    </div>
+    <div class="tip tip-dont">
+      <div class="tip-label">&#10007; Don't</div>
+      Share the playbook link with the Hiring Manager — it is an internal recruiter tool.<br><br>
+      Send the email without pasting into Outlook — click Send Email, then Ctrl+V in the compose window.<br><br>
+      Skip the Skills &amp; Interviewer Allocation section — this feeds the interview panel briefing.<br><br>
+      Rely on browser history for saving — use Save Session for anything you need to retrieve later.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left"><strong>SAP Skills &amp; AI Recruiter Playbook</strong> &nbsp;·&nbsp; Tech Talent Discovery &nbsp;·&nbsp; For questions contact your TD lead or TA Ops.</div>
+    <div class="footer-badge">&#128274; SAP Internal — Recruiter Use Only</div>
+  </div>
+
+</div>
+</body>
+</html>
