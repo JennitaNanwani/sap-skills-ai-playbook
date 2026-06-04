@@ -5,17 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAP Recruiter Playbook — Overview</title>
 <style>
-@font-face{font-family:'72';src:url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Regular.woff2') format('woff2');font-weight:400;}
-@font-face{font-family:'72';src:url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Bold.woff2') format('woff2');font-weight:700;}
-@font-face{font-family:'72';src:url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Light.woff2') format('woff2');font-weight:300;}
+@font-face{font-family:'72 Brand';font-weight:300;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Light.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Light.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Light.woff2') format('woff2');}
+@font-face{font-family:'72 Brand';font-weight:400;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Regular.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Regular.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Regular.woff2') format('woff2');}
+@font-face{font-family:'72 Brand';font-weight:500;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Medium.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Medium.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Regular.woff2') format('woff2');}
+@font-face{font-family:'72 Brand';font-weight:600;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-SemiBold.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-SemiBold.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Bold.woff2') format('woff2');}
+@font-face{font-family:'72 Brand';font-weight:700;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Bold.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Bold.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Bold.woff2') format('woff2');}
+@font-face{font-family:'72 Brand';font-weight:800;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Black.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Black.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Bold.woff2') format('woff2');}
 
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'72',Arial,sans-serif;background:#fff;color:#32363A;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:14px;}
+body{font-family:'72 Brand','72',Arial,sans-serif;background:#fff;color:#32363A;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:14px;}
 
 .page{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;}
 
 /* ── HEADER ── */
-.hdr{border-radius:14px;background:linear-gradient(130deg,#354A5E 0%,#29374F 55%,#354A5E 100%);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;}
+.hdr{border-radius:14px;background:linear-gradient(130deg,#0057C2 0%,#003F8A 55%,#0040B0 100%);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;}
 .hdr::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(214,24,90,.25) 0%,transparent 70%);}
 .hdr::after{content:'';position:absolute;bottom:-60px;left:35%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(0,112,242,.15) 0%,transparent 70%);}
 .hdr-left{display:flex;align-items:center;gap:16px;z-index:1;}
@@ -31,7 +34,7 @@ body{font-family:'72',Arial,sans-serif;background:#fff;color:#32363A;min-height:
 /* ── VIEWS BANNER ── */
 .views{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 
-.view-recruiter{background:linear-gradient(120deg,#354A5E,#29374F);border-radius:12px;padding:16px 20px;border:1.5px solid #3F566E;position:relative;overflow:hidden;}
+.view-recruiter{background:linear-gradient(120deg,#0057C2,#003F8A);border-radius:12px;padding:16px 20px;border:1.5px solid #0057C2;position:relative;overflow:hidden;}
 .view-recruiter::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(214,24,90,.2) 0%,transparent 70%);}
 
 .view-hm{background:linear-gradient(120deg,#EBF5FB,#EEF6FF);border-radius:12px;padding:16px 20px;border:1.5px solid #91C8F6;position:relative;overflow:hidden;}
@@ -74,7 +77,7 @@ body{font-family:'72',Arial,sans-serif;background:#fff;color:#32363A;min-height:
 .feat-hero{border-radius:12px;padding:16px 18px;}
 .feat-hero.pink{background:linear-gradient(135deg,#FEF0F5,#FFF5F8);border:1px solid #F9C8D8;}
 .feat-hero.blue{background:linear-gradient(135deg,#EBF5FB,#EEF2FF);border:1px solid #91C8F6;}
-.feat-hero.dark{background:linear-gradient(135deg,#354A5E,#29374F);border:1px solid #3F566E;}
+.feat-hero.dark{background:linear-gradient(135deg,#0057C2,#003F8A);border:1px solid #0040B0;}
 .feat-num{font-size:32px;font-weight:700;line-height:1;margin-bottom:4px;}
 .feat-hero.pink .feat-num{color:#F9C8D8;}
 .feat-hero.blue .feat-num{color:#91C8F6;}
