@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAP Recruiter Playbook — Overview</title>
+<title>SAP Skills &amp; AI Recruiter Playbook — Guide</title>
 <style>
 @font-face{font-family:'72 Brand';font-weight:300;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Light.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Light.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Light.woff2') format('woff2');}
 @font-face{font-family:'72 Brand';font-weight:400;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Regular.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Regular.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Regular.woff2') format('woff2');}
@@ -13,115 +13,96 @@
 @font-face{font-family:'72 Brand';font-weight:800;font-style:normal;font-display:swap;src:url('https://ui5.sap.com/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Black.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_horizon/fonts/72Brand-Black.woff2') format('woff2'),url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Bold.woff2') format('woff2');}
 
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'72 Brand','72',Arial,sans-serif;background:#fff;color:#32363A;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:14px;}
+html,body{height:100%;}
+body{font-family:'72 Brand','72',Arial,sans-serif;background:#fff;color:#32363A;display:flex;align-items:center;justify-content:center;padding:10px;}
 
-.page{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;}
+.page{width:100%;max-width:1080px;display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;}
 
 /* ── HEADER ── */
-.hdr{border-radius:14px;background:linear-gradient(130deg,#0057C2 0%,#003F8A 55%,#0040B0 100%);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;}
-.hdr::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(214,24,90,.25) 0%,transparent 70%);}
-.hdr::after{content:'';position:absolute;bottom:-60px;left:35%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(0,112,242,.15) 0%,transparent 70%);}
-.hdr-left{display:flex;align-items:center;gap:16px;z-index:1;}
-.logo{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg,#D6185A,#FF6FA0);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(214,24,90,.4);}
-.hdr-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.45);margin-bottom:4px;}
-.hdr-title{color:#fff;font-size:19px;font-weight:700;letter-spacing:-.3px;}
-.hdr-title span{color:#FF6FA0;}
-.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:1;}
-.hdr-tagline{font-size:12px;color:rgba(255,255,255,.6);text-align:right;line-height:1.5;max-width:260px;}
-.hdr-tagline strong{color:#fff;font-weight:700;}
-.hdr-badge{background:rgba(214,24,90,.18);border:1px solid rgba(214,24,90,.4);border-radius:20px;padding:4px 12px;color:#FF6FA0;font-size:10px;font-weight:700;}
+.hdr{background:#fff;border:1px solid #F0D0DC;border-radius:12px;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;}
+.hdr-left{display:flex;align-items:center;gap:12px;}
+.logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#D6185A,#FF6FA0);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;flex-shrink:0;}
+.hdr-eyebrow{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#B0BAC5;margin-bottom:2px;}
+.hdr-title{font-size:16px;font-weight:700;color:#32363A;letter-spacing:-.2px;}
+.hdr-title span{color:#D6185A;}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.hdr-tag{background:#FEF0F5;border:1px solid #F0D0DC;border-radius:20px;padding:3px 11px;font-size:9.5px;font-weight:700;color:#C41454;}
+.hdr-tag-blue{background:#EBF5FB;border:1px solid #91C8F6;border-radius:20px;padding:3px 11px;font-size:9.5px;font-weight:700;color:#0057C2;}
 
-/* ── VIEWS BANNER ── */
-.views{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+/* ── VIEWS ROW ── */
+.views{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 
-.view-recruiter{background:linear-gradient(120deg,#0057C2,#003F8A);border-radius:12px;padding:16px 20px;border:1.5px solid #0057C2;position:relative;overflow:hidden;}
-.view-recruiter::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(214,24,90,.2) 0%,transparent 70%);}
+.view-card{border-radius:10px;padding:13px 16px;position:relative;overflow:hidden;}
+.view-r{background:#FEF0F5;border:1.5px solid #F0D0DC;}
+.view-h{background:#EBF5FB;border:1.5px solid #91C8F6;}
 
-.view-hm{background:linear-gradient(120deg,#EBF5FB,#EEF6FF);border-radius:12px;padding:16px 20px;border:1.5px solid #91C8F6;position:relative;overflow:hidden;}
-.view-hm::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(0,112,242,.12) 0%,transparent 70%);}
+.view-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;margin-bottom:7px;}
+.badge-r{background:#D6185A;color:#fff;}
+.badge-h{background:#0057C2;color:#fff;}
 
-.view-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.view-recruiter .view-label{color:rgba(255,255,255,.45);}
-.view-hm .view-label{color:#0057C2;}
+.view-title{font-size:13px;font-weight:700;color:#32363A;margin-bottom:4px;}
+.view-desc{font-size:10.5px;line-height:1.55;color:#556068;margin-bottom:8px;}
 
-.view-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;}
-.badge-r{background:rgba(214,24,90,.2);border:1px solid rgba(214,24,90,.45);color:#FF6FA0;}
-.badge-hm{background:#0057C2;color:#fff;}
+.pills{display:flex;flex-wrap:wrap;gap:4px;}
+.pill{font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:5px;}
+.pill-r{background:rgba(214,24,90,.1);color:#C41454;border:1px solid rgba(214,24,90,.2);}
+.pill-h{background:#fff;color:#0057C2;border:1px solid #91C8F6;}
 
-.view-title{font-size:15px;font-weight:700;margin-bottom:5px;}
-.view-recruiter .view-title{color:#fff;}
-.view-hm .view-title{color:#0040B0;}
+.view-warn{margin-top:7px;padding:5px 9px;background:rgba(214,24,90,.08);border:1px solid rgba(214,24,90,.18);border-radius:6px;font-size:9.5px;color:#C41454;}
 
-.view-desc{font-size:11.5px;line-height:1.6;margin-bottom:10px;}
-.view-recruiter .view-desc{color:rgba(255,255,255,.6);}
-.view-hm .view-desc{color:#2B6099;}
+/* ── MIDDLE ROW ── */
+.mid{display:grid;grid-template-columns:1fr 1fr 1fr 1.1fr;gap:8px;}
 
-.view-pills{display:flex;flex-wrap:wrap;gap:5px;}
-.vpill{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px;}
-.vpill-r{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);}
-.vpill-hm{background:#fff;color:#0057C2;border:1px solid #91C8F6;}
+/* Feature tiles */
+.feat{border-radius:10px;padding:12px 14px;}
+.feat.pk{background:#FEF0F5;border:1px solid #F0D0DC;}
+.feat.bl{background:#EBF5FB;border:1px solid #91C8F6;}
+.feat-ico{font-size:18px;margin-bottom:5px;}
+.feat-title{font-size:11.5px;font-weight:700;color:#32363A;margin-bottom:3px;line-height:1.3;}
+.feat-desc{font-size:10px;line-height:1.5;color:#556068;}
+.feat-tag{display:inline-block;margin-top:7px;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;}
+.feat.pk .feat-tag{background:#D6185A;color:#fff;}
+.feat.bl .feat-tag{background:#0057C2;color:#fff;}
 
-.view-warning{margin-top:10px;padding:7px 10px;background:rgba(214,24,90,.12);border:1px solid rgba(214,24,90,.25);border-radius:7px;font-size:10.5px;color:#FF6FA0;font-weight:400;}
-.view-warning strong{font-weight:700;}
+/* Stats tile */
+.stats-tile{border-radius:10px;padding:12px 14px;background:#fff;border:1px solid #E4E8EB;display:flex;flex-direction:column;justify-content:space-between;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;}
+.stat{text-align:center;padding:6px 4px;}
+.stat-num{font-size:22px;font-weight:700;color:#D6185A;line-height:1;}
+.stat-label{font-size:8.5px;color:#6A7785;margin-top:2px;line-height:1.3;}
+.stats-eyebrow{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#B0BAC5;margin-bottom:7px;}
 
-/* ── MAIN GRID ── */
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-.grid-wide{display:grid;grid-template-columns:1.8fr 1fr;gap:10px;}
+/* ── BOTTOM ROW ── */
+.bot{display:grid;grid-template-columns:1.6fr 1fr;gap:8px;}
 
-/* ── CARD ── */
-.card{background:#fff;border:1px solid #E4E8EB;border-radius:12px;padding:14px 18px;}
-.card-eyebrow{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6A7785;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-.card-eyebrow::before{content:'';display:inline-block;width:14px;height:2px;background:linear-gradient(90deg,#D6185A,#FF6FA0);border-radius:2px;}
+/* Flow */
+.flow-card{border-radius:10px;padding:12px 14px;background:#fff;border:1px solid #E4E8EB;}
+.flow-eyebrow{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#B0BAC5;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+.flow-eyebrow::before{content:'';display:inline-block;width:12px;height:2px;background:linear-gradient(90deg,#D6185A,#FF6FA0);border-radius:2px;}
+.flow{display:flex;align-items:stretch;gap:3px;}
+.flow-step{flex:1;padding:7px 8px;border-radius:7px;position:relative;}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-5px;top:50%;transform:translateY(-50%);font-size:11px;color:#D6185A;font-weight:700;z-index:1;}
+.flow-ico{font-size:14px;margin-bottom:2px;}
+.flow-label{font-size:9.5px;font-weight:700;color:#32363A;line-height:1.25;margin-bottom:1px;}
+.flow-hint{font-size:8.5px;color:#6A7785;line-height:1.3;}
+.flow-step:nth-child(odd){background:#FAFAFA;border:1px solid #F0F2F3;}
+.flow-step:nth-child(even){background:#FEF0F5;border:1px solid #F0D0DC;}
 
-/* ── FEATURE HERO CARDS ── */
-.feat-hero{border-radius:12px;padding:16px 18px;}
-.feat-hero.pink{background:linear-gradient(135deg,#FEF0F5,#FFF5F8);border:1px solid #F9C8D8;}
-.feat-hero.blue{background:linear-gradient(135deg,#EBF5FB,#EEF2FF);border:1px solid #91C8F6;}
-.feat-hero.dark{background:linear-gradient(135deg,#0057C2,#003F8A);border:1px solid #0040B0;}
-.feat-num{font-size:32px;font-weight:700;line-height:1;margin-bottom:4px;}
-.feat-hero.pink .feat-num{color:#F9C8D8;}
-.feat-hero.blue .feat-num{color:#91C8F6;}
-.feat-hero.dark .feat-num{color:rgba(255,255,255,.1);}
-.feat-title{font-size:13.5px;font-weight:700;margin-bottom:5px;line-height:1.3;}
-.feat-hero.pink .feat-title,.feat-hero.blue .feat-title{color:#32363A;}
-.feat-hero.dark .feat-title{color:#fff;}
-.feat-desc{font-size:11px;line-height:1.6;}
-.feat-hero.pink .feat-desc{color:#556068;}
-.feat-hero.blue .feat-desc{color:#2B6099;}
-.feat-hero.dark .feat-desc{color:rgba(255,255,255,.55);}
-.feat-tag{display:inline-block;margin-top:9px;padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:700;}
-.feat-hero.pink .feat-tag{background:#D6185A;color:#fff;}
-.feat-hero.blue .feat-tag{background:#0057C2;color:#fff;}
-.feat-hero.dark .feat-tag{background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff;}
-
-/* ── FLOW ── */
-.flow{display:flex;align-items:stretch;gap:4px;}
-.flow-step{flex:1;padding:9px 10px;border-radius:8px;position:relative;}
-.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-6px;top:50%;transform:translateY(-50%);font-size:13px;color:#D6185A;font-weight:700;z-index:1;}
-.flow-ico{font-size:16px;margin-bottom:3px;}
-.flow-label{font-size:10.5px;font-weight:700;color:#32363A;line-height:1.3;margin-bottom:1px;}
-.flow-hint{font-size:9.5px;color:#6A7785;line-height:1.35;}
-.flow-step:nth-child(odd){background:#FAFAFA;border:1px solid #F5F6F7;}
-.flow-step:nth-child(even){background:#FEF0F5;border:1px solid #F9C8D8;}
-
-/* ── STATS ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;}
-.stat{background:#fff;border:1px solid #E4E8EB;border-radius:10px;padding:11px 8px;text-align:center;}
-.stat-num{font-size:24px;font-weight:700;color:#D6185A;line-height:1;}
-.stat-label{font-size:9.5px;color:#6A7785;margin-top:3px;line-height:1.4;}
-
-/* ── CAPS ── */
-.caps{display:flex;flex-wrap:wrap;gap:6px;}
-.cap{display:flex;align-items:center;gap:6px;padding:6px 11px;background:#FAFAFA;border:1px solid #E4E8EB;border-radius:8px;}
-.cap-ico{font-size:13px;}
-.cap-label{font-size:11px;font-weight:700;color:#32363A;}
-.cap-desc{font-size:10px;color:#6A7785;}
+/* Caps */
+.caps-card{border-radius:10px;padding:12px 14px;background:#fff;border:1px solid #E4E8EB;}
+.caps-eyebrow{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#B0BAC5;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+.caps-eyebrow::before{content:'';display:inline-block;width:12px;height:2px;background:linear-gradient(90deg,#91C8F6,#0057C2);border-radius:2px;}
+.caps{display:flex;flex-direction:column;gap:4px;}
+.cap{display:flex;align-items:baseline;gap:5px;}
+.cap-ico{font-size:11px;flex-shrink:0;}
+.cap-label{font-size:10px;font-weight:700;color:#32363A;flex-shrink:0;}
+.cap-desc{font-size:9.5px;color:#6A7785;}
 
 /* ── FOOTER ── */
-.footer{background:#FAFAFA;border:1px solid #E4E8EB;border-radius:10px;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;}
-.footer-txt{font-size:10.5px;color:#6A7785;}
-.footer-txt strong{color:#32363A;font-weight:700;}
-.footer-badge{background:#FEF0F5;border:1px solid #F9C8D8;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#C41454;}
+.footer{background:#FAFAFA;border:1px solid #E4E8EB;border-radius:8px;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;}
+.footer-txt{font-size:9.5px;color:#6A7785;}
+.footer-txt strong{color:#32363A;}
+.footer-badge{background:#FEF0F5;border:1px solid #F0D0DC;border-radius:20px;padding:2px 10px;font-size:9px;font-weight:700;color:#C41454;}
 </style>
 </head>
 <body>
@@ -137,69 +118,75 @@ body{font-family:'72 Brand','72',Arial,sans-serif;background:#fff;color:#32363A;
       </div>
     </div>
     <div class="hdr-right">
-      <div class="hdr-tagline"><strong>Everything you need to hire great tech talent</strong> — structured around SAP's Skills &amp; AI hiring framework.</div>
-      <div class="hdr-badge">&#128274; SAP Internal — Recruiter Use Only</div>
+      <div class="hdr-tag-blue">25 job profiles &nbsp;·&nbsp; 193 skills</div>
+      <div class="hdr-tag">&#128274; SAP Internal — Recruiter Use Only</div>
     </div>
   </div>
 
-  <!-- TWO VIEWS — CLEAR CALLOUT -->
+  <!-- TWO VIEWS -->
   <div class="views">
-
-    <div class="view-recruiter">
-      <div class="view-label"><span class="view-badge badge-r">&#128100; Recruiter View</span> &nbsp;Default mode — always on</div>
-      <div class="view-title">Your full hiring toolkit</div>
-      <div class="view-desc">The complete playbook — Strategy Meeting notes, Skills Prioritization, Interview Guide, JD templates, FAQ and workflow. Everything auto-saves in your browser.</div>
-      <div class="view-pills">
-        <span class="vpill vpill-r">Strategy Meeting</span>
-        <span class="vpill vpill-r">RSM Questionnaire</span>
-        <span class="vpill vpill-r">Interview Guide</span>
-        <span class="vpill vpill-r">Job Descriptions</span>
-        <span class="vpill vpill-r">Export &amp; Email</span>
-        <span class="vpill vpill-r">BrightHire Mode</span>
+    <div class="view-card view-r">
+      <div class="view-badge badge-r">&#128100; Recruiter View &nbsp;·&nbsp; Default</div>
+      <div class="view-title">Your full hiring toolkit — always on</div>
+      <div class="view-desc">Strategy Meeting notes, Skills Prioritization, Interview Guide, JD templates, FAQ and one-click emails. Everything auto-saves in your browser per REQ.</div>
+      <div class="pills">
+        <span class="pill pill-r">Strategy Meeting</span>
+        <span class="pill pill-r">Skills Prioritization</span>
+        <span class="pill pill-r">Interview Guide</span>
+        <span class="pill pill-r">Job Descriptions</span>
+        <span class="pill pill-r">BrightHire Mode</span>
+        <span class="pill pill-r">Export &amp; Email</span>
       </div>
     </div>
-
-    <div class="view-hm">
-      <div class="view-label"><span class="view-badge badge-hm">&#128101; HM View</span> &nbsp;Toggle on during the RSM conversation</div>
-      <div class="view-title" style="color:#0040B0;">Walk the HM through skills — on your screen</div>
-      <div class="view-desc">A simplified, clean view designed to show the Hiring Manager exactly which skills are mapped to their role. Use it on your screen during the RSM to make the skills conversation visual and structured.</div>
-      <div class="view-pills">
-        <span class="vpill vpill-hm">Skills Prioritization</span>
-        <span class="vpill vpill-hm">Must Have / Nice to Have</span>
-        <span class="vpill vpill-hm">HM FAQ</span>
-        <span class="vpill vpill-hm">Skills Definitions</span>
+    <div class="view-card view-h">
+      <div class="view-badge badge-h">&#128101; HM View &nbsp;·&nbsp; Toggle on during RSM</div>
+      <div class="view-title">Walk your Hiring Manager through skills — on your screen</div>
+      <div class="view-desc">A clean, simplified view showing exactly which skills are mapped to the role. Use it on your screen during the RSM to make the conversation visual and structured.</div>
+      <div class="pills">
+        <span class="pill pill-h">Skills Prioritization</span>
+        <span class="pill pill-h">Must Have / Nice to Have</span>
+        <span class="pill pill-h">HM FAQ</span>
+        <span class="pill pill-h">Skills Definitions</span>
       </div>
-      <div class="view-warning"><strong>&#9888; Recruiter use only</strong> — HM View is a demo tool. Never share the playbook link or hand over access to the Hiring Manager.</div>
-    </div>
-
-  </div>
-
-  <!-- ROW 2: 3 feature cards -->
-  <div class="grid3">
-    <div class="feat-hero pink">
-      <div class="feat-num">01</div>
-      <div class="feat-title">Send a Pre-Strategy Email before the meeting</div>
-      <div class="feat-desc">Share the skills framework with the HM in advance — so the conversation starts from an informed position, not from scratch.</div>
-      <span class="feat-tag">Pre-Strategy Email &nbsp;·&nbsp; one click</span>
-    </div>
-    <div class="feat-hero blue">
-      <div class="feat-num">02</div>
-      <div class="feat-title">Agree 5 skills. Allocate interviewers. Send the summary.</div>
-      <div class="feat-desc">Skills Prioritization, Interviewer Allocation, and Post-Strategy Email all connect — from conversation to confirmed brief in minutes.</div>
-      <span class="feat-tag">Skills Prioritization &nbsp;·&nbsp; Post-Strategy Email</span>
-    </div>
-    <div class="feat-hero dark">
-      <div class="feat-num">03</div>
-      <div class="feat-title">BrightHire recorded? Drop the summary in and go.</div>
-      <div class="feat-desc">Toggle BrightHire mode, paste your AI summary — the Post-Strategy Email builds itself. No manual notes needed.</div>
-      <span class="feat-tag">BrightHire Mode &nbsp;·&nbsp; auto-generates email</span>
+      <div class="view-warn">&#9888; <strong>Recruiter use only</strong> — never share the playbook link or hand over access to the Hiring Manager.</div>
     </div>
   </div>
 
-  <!-- ROW 3: Flow + Stats -->
-  <div class="grid-wide">
-    <div class="card">
-      <div class="card-eyebrow">The hiring flow — pre-meeting to panel</div>
+  <!-- MIDDLE: 3 features + stats -->
+  <div class="mid">
+    <div class="feat pk">
+      <div class="feat-ico">&#128231;</div>
+      <div class="feat-title">Set the tone before the meeting</div>
+      <div class="feat-desc">Send a Pre-Strategy Email with the skills framework so the HM arrives informed, not cold.</div>
+      <span class="feat-tag">Pre-Strategy Email</span>
+    </div>
+    <div class="feat bl">
+      <div class="feat-ico">&#127919;</div>
+      <div class="feat-title">5 skills agreed. Brief sent. Done.</div>
+      <div class="feat-desc">Skills Prioritization connects directly to the Post-Strategy Email — conversation to confirmed brief in minutes.</div>
+      <span class="feat-tag">Skills &amp; Post-Strategy Email</span>
+    </div>
+    <div class="feat pk">
+      <div class="feat-ico">&#127908;</div>
+      <div class="feat-title">BrightHire recorded? Just paste and send.</div>
+      <div class="feat-desc">Toggle BrightHire mode, drop in the AI summary — the email writes itself. No manual notes needed.</div>
+      <span class="feat-tag">BrightHire Mode</span>
+    </div>
+    <div class="stats-tile">
+      <div class="stats-eyebrow">At a glance</div>
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-num">6</div><div class="stat-label">Tabs covering every hire step</div></div>
+        <div class="stat"><div class="stat-num">25</div><div class="stat-label">Job profiles mapped</div></div>
+        <div class="stat"><div class="stat-num">193</div><div class="stat-label">Skills defined</div></div>
+        <div class="stat"><div class="stat-num">1×</div><div class="stat-label">Click to send formatted email</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM: Flow + Capabilities -->
+  <div class="bot">
+    <div class="flow-card">
+      <div class="flow-eyebrow">The hiring flow — pre-meeting to panel</div>
       <div class="flow">
         <div class="flow-step">
           <div class="flow-ico">&#128231;</div>
@@ -214,7 +201,7 @@ body{font-family:'72 Brand','72',Arial,sans-serif;background:#fff;color:#32363A;
         <div class="flow-step">
           <div class="flow-ico">&#127919;</div>
           <div class="flow-label">Skills Agreed</div>
-          <div class="flow-hint">5 Must-Haves locked with HM</div>
+          <div class="flow-hint">5 Must-Haves locked</div>
         </div>
         <div class="flow-step">
           <div class="flow-ico">&#128233;</div>
@@ -228,29 +215,18 @@ body{font-family:'72 Brand','72',Arial,sans-serif;background:#fff;color:#32363A;
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-eyebrow">At a glance</div>
-      <div class="stats">
-        <div class="stat"><div class="stat-num">6</div><div class="stat-label">Tabs covering every hiring step</div></div>
-        <div class="stat"><div class="stat-num">25</div><div class="stat-label">Job profiles mapped</div></div>
-        <div class="stat"><div class="stat-num">193</div><div class="stat-label">Skills defined</div></div>
-        <div class="stat"><div class="stat-num">1&#x00D7;</div><div class="stat-label">Click to send formatted email</div></div>
+    <div class="caps-card">
+      <div class="caps-eyebrow">What's built in</div>
+      <div class="caps">
+        <div class="cap"><span class="cap-ico">&#128101;</span><span class="cap-label">HM View</span><span class="cap-desc">— on-screen skills walkthrough, recruiter only</span></div>
+        <div class="cap"><span class="cap-ico">&#127908;</span><span class="cap-label">BrightHire Mode</span><span class="cap-desc">— paste AI summary, email auto-generates</span></div>
+        <div class="cap"><span class="cap-ico">&#128190;</span><span class="cap-label">Auto-Save &amp; Sessions</span><span class="cap-desc">— saves in browser per REQ</span></div>
+        <div class="cap"><span class="cap-ico">&#128233;</span><span class="cap-label">One-Click Email</span><span class="cap-desc">— formatted HTML, paste into Outlook</span></div>
+        <div class="cap"><span class="cap-ico">&#128196;</span><span class="cap-label">Export RSM Notes</span><span class="cap-desc">— downloadable record for handover</span></div>
+        <div class="cap"><span class="cap-ico">&#128172;</span><span class="cap-label">Interview Questions Guide</span><span class="cap-desc">— 7 questions emailed to panel</span></div>
+        <div class="cap"><span class="cap-ico">&#127774;</span><span class="cap-label">Dark &amp; Light Mode</span><span class="cap-desc">— for screen sharing or low light</span></div>
+        <div class="cap"><span class="cap-ico">&#127758;</span><span class="cap-label">Multi-language</span><span class="cap-desc">— language switcher for global teams</span></div>
       </div>
-    </div>
-  </div>
-
-  <!-- ROW 4: Capabilities strip -->
-  <div class="card">
-    <div class="card-eyebrow">What's built in</div>
-    <div class="caps">
-      <div class="cap"><span class="cap-ico">&#128101;</span><span class="cap-label">HM View</span><span class="cap-desc">— on-screen skills walkthrough, recruiter access only</span></div>
-      <div class="cap"><span class="cap-ico">&#127908;</span><span class="cap-label">BrightHire Mode</span><span class="cap-desc">— paste AI summary, email auto-generates</span></div>
-      <div class="cap"><span class="cap-ico">&#128190;</span><span class="cap-label">Auto-Save &amp; Sessions</span><span class="cap-desc">— saves in browser, name sessions per REQ</span></div>
-      <div class="cap"><span class="cap-ico">&#128233;</span><span class="cap-label">One-Click Email</span><span class="cap-desc">— formatted HTML, paste directly into Outlook</span></div>
-      <div class="cap"><span class="cap-ico">&#128196;</span><span class="cap-label">Export RSM Notes</span><span class="cap-desc">— full downloadable record for handover</span></div>
-      <div class="cap"><span class="cap-ico">&#128172;</span><span class="cap-label">Interview Questions Guide</span><span class="cap-desc">— 7 structured questions emailed to panel</span></div>
-      <div class="cap"><span class="cap-ico">&#127774;</span><span class="cap-label">Dark &amp; Light Mode</span><span class="cap-desc">— switch for screen sharing or low light</span></div>
-      <div class="cap"><span class="cap-ico">&#127758;</span><span class="cap-label">Multi-language</span><span class="cap-desc">— built-in language switcher for global teams</span></div>
     </div>
   </div>
 
