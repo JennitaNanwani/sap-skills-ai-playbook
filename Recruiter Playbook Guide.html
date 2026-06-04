@@ -5,69 +5,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAP Recruiter Playbook — Quick Guide</title>
 <style>
+@font-face{font-family:'72';src:url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Regular.woff2') format('woff2');font-weight:400;}
+@font-face{font-family:'72';src:url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Bold.woff2') format('woff2');font-weight:700;}
+@font-face{font-family:'72';src:url('https://cdn.ui5.sap.com/1.120.0/resources/sap/ui/core/themes/sap_fiori_3/fonts/72-Light.woff2') format('woff2');font-weight:300;}
+
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:Arial,sans-serif;background:#0D1B30;color:#1A1D23;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;}
+body{font-family:'72',Arial,sans-serif;background:#F5F6F8;color:#1A1D23;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;}
 
 .page{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;}
 
 /* ── HEADER ── */
-.hdr{background:linear-gradient(120deg,#D6185A 0%,#7C3AED 60%,#0070F2 100%);border-radius:12px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+.hdr{background:linear-gradient(120deg,#0D1B30 0%,#1A0830 60%,#0D1B30 100%);border-radius:12px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #D6185A;}
 .hdr-left{display:flex;align-items:center;gap:14px;}
-.logo{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;flex-shrink:0;backdrop-filter:blur(4px);}
-.hdr-title{color:#fff;font-size:18px;font-weight:900;letter-spacing:-.3px;}
-.hdr-sub{color:rgba(255,255,255,.7);font-size:11px;margin-top:1px;}
-.hdr-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 12px;color:#fff;font-size:10px;font-weight:700;backdrop-filter:blur(4px);}
+.logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#D6185A,#FF6FA0);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0;}
+.hdr-title{color:#fff;font-size:17px;font-weight:700;letter-spacing:-.2px;}
+.hdr-sub{color:rgba(255,255,255,.55);font-size:11px;margin-top:2px;font-weight:400;}
+.hdr-right{display:flex;align-items:center;gap:10px;}
+.hdr-pill{background:rgba(214,24,90,.15);border:1px solid rgba(214,24,90,.35);border-radius:20px;padding:4px 12px;color:#FF6FA0;font-size:10px;font-weight:700;}
 
 /* ── GRID ── */
-.grid{display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:10px;}
+.grid{display:grid;grid-template-columns:1fr 1.55fr 1fr;gap:10px;}
 
 /* ── CARD ── */
-.card{background:#fff;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
-.card-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:#9CA3AF;}
+.card{background:#fff;border:1px solid #E8EAF0;border-radius:12px;padding:14px 16px;}
+.card-title{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8A95A3;margin-bottom:10px;display:flex;align-items:center;gap:5px;}
+.card-title span{display:inline-block;width:16px;height:2px;background:linear-gradient(90deg,#D6185A,#FF6FA0);border-radius:2px;margin-right:2px;}
 
 /* ── TABS ── */
-.tab{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;background:#F9FAFB;border:1px solid #F3F4F6;transition:.15s;}
-.tab-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.tabs{display:flex;flex-direction:column;gap:5px;}
+.tab{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;border:1px solid #F0F2F5;background:#FAFBFC;}
+.tab-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
 .tab-name{font-size:12px;font-weight:700;color:#1A1D23;line-height:1.2;}
-.tab-hint{font-size:10px;color:#9CA3AF;line-height:1.3;}
-.tag{display:inline-block;padding:1px 5px;border-radius:4px;font-size:9px;font-weight:700;margin-left:3px;}
+.tab-hint{font-size:10px;color:#8A95A3;margin-top:1px;}
+.tag{display:inline-block;padding:1px 5px;border-radius:4px;font-size:9px;font-weight:700;margin-left:3px;vertical-align:middle;}
 .tr{background:#FEF0F5;color:#C41454;}
-.th{background:#F0FDF4;color:#047857;}
+.th{background:#EBF5FB;color:#0057C2;}
 
 /* ── STEPS ── */
-.steps-wrap{display:flex;flex-direction:column;gap:6px;}
+.steps{display:flex;flex-direction:column;gap:7px;}
 .step{display:flex;align-items:flex-start;gap:10px;}
-.step-n{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;flex-shrink:0;margin-top:1px;}
-.step-body strong{font-size:12px;color:#1A1D23;display:block;line-height:1.3;}
-.step-body span{font-size:11px;color:#6B7280;line-height:1.35;}
+.step-n{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#D6185A,#FF6FA0);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px;}
+.step-body strong{font-size:12px;font-weight:700;color:#1A1D23;display:block;line-height:1.3;}
+.step-body span{font-size:11px;color:#556068;line-height:1.35;font-weight:400;}
 
 /* ── FEATURES ── */
-.feats{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.feat{border-radius:9px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;}
-.feat-ico{font-size:18px;line-height:1;}
-.feat-title{font-size:11.5px;font-weight:800;color:#1A1D23;}
-.feat-desc{font-size:10.5px;color:#6B7280;line-height:1.35;}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px;}
+.feat{border-radius:9px;padding:9px 11px;border:1px solid #F0F2F5;}
+.feat-ico{font-size:17px;line-height:1;margin-bottom:4px;}
+.feat-title{font-size:11.5px;font-weight:700;color:#1A1D23;margin-bottom:2px;}
+.feat-desc{font-size:10.5px;color:#6B7280;line-height:1.35;font-weight:400;}
 
 /* ── DOS DONTS ── */
-.dd{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.do,.dont{border-radius:9px;padding:10px 12px;}
-.do{background:#F0FDF4;border:1.5px solid #6EE7B7;}
-.dont{background:#FFF1F2;border:1.5px solid #FECDD3;}
-.dd-lbl{font-size:9.5px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
-.do .dd-lbl{color:#059669;}
-.dont .dd-lbl{color:#E11D48;}
-.dd-item{font-size:11px;line-height:1.55;padding-left:12px;position:relative;margin-bottom:2px;}
-.dd-item::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;}
-.do .dd-item::before{background:#10B981;}
-.dont .dd-item::before{background:#F43F5E;}
-.do .dd-item{color:#065F46;}
-.dont .dd-item{color:#9F1239;}
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.do{background:#F9FEFF;border:1.5px solid #B0E0FF;border-radius:9px;padding:10px 12px;}
+.dont{background:#FFF5F7;border:1.5px solid #FFCCD5;border-radius:9px;padding:10px 12px;}
+.dd-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
+.do .dd-lbl{color:#0057C2;}
+.dont .dd-lbl{color:#C41454;}
+.dd-item{font-size:11px;line-height:1.6;padding-left:11px;position:relative;font-weight:400;}
+.dd-item::before{content:'';position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;}
+.do .dd-item::before{background:#0070F2;}
+.dont .dd-item::before{background:#D6185A;}
+.do .dd-item{color:#003F8A;}
+.dont .dd-item{color:#8B0030;}
+
+/* ── REMEMBER BOX ── */
+.remember{background:linear-gradient(120deg,#FEF0F5 0%,#EBF5FB 100%);border:1px solid #F9C8D8;border-radius:9px;padding:10px 13px;}
+.remember-title{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#C41454;margin-bottom:6px;}
+.remember-row{font-size:11.5px;color:#1A1D23;line-height:1.7;font-weight:400;}
+.remember-row strong{font-weight:700;color:#0057C2;}
+
+/* ── DIVIDER ── */
+hr{border:none;border-top:1px solid #F0F2F5;margin:10px 0;}
 
 /* ── FOOTER ── */
-.footer{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;}
-.footer-txt{font-size:10.5px;color:rgba(255,255,255,.5);}
-.footer-txt strong{color:rgba(255,255,255,.8);}
-.footer-badge{background:rgba(214,24,90,.25);border:1px solid rgba(214,24,90,.4);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#FF6FA0;}
+.footer{background:#fff;border:1px solid #E8EAF0;border-radius:10px;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;}
+.footer-txt{font-size:10.5px;color:#8A95A3;font-weight:400;}
+.footer-txt strong{color:#1A1D23;font-weight:700;}
+.footer-badge{background:#FEF0F5;border:1px solid #F9C8D8;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#C41454;}
 </style>
 </head>
 <body>
@@ -78,76 +93,79 @@ body{font-family:Arial,sans-serif;background:#0D1B30;color:#1A1D23;height:100vh;
     <div class="hdr-left">
       <div class="logo">S</div>
       <div>
-        <div class="hdr-title">SAP Skills &amp; AI Recruiter Playbook &nbsp;—&nbsp; How to Use</div>
-        <div class="hdr-sub">Tech Talent Discovery &nbsp;·&nbsp; Your end-to-end hiring toolkit for Engineering &amp; Technology</div>
+        <div class="hdr-title">SAP Skills &amp; AI Recruiter Playbook &nbsp;&mdash;&nbsp; How to Use</div>
+        <div class="hdr-sub">Tech Talent Discovery &nbsp;&middot;&nbsp; End-to-end hiring toolkit for Engineering &amp; Technology &nbsp;&middot;&nbsp; 2026</div>
       </div>
     </div>
-    <div class="hdr-badge">&#128274; SAP Internal — Recruiter Use Only</div>
+    <div class="hdr-right">
+      <div class="hdr-pill">&#128274; SAP Internal &mdash; Recruiter Use Only</div>
+    </div>
   </div>
 
-  <!-- MAIN GRID -->
+  <!-- GRID -->
   <div class="grid">
 
     <!-- COL 1: Tabs -->
     <div class="card">
-      <div class="card-title">&#9776;&nbsp; The 6 Tabs</div>
-      <div class="tab"><div class="tab-ico" style="background:#FEF0F5;">&#128197;</div><div><div class="tab-name">Workflow <span class="tag tr">Recruiter</span></div><div class="tab-hint">4-step hiring process map</div></div></div>
-      <div class="tab"><div class="tab-ico" style="background:#EFF6FF;">&#128221;</div><div><div class="tab-name">Strategy Meeting <span class="tag tr">Recruiter</span></div><div class="tab-hint">RSM form, Q1–11, skills &amp; export</div></div></div>
-      <div class="tab"><div class="tab-ico" style="background:#F5F3FF;">&#127919;</div><div><div class="tab-name">Skills Prioritization <span class="tag tr">R</span><span class="tag th">HM</span></div><div class="tab-hint">Agree top 5 skills with HM on-screen</div></div></div>
-      <div class="tab"><div class="tab-ico" style="background:#F0FDF4;">&#128172;</div><div><div class="tab-name">Interview Guide <span class="tag tr">Recruiter</span></div><div class="tab-hint">7 questions + listen-for guidance</div></div></div>
-      <div class="tab"><div class="tab-ico" style="background:#FFFBEB;">&#128196;</div><div><div class="tab-name">Job Descriptions <span class="tag tr">Recruiter</span></div><div class="tab-hint">JD templates for E&amp;T roles</div></div></div>
-      <div class="tab"><div class="tab-ico" style="background:#F9FAFB;">&#10067;</div><div><div class="tab-name">FAQ <span class="tag tr">R</span><span class="tag th">HM</span></div><div class="tab-hint">Recruiter &amp; HM Q&amp;As</div></div></div>
+      <div class="card-title"><span></span>The 6 Tabs</div>
+      <div class="tabs">
+        <div class="tab"><div class="tab-ico" style="background:#FEF0F5;">&#128197;</div><div><div class="tab-name">Workflow <span class="tag tr">Recruiter</span></div><div class="tab-hint">4-step process map — start every new REQ here</div></div></div>
+        <div class="tab"><div class="tab-ico" style="background:#EBF5FB;">&#128221;</div><div><div class="tab-name">Strategy Meeting <span class="tag tr">Recruiter</span></div><div class="tab-hint">RSM notes, Q1–11 guidance, skills &amp; export</div></div></div>
+        <div class="tab"><div class="tab-ico" style="background:#F5F0FF;">&#127919;</div><div><div class="tab-name">Skills Prioritization <span class="tag tr">R</span> <span class="tag th">HM</span></div><div class="tab-hint">Agree top 5 skills with HM on-screen</div></div></div>
+        <div class="tab"><div class="tab-ico" style="background:#F0FDF4;">&#128172;</div><div><div class="tab-name">Interview Guide <span class="tag tr">Recruiter</span></div><div class="tab-hint">7 questions with listen-for guidance</div></div></div>
+        <div class="tab"><div class="tab-ico" style="background:#FFFBEB;">&#128196;</div><div><div class="tab-name">Job Descriptions <span class="tag tr">Recruiter</span></div><div class="tab-hint">JD templates for E&amp;T roles</div></div></div>
+        <div class="tab"><div class="tab-ico" style="background:#F5F6F8;">&#10067;</div><div><div class="tab-name">FAQ <span class="tag tr">R</span> <span class="tag th">HM</span></div><div class="tab-hint">Recruiter &amp; HM questions answered</div></div></div>
+      </div>
     </div>
 
     <!-- COL 2: Steps + Features -->
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div class="card" style="flex:1;">
-        <div class="card-title">&#9889;&nbsp; Run a Strategy Meeting in 5 Steps</div>
-        <div class="steps-wrap">
-          <div class="step"><div class="step-n" style="background:#D6185A;">1</div><div class="step-body"><strong>Prepare</strong><span>Open Strategy Meeting tab — fill in HM, REQ ID &amp; date</span></div></div>
-          <div class="step"><div class="step-n" style="background:#9333EA;">2</div><div class="step-body"><strong>Capture notes</strong><span>Type into questionnaire fields or use the free-text Summary box</span></div></div>
-          <div class="step"><div class="step-n" style="background:#0070F2;">3</div><div class="step-body"><strong>Skills agreement</strong><span>Switch to HM View &rarr; Skills Prioritization &rarr; agree top 5 on-screen</span></div></div>
-          <div class="step"><div class="step-n" style="background:#059669;">4</div><div class="step-body"><strong>Assign interviewers</strong><span>Back in Strategy Meeting &rarr; fill Skills &amp; Interviewer Allocation</span></div></div>
-          <div class="step"><div class="step-n" style="background:#D6185A;">5</div><div class="step-body"><strong>Send &amp; export</strong><span>Click Send Email &rarr; paste in Outlook (Ctrl+V) &rarr; Export for your records</span></div></div>
+        <div class="card-title"><span></span>Run a Strategy Meeting &mdash; 5 Steps</div>
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div class="step-body"><strong>Prepare &mdash; before the call</strong><span>Open Strategy Meeting tab &middot; fill HM name, REQ ID &amp; date &middot; scan Q1&ndash;11 and pick what's relevant</span></div></div>
+          <div class="step"><div class="step-n">2</div><div class="step-body"><strong>Capture &mdash; during the call</strong><span>Type notes into the questionnaire &middot; or use the free-text Summary box for your own notes</span></div></div>
+          <div class="step"><div class="step-n">3</div><div class="step-body"><strong>Skills &mdash; agree with HM on-screen</strong><span>Switch to HM View &rarr; Skills Prioritization &middot; walk HM through Must Have / Nice to Have &middot; agree top 5</span></div></div>
+          <div class="step"><div class="step-n">4</div><div class="step-body"><strong>Assign &mdash; interviewers &amp; next steps</strong><span>Fill Skills &amp; Interviewer Allocation &middot; tick Next Steps checkboxes &middot; add HM commitments</span></div></div>
+          <div class="step"><div class="step-n">5</div><div class="step-body"><strong>Send &mdash; email &amp; export</strong><span>Click Send Email &rarr; paste in Outlook (Ctrl+V) &middot; click Export to download your full notes</span></div></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">&#10024;&nbsp; Key Features</div>
+        <div class="card-title"><span></span>Key Features</div>
         <div class="feats">
-          <div class="feat" style="background:#FEF0F5;"><div class="feat-ico">&#128101;</div><div class="feat-title">HM View</div><div class="feat-desc">Demo skills on-screen — never share the link</div></div>
-          <div class="feat" style="background:#F5F3FF;"><div class="feat-ico">&#127908;</div><div class="feat-title">BrightHire Mode</div><div class="feat-desc">Paste AI summary — replaces questionnaire in email</div></div>
-          <div class="feat" style="background:#EFF6FF;"><div class="feat-ico">&#128190;</div><div class="feat-title">Auto-Save</div><div class="feat-desc">Saves in browser — use Sessions for multiple HMs</div></div>
-          <div class="feat" style="background:#F0FDF4;"><div class="feat-ico">&#128233;</div><div class="feat-title">Send Email</div><div class="feat-desc">One click — copies &amp; opens Outlook, paste Ctrl+V</div></div>
+          <div class="feat" style="background:#FEF0F5;border-color:#F9C8D8;"><div class="feat-ico">&#128101;</div><div class="feat-title">HM View</div><div class="feat-desc">Demo skills on your screen &mdash; never share the link with the HM</div></div>
+          <div class="feat" style="background:#F5F0FF;border-color:#DDD6FE;"><div class="feat-ico">&#127908;</div><div class="feat-title">BrightHire Mode</div><div class="feat-desc">Paste AI summary &mdash; replaces questionnaire in Post-Strategy Email</div></div>
+          <div class="feat" style="background:#EBF5FB;border-color:#B0D8F5;"><div class="feat-ico">&#128190;</div><div class="feat-title">Auto-Save &amp; Sessions</div><div class="feat-desc">Saves in browser &mdash; use Save Session for multiple HMs or REQs</div></div>
+          <div class="feat" style="background:#F0FDF4;border-color:#A7F3D0;"><div class="feat-ico">&#128233;</div><div class="feat-title">Send Email</div><div class="feat-desc">One click &mdash; copies formatted email, open Outlook &amp; Ctrl+V</div></div>
         </div>
       </div>
     </div>
 
-    <!-- COL 3: Dos & Don'ts -->
+    <!-- COL 3: Dos & Don'ts + Remember -->
     <div class="card">
-      <div class="card-title">&#9889;&nbsp; Dos &amp; Don'ts</div>
+      <div class="card-title"><span></span>Dos &amp; Don'ts</div>
       <div class="dd">
         <div class="do">
-          <div class="dd-lbl">&#10003; Do</div>
-          <div class="dd-item">Use HM View on your screen — walk skills live with the HM</div>
-          <div class="dd-item">Save a named session per REQ to switch between HMs</div>
-          <div class="dd-item">Pick relevant questions — you don't need all 11</div>
-          <div class="dd-item">Assign interviewers before sending the summary</div>
+          <div class="dd-lbl">&#10003;&nbsp; Do</div>
+          <div class="dd-item">Walk HM through skills live in HM View</div>
+          <div class="dd-item">Save a session per REQ — keeps HMs separate</div>
+          <div class="dd-item">Pick the most relevant questions, not all 11</div>
+          <div class="dd-item">Assign interviewers before sending summary</div>
         </div>
         <div class="dont">
-          <div class="dd-lbl">&#10007; Don't</div>
+          <div class="dd-lbl">&#10007;&nbsp; Don't</div>
           <div class="dd-item">Share the playbook link with the HM</div>
           <div class="dd-item">Forget to paste in Outlook after Send Email</div>
-          <div class="dd-item">Skip Skills Allocation — it feeds the panel brief</div>
+          <div class="dd-item">Skip Skills Allocation — feeds panel brief</div>
           <div class="dd-item">Rely on browser history — use Save Session</div>
         </div>
       </div>
-      <div style="background:linear-gradient(120deg,#FEF0F5,#EFF6FF);border-radius:9px;padding:10px 12px;margin-top:2px;">
-        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#9CA3AF;margin-bottom:6px;">&#128161; Remember</div>
-        <div style="font-size:11.5px;color:#374151;line-height:1.6;">
-          BrightHire on? &rarr; <strong>BrightHire box shows.</strong><br>
-          BrightHire off? &rarr; <strong>Summary box shows.</strong><br>
-          HM View? &rarr; <strong>On your screen only.</strong>
-        </div>
+      <div class="remember">
+        <div class="remember-title">&#128161;&nbsp; Quick Reminders</div>
+        <div class="remember-row">BrightHire on &rarr; <strong>BrightHire box shows</strong></div>
+        <div class="remember-row">BrightHire off &rarr; <strong>Strategy Summary shows</strong></div>
+        <div class="remember-row">HM View &rarr; <strong>your screen only &mdash; do not share</strong></div>
+        <div class="remember-row">Send Email &rarr; <strong>must paste in Outlook (Ctrl+V)</strong></div>
       </div>
     </div>
 
@@ -155,8 +173,8 @@ body{font-family:Arial,sans-serif;background:#0D1B30;color:#1A1D23;height:100vh;
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-txt"><strong>SAP Skills &amp; AI Recruiter Playbook</strong> &nbsp;·&nbsp; Tech Talent Discovery &nbsp;·&nbsp; Questions? Contact your TD lead or TA Ops.</div>
-    <div class="footer-badge">&#128274; SAP Internal — Recruiter Use Only</div>
+    <div class="footer-txt"><strong>SAP Skills &amp; AI Recruiter Playbook</strong> &nbsp;&middot;&nbsp; Tech Talent Discovery &nbsp;&middot;&nbsp; Questions? Contact your TD lead or TA Ops.</div>
+    <div class="footer-badge">&#128274; SAP Internal &mdash; Recruiter Use Only</div>
   </div>
 
 </div>
