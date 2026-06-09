@@ -27,7 +27,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F5F6F7!important;color
 .wrap{max-width:980px;margin:0 auto;padding:26px 16px 60px}
 .pg-h{margin-bottom:22px}.pg-h h1{font-size:22px;font-weight:800}.pg-h p{font-size:13px;color:var(--text-m);margin-top:3px}
 .stepper{display:flex;align-items:center;background:var(--white);border-radius:var(--r);padding:18px 22px;margin-bottom:22px;box-shadow:var(--shadow)}
-.st-i{display:flex;align-items:center;flex:1}.st-i:last-child{flex:0 0 auto}
+.st-i{display:flex;align-items:center;flex:1;cursor:pointer;border-radius:8px;padding:4px 6px;margin:-4px -6px;transition:background .15s}.st-i:last-child{flex:0 0 auto}.st-i:hover{background:var(--blue-ll)}.st-i:hover .st-lt{color:var(--blue)}
 .st-c{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:.2s}
 .st-c.pend{background:var(--bg);border:2px solid var(--border);color:var(--text-l)}
 .st-c.act{background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff;box-shadow:0 0 0 4px rgba(214,24,90,.2)}
@@ -239,13 +239,13 @@ textarea{resize:vertical;min-height:56px}
 <div class="wrap">
   <div class="pg-h"><h1>E&amp;T Skills Prioritisation</h1><p>Configure your interview skills plan in 4 guided steps — select skills, assign interviewers, and export.</p></div>
   <div class="stepper">
-    <div class="st-i"><div class="st-c act" id="sc1">1</div><div class="st-lbl"><div class="st-lt">Role Information</div><div class="st-ls">Profile &amp; Details</div></div></div>
+    <div class="st-i" onclick="navToStep(1)" title="Go to Step 1: Role Information"><div class="st-c act" id="sc1">1</div><div class="st-lbl"><div class="st-lt">Role Information</div><div class="st-ls">Profile &amp; Details</div></div></div>
     <div class="st-ln" id="ln12"></div>
-    <div class="st-i"><div class="st-c pend" id="sc2">2</div><div class="st-lbl"><div class="st-lt">Skill Selection</div><div class="st-ls">Choose 5 Tech Skills</div></div></div>
+    <div class="st-i" onclick="navToStep(2)" title="Go to Step 2: Skill Selection"><div class="st-c pend" id="sc2">2</div><div class="st-lbl"><div class="st-lt">Skill Selection</div><div class="st-ls">Choose 5 Tech Skills</div></div></div>
     <div class="st-ln" id="ln23"></div>
-    <div class="st-i"><div class="st-c pend" id="sc3">3</div><div class="st-lbl"><div class="st-lt">Interview Plan</div><div class="st-ls">Assign &amp; Schedule</div></div></div>
+    <div class="st-i" onclick="navToStep(3)" title="Go to Step 3: Interview Plan"><div class="st-c pend" id="sc3">3</div><div class="st-lbl"><div class="st-lt">Interview Plan</div><div class="st-ls">Assign &amp; Schedule</div></div></div>
     <div class="st-ln" id="ln34"></div>
-    <div class="st-i"><div class="st-c pend" id="sc4">4</div><div class="st-lbl"><div class="st-lt">Summary</div><div class="st-ls">Review &amp; Export</div></div></div>
+    <div class="st-i" onclick="navToStep(4)" title="Go to Step 4: Summary"><div class="st-c pend" id="sc4">4</div><div class="st-lbl"><div class="st-lt">Summary</div><div class="st-ls">Review &amp; Export</div></div></div>
   </div>
 
   <!-- ═══ STEP 1 ═══ -->
