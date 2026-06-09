@@ -219,6 +219,13 @@ textarea{resize:vertical;min-height:56px}
 .hidden{display:none!important}
 @keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.fade{animation:fi .22s ease}
 @media(max-width:720px){.r2,.r3,.csk-grid,.plan-lay,.sum-meta,.sum-srow{grid-template-columns:1fr}.pool-p{display:none}}
+/* ── Skill tooltip ── */
+.sk-i{position:relative;}
+.sk-tip{display:none;position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);width:260px;background:#1a1a2e;color:#f0f0f0;font-size:12px;line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 4px 18px rgba(0,0,0,.3);z-index:999;pointer-events:none;white-space:normal;border:1px solid rgba(214,24,90,.3);}
+.sk-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1a1a2e;}
+.sk-i:hover .sk-tip{display:block;}
+.sk-tip-name{font-weight:700;color:#FF6FA0;margin-bottom:5px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;}
+.sk-tip-def{color:#d0d0e8;}
 </style>
 </head>
 <body>
@@ -812,6 +819,213 @@ function renderNonhcGrid(){
   });
 }
 
+// ── Skill definitions (from SAP E&T Skills Framework) ────────────────────────
+const SKILL_DEF = {
+  'AI Adoption Capability':'Ability to embrace mindsets and behaviors that drive effective human–AI collaboration, outcome focus, experimentation, and workflow adaptation. Employees who excel in this skill are open to change, accountable, and results-oriented.',
+  'AI Output Quality Assurance':'Ability to assess and ensure the correctness, completeness, safety, bias, and standards alignment of AI-generated outputs. Employees who excel in this skill apply structured checks and provide supporting evidence.',
+  'Agentic AI Day-to-Day Practice':'Ability to seamlessly integrate autonomous AI agents into daily personal workflows to automate complex, multi-step administrative tasks. Employees who excel in this skill focus on workflow mapping, time reclamation, and the critical auditing of agent-led outcomes to ensure operational accuracy.',
+  'Context Engineering':'Ability to design, refine, and optimize prompts or contextual inputs to elicit desired outputs from AI models, with effective application and alignment to MCP-based workflows and protocols.',
+  'System-integrated Vibe Coding':'Ability to leverage AI-assisted coding tools and large language models to generate, refine, and debug code through natural language prompts.',
+  'AI-Assisted Engineering':'Ability to effectively leverage artificial intelligence tools and frameworks to streamline software development tasks such as coding, debugging, and testing.',
+  'AI Governance Operations':'Ability to operate governed AI processes such as decision traceability, policy controls, compliant integrations, audit readiness, and cost management.',
+  'Agentic Engineering':'Ability to design, build, and deploy autonomous AI systems that operate independently to accomplish complex objectives with minimal human intervention.',
+  'Agentic Orchestration':'Ability to design, implement, and manage multi-agent systems where autonomous AI agents collaborate and coordinate to accomplish complex, multi-step tasks.',
+  'AI Assisted Development':'Ability to use AI-powered tools to accelerate software development, including code generation, review, and testing.',
+  'AI Assisted Prototyping':'Ability to leverage AI tools to rapidly create low- and high-fidelity prototypes, facilitating iterative experimentation and feedback.',
+  'AI Journey Mapping':'Ability to design and analyse end-to-end user journeys that incorporate AI touchpoints, ensuring seamless and ethical AI-human interactions.',
+  'AI Content Curation':'Ability to evaluate, organise, and maintain AI-generated content to ensure quality, accuracy, and relevance.',
+  'AI-Workforce Transformation Planning':'Ability to assess organisational readiness for AI adoption and develop workforce transition strategies.',
+  'Application Security':'Ability to identify, assess, and mitigate security vulnerabilities in software applications throughout the development lifecycle.',
+  'Attack Patterns':'Ability to identify, analyse, and document common attack patterns used by adversaries to compromise systems.',
+  'Attack Surface Management':'Ability to identify, monitor, and reduce the external attack surface of an organisation.',
+  'Audit Management':'Ability to plan, execute, and manage audit programmes in accordance with professional standards.',
+  'Audit Planning':'Ability to develop comprehensive audit plans that align with organisational risk assessments.',
+  'Audit Processes':'Ability to execute structured audit procedures to evaluate the effectiveness of internal controls.',
+  'Audit Report Preparation':'Ability to document audit findings and recommendations in clear, concise reports.',
+  'Audit Risk':'Ability to identify and assess risks that may affect the achievement of audit objectives.',
+  'Audit Scheduling':'Ability to develop and manage audit schedules that optimise resource utilisation.',
+  'Audit Working Papers':'Ability to prepare and maintain working papers that document audit evidence and conclusions.',
+  'Big Data Handling':'Ability to process, analyse, and manage large-scale datasets using distributed computing frameworks.',
+  'Business Architecture':'Ability to design and document organisational structures, processes, and capabilities to support strategic objectives.',
+  'Business Process Analysis':'Ability to examine and document business processes to identify inefficiencies and improvement opportunities.',
+  'Business Process Automation':'Ability to design and implement automated solutions to streamline repetitive business processes.',
+  'Business Process Management':'Ability to systematically improve organisational processes through analysis, design, implementation, and monitoring.',
+  'Business Process Modeling':'Ability to create visual representations of business processes using standard notation frameworks.',
+  'Campaign Management':'Ability to plan, execute, and measure marketing campaigns across multiple channels.',
+  'Certified Compliance Specialist':'Knowledge and application of compliance frameworks and regulatory requirements.',
+  'Certified Lead Auditor':'Ability to lead audit engagements in accordance with international audit standards.',
+  'Change Management':'Ability to plan and implement organisational change initiatives to achieve desired outcomes.',
+  'Cloud Architecture':'Ability to design and implement cloud architecture with deep understanding of cloud computing principles and providers.',
+  'Cloud Platform System':'Ability to design, deploy, and manage applications on cloud platforms such as AWS, Azure, or GCP.',
+  'Cloud Security Architecture':'Ability to design security controls and frameworks for cloud-based environments.',
+  'Cloud Security Infrastructure':'Ability to implement and manage security controls within cloud infrastructure.',
+  'Color Theory':'Ability to apply principles of colour relationships, psychology, and harmony in visual design.',
+  'Competitive Analysis':'Ability to research and analyse competitor products, strategies, and market positioning.',
+  'Computer-Assisted Translation':'Ability to use CAT tools and translation memory systems to produce consistent, accurate translations.',
+  'Computer Security Incident Response':'Ability to detect, analyse, contain, and recover from computer security incidents.',
+  'Conflict Management':'Ability to identify, address, and resolve conflicts constructively within project or team contexts.',
+  'Content Design':'Ability to create user-centred content that guides users through digital products and services.',
+  'Content Development':'Ability to research, create, and edit content for various platforms and audiences.',
+  'Content Engineering':'Ability to design and implement structured content systems that support scalable content delivery.',
+  'Contextual Inquiry':'Ability to conduct field research by observing and interviewing users in their natural environment.',
+  'Continuous Integration/Continuous Delivery (CI/CD)':'Ability to design, implement, and maintain CI/CD pipelines to automate software build, test, and deployment processes.',
+  'Control Deficiency Management':'Ability to identify, assess, and remediate internal control deficiencies.',
+  'Creative Problem Solving':'Ability to apply innovative thinking and design methodologies to address complex challenges.',
+  'Cross-Functional Collaboration':'Ability to work effectively across organisational boundaries to achieve shared goals.',
+  'Customer Engagement':'Ability to build and maintain productive relationships with customers to understand and address their needs.',
+  'Customer Orientation':'Ability to focus on understanding and meeting customer needs throughout all activities.',
+  'Customer Value Proposition':'Ability to articulate the unique value an offering provides to customers.',
+  'Cyber Incident Response':'Ability to coordinate and execute response activities following a cybersecurity incident.',
+  'Cyber Threat Analysis':'Ability to analyse cyber threats to assess their potential impact and likelihood.',
+  'Cyber Threat Intelligence':'Ability to collect, process, and analyse information about current and emerging cyber threats.',
+  'Cybersecurity Forensic Analyst':'Ability to identify, collect, preserve, and analyse electronic data in a forensically sound manner.',
+  'Data Analysis':'Ability to collect, clean, and analyse data to derive actionable insights.',
+  'Data Collection':'Ability to design and implement methods for gathering research or operational data.',
+  'Data Enrichment':'Ability to enhance raw data by supplementing it with additional context from external sources.',
+  'Data Ethics':'Ability to identify and address ethical considerations in data collection, processing, and use.',
+  'Data Governance':'Ability to assess, manage, use, improve, monitor, maintain, and protect organisational information through a system of decision rights and accountabilities.',
+  'Data Infrastructure Management':'Ability to design, deploy, and manage infrastructure that supports data storage and processing.',
+  'Data Orchestration':'Ability to automate and manage the movement and transformation of data across systems.',
+  'Data Pipeline Development':'Ability to design and develop data pipelines using technologies such as Apache Spark and Databricks.',
+  'Data Product Lifecycle Management':'Ability to manage data products from conception through retirement.',
+  'Data Validation':'Ability to verify that data meets defined quality standards and business requirements.',
+  'Data‑Driven Decision Making':'Ability to use data analysis to inform and support strategic and operational decisions.',
+  'Database Engineering':'Ability to design, implement, and optimise relational and non-relational database systems.',
+  'Deep Learning':'Ability to design, train, and evaluate deep neural network models for complex pattern recognition tasks.',
+  'Design Iconography':'Ability to create and apply icon systems that enhance visual communication in digital products.',
+  'Design Thinking':'Ability to apply human-centred design methodologies to solve complex problems creatively.',
+  'Design Tools':'Ability to use industry-standard design software to create and prototype digital experiences.',
+  'Digital Content Management':'Ability to organise, maintain, and publish digital content across platforms.',
+  'Digital Illustration':'Ability to create original artwork using digital tools for communication or decorative purposes.',
+  'Digital Marketing':'Ability to plan and execute marketing strategies across digital channels.',
+  'Document Management':'Ability to establish and maintain systems for organising and controlling project documentation.',
+  'Endpoint Detection And Response':'Ability to deploy and operate EDR solutions to detect and respond to threats on endpoints.',
+  'Ethical AI':'Ability to identify, assess, and mitigate ethical risks associated with AI systems.',
+  'Evaluation and Benchmark Engineering':'Ability to design and implement evaluation frameworks to measure AI model performance.',
+  'Evaluative Research':'Ability to assess existing products or services against user needs and usability standards.',
+  'Feature Engineering':'Ability to transform raw data into features that improve machine learning model performance.',
+  'Generative AI Day-to-Day Practice':'Ability to apply generative AI tools in daily workflows to enhance productivity and output quality.',
+  'Generative Research':'Ability to conduct open-ended research to discover user needs, behaviours, and motivations.',
+  'Go-To-Market Strategy':'Ability to develop and execute strategies for launching products or services into target markets.',
+  'Graphic Design':'Ability to create visual content that communicates messages effectively to target audiences.',
+  'High Availability Design':'Ability to design systems and architectures that minimise downtime and ensure continuous service.',
+  'High Availability Engineering':'Ability to implement technical solutions that ensure systems remain operational during failures.',
+  'Identity and Access Management':'Ability to design and manage systems that control user access to resources.',
+  'Incident Management':'Ability to detect, respond to, and recover from operational or security incidents.',
+  'Incident Response Management':'Ability to lead and coordinate an organisation\'s response to security incidents.',
+  'Information Architecture':'Ability to organise and structure information to support usability and findability.',
+  'Information Security Audits':'Ability to conduct audits to assess the effectiveness of information security controls.',
+  'Information Security Management':'Ability to establish and maintain an information security management programme.',
+  'Information Technology Controls':'Ability to design and assess IT controls that mitigate technology-related risks.',
+  'Information Technology Management':'Ability to plan, organise, and oversee IT resources to support organisational objectives.',
+  'Infrastructure Automation':'Ability to automate provisioning and management of infrastructure using code-based tools.',
+  'Infrastructure Security':'Ability to implement security controls to protect network and computing infrastructure.',
+  'Interaction Design':'Ability to design interactive digital experiences that are intuitive and meet user needs.',
+  'IT Risk Management':'Ability to identify, assess, and mitigate technology-related risks.',
+  'IT Security':'Ability to implement and manage security measures to protect information systems.',
+  'Knowledge Graph Integration and Interaction':'Ability to design and query knowledge graphs to represent and retrieve complex relational data.',
+  'Language Consulting':'Ability to provide expert advice on language quality, style, and localisation strategy.',
+  'Linguistic Quality Assurance':'Ability to assess and ensure the accuracy, consistency, and appropriateness of translated content.',
+  'LLMOps Architecture':'Ability to architect and design scalable, production-ready systems for deploying and managing large language models at enterprise scale.',
+  'Machine Learning Operations (MLOps)':'Ability to design, implement, and optimise scalable solutions for deploying, automating, and managing the entire lifecycle of machine learning models in production.',
+  'Malware Analysis':'Ability to examine malicious software to understand its behaviour, origin, and impact.',
+  'Malware Reverse Engineering':'Ability to deconstruct malware to identify its components, functionality, and indicators of compromise.',
+  'Market Research':'Ability to gather, analyse, and interpret information about markets, customers, and competitors.',
+  'Master Data Management':'Ability to establish and maintain consistent, accurate master data across systems.',
+  'Model Training':'Ability to configure, execute, and optimise the training of machine learning models.',
+  'Motion Graphic Design':'Ability to create animated visual content for digital communication and storytelling.',
+  'NIST Cybersecurity Framework (CSF)':'Ability to apply the NIST Cybersecurity Framework to manage and reduce cybersecurity risk.',
+  'Observability':'Ability to instrument, monitor, and troubleshoot distributed systems using logs, metrics, and traces.',
+  'Ontologies':'Ability to design and implement ontologies to formally represent domain knowledge.',
+  'Open Source Intelligence':'Ability to collect and analyse publicly available information to support investigations.',
+  'Open Web Application Security Project (OWASP)':'Ability to identify and remediate web application vulnerabilities using OWASP guidelines.',
+  'Operating Systems':'Ability to install, configure, and manage operating systems for servers and workstations.',
+  'Page & Screen Layout':'Ability to arrange visual elements on a page or screen to guide the viewer\'s attention effectively.',
+  'Participant Recruitment':'Ability to identify and recruit appropriate participants for user research studies.',
+  'Penetration Testing':'Ability to conduct penetration testing by identifying and exploiting vulnerabilities in systems.',
+  'Personal Identifiable Information (PII) Handling':'Ability to handle, process, and protect personally identifiable information in compliance with regulations.',
+  'Plan Execution':'Ability to implement project plans effectively, monitoring progress and managing issues.',
+  'Positioning Strategy':'Ability to define how a product or service should be perceived relative to competitors.',
+  'Process Mining & Optimization':'Ability to analyse event logs to discover, monitor, and improve business processes.',
+  'Product Lifecycle Management':'Ability to manage a product throughout its lifecycle from inception to retirement.',
+  'Product Roadmap Development':'Ability to create and maintain strategic product roadmaps aligned with business objectives.',
+  'Programming Languages':'Ability to write clean, maintainable code in one or more programming languages.',
+  'Project Coordination':'Ability to coordinate project activities, resources, and stakeholders to achieve project goals.',
+  'Project Implementation':'Ability to execute project plans and manage the delivery of project outputs.',
+  'Project Management':'Ability to initiate, plan, execute, monitor, and close projects within defined constraints.',
+  'Project Planning and Execution':'Ability to develop comprehensive project plans and manage their execution.',
+  'Project Scoping':'Ability to define project boundaries, deliverables, and success criteria.',
+  'Project Schedules':'Ability to develop and maintain project schedules that ensure timely delivery.',
+  'Proofreading':'Ability to review written content to identify and correct errors in grammar, spelling, and style.',
+  'Public Speaking':'Ability to communicate ideas clearly and persuasively to audiences of various sizes.',
+  'Rapid Field Prototyping':'Ability to quickly build functional prototypes to validate technical assumptions.',
+  'Red Teaming':'Ability to simulate adversarial attacks to test the security posture of an organisation.',
+  'Report Writing':'Ability to produce clear, structured reports that communicate findings to diverse audiences.',
+  'Research Planning & Design':'Ability to design research studies that answer specific questions about user needs or behaviour.',
+  'Responsible AI (RAI) Design':'Ability to incorporate ethical principles and fairness considerations into AI product design.',
+  'Risk Analysis':'Ability to identify, assess, and prioritise risks based on their likelihood and potential impact.',
+  'Risk Management Framework':'Ability to implement a structured approach to identifying and managing organisational risks.',
+  'Risk Management Information Systems':'Ability to use information systems to support risk identification, assessment, and monitoring.',
+  'Risk Management Tools':'Ability to use tools and techniques to identify, assess, and manage risks.',
+  'Risk Mindset':'Ability to proactively identify and consider risk implications in decision-making.',
+  'Risk Mitigation':'Ability to develop and implement strategies to reduce the likelihood or impact of identified risks.',
+  'Risk Register':'Ability to create and maintain a risk register that documents identified risks and mitigation actions.',
+  'Root Cause Analysis':'Ability to identify the underlying causes of problems to prevent recurrence.',
+  'SAP Data and Analytics Ecosystem':'Ability to work with SAP data and analytics tools including SAP BW, SAP Analytics Cloud, and DataSphere.',
+  'SAP Global Development Policy':'Knowledge and application of SAP\'s global software development standards and policies.',
+  'SAP Product Standards':'Ability to design and deliver software that meets SAP\'s product quality and compliance standards.',
+  'Scalability':'Ability to design and implement systems that can handle increasing loads efficiently.',
+  'Scalability Design':'Ability to architect solutions that scale horizontally and vertically to meet demand.',
+  'Scenario Testing':'Ability to design and execute test scenarios that validate system behaviour under defined conditions.',
+  'Scope Management':'Ability to define, control, and manage project scope throughout the project lifecycle.',
+  'Scripting':'Ability to write scripts to automate tasks and process data in operational environments.',
+  'Security Interest':'Ability to maintain awareness of current security threats, vulnerabilities, and best practices.',
+  'Security Operations (SecOps)':'Ability to perform security operations including identification, analysis, and mitigation of security threats.',
+  'Security Patterns':'Ability to apply established security design patterns to protect systems and data.',
+  'Security Recommendations':'Ability to provide actionable security recommendations based on assessment findings.',
+  'Semantic Retrieval':'Ability to design and implement systems that retrieve information based on semantic meaning.',
+  'Social Engineering':'Ability to simulate social engineering attacks to test human vulnerability in security programmes.',
+  'Software Audit':'Ability to conduct audits of software systems to assess quality, compliance, and security.',
+  'Software Development Life Cycle':'Ability to manage and apply structured processes for software development from requirements to deployment.',
+  'Software Localization':'Ability to adapt software products to meet linguistic, cultural, and technical requirements of target markets.',
+  'Software Testing Life Cycle':'Ability to manage the full testing lifecycle from planning through execution and reporting.',
+  'Software Testing Methodologies':'Ability to apply testing methodologies such as black-box, white-box, and exploratory testing.',
+  'Software Testing Tools':'Ability to use automated and manual testing tools to verify software quality.',
+  'Spark Runtime':'Ability to configure and optimise Apache Spark runtime environments for large-scale data processing.',
+  'Storytelling':'Ability to craft and deliver compelling narratives that engage audiences and communicate complex ideas.',
+  'Strategic Thinking':'Ability to analyse complex situations and develop long-term strategies aligned with organisational goals.',
+  'System Security Analysis':'Ability to analyse system architectures and configurations to identify security vulnerabilities.',
+  'Systems Thinking':'Ability to understand how components of a system interrelate and how systems work over time.',
+  'Team Performance Management':'Ability to set clear expectations, provide feedback, and support team members in achieving high performance.',
+  'Technical Leadership':'Ability to guide technical teams, make architectural decisions, and drive engineering excellence.',
+  'Terminology Management':'Ability to develop and maintain terminology databases to ensure consistent language use.',
+  'Test Automation':'Ability to design and implement automated test frameworks that improve testing efficiency and coverage.',
+  'Test Strategy Development':'Ability to define testing strategies that align with project objectives and quality standards.',
+  'Third Party Risk Management':'Ability to identify, assess, and manage risks associated with third-party vendors and partners.',
+  'Threat Management':'Ability to identify, assess, and respond to security threats to protect organisational assets.',
+  'Time-Boxed Engagement Orchestration':'Ability to manage time-constrained customer engagements effectively.',
+  'Troubleshooting (Problem Solving)':'Ability to diagnose and resolve technical issues systematically and efficiently.',
+  'Typography':'Ability to select and arrange typefaces to enhance readability and visual communication.',
+  'UI/UX Design Systems':'Ability to create and maintain design systems that ensure consistency across digital products.',
+  'UI/UX Writing':'Ability to write clear, concise interface copy that guides users through digital experiences.',
+  'Usability Testing':'Ability to plan and conduct usability tests to evaluate product usability with real users.',
+  'User Journey Mapping':'Ability to visualise and analyse the end-to-end experience of users interacting with a product.',
+  'User Research Methods':'Ability to select and apply appropriate research methods to understand user needs and behaviours.',
+  'Visual Composition':'Ability to arrange visual elements to create balanced, purposeful, and aesthetically pleasing designs.',
+  'Vulnerability Assessments':'Ability to identify and evaluate vulnerabilities in systems, networks, and applications.',
+  'Vulnerability Management':'Ability to operationalise vulnerability management programmes including scanning, prioritisation, and remediation.',
+  'Vulnerability Scanning':'Ability to use automated scanning tools to discover vulnerabilities across systems and applications.',
+  'Web Accessibility Standards':'Ability to design and develop digital content that meets accessibility standards such as WCAG.',
+  'Web Development':'Ability to build and maintain web applications using modern frontend and backend technologies.',
+  'Effective Communication':'Communicates effectively and professionally; adapts message to different stakeholder groups.',
+  'Collaboration':'Creates cross-team relationships to achieve shared goals, using clear communication and collaboration — supported by AI tools that improve alignment and decision making.',
+  'Learning Agility':'Continuously learns and applies new tools, technologies, and knowledge to solve problems and adapt to changing situations.',
+  'Creative Thinking':'Drives innovative solutions by applying new ideas, technologies, and AI where relevant.',
+  'Complex Problem Solving':'Identifies root causes of complex problems through systematic analysis and develops scalable solutions using appropriate tools and AI.',
+  'Adaptive Leadership':'Adapts the approach and leadership style to navigate complexities in situations and bring out the best in people.',
+  'Customer Focus':'Understands customer needs and uses expertise and tools (including AI) to deliver solutions that create value.',
+};
+
 function renderTechGrid(){
   if(S.profile==='Other'){ renderCustomGrid(); return; }
   const info=D.profiles[S.profile];
@@ -826,6 +1040,8 @@ function renderTechGrid(){
     const ch=document.createElement('div'); ch.className='sk-ch'; ch.textContent=sel?'\u2713':'';
     const nm=document.createElement('span'); nm.className='sk-nm'; nm.textContent=sk;
     d.appendChild(ch); d.appendChild(nm);
+    const def=SKILL_DEF[sk];
+    if(def){const tip=document.createElement('div');tip.className='sk-tip';tip.innerHTML='<div class="sk-tip-name">'+sk+'</div><div class="sk-tip-def">'+def+'</div>';d.appendChild(tip);}
     grid.appendChild(d);
   });
   updCounter(n);
@@ -850,6 +1066,8 @@ function renderCustomGrid(){
     const ch=document.createElement('div'); ch.className='sk-ch'; ch.textContent=sel?'\u2713':'';
     const nm=document.createElement('span'); nm.className='sk-nm'; nm.textContent=sk;
     d.appendChild(ch); d.appendChild(nm);
+    const def2=SKILL_DEF[sk];
+    if(def2){const tip=document.createElement('div');tip.className='sk-tip';tip.innerHTML='<div class="sk-tip-name">'+sk+'</div><div class="sk-tip-def">'+def2+'</div>';d.appendChild(tip);}
     grid.appendChild(d);
   });
 }
@@ -881,6 +1099,11 @@ function updCustomSkill(i,val){
 
 // ── Step 3 ────────────────────────────────────────────────────────────────────
 function renderS3(){
+  // Auto-assign predefined skills to first Recruiter Interview interviewer if empty
+  const recRound=S.rounds.find(r=>r.type==='Recruiter Interview');
+  if(recRound&&recRound.interviewers[0]&&recRound.interviewers[0].skills.length===0){
+    recRound.interviewers[0].skills=['AI Adoption Capability','Collaboration','Effective Communication'];
+  }
   const nonhc=S.hcMode==='nonhc';
   $('s3-desc').innerHTML=nonhc
     ?'<strong>Drag skills</strong> onto an interviewer row, or click <strong>+ Add Skills</strong> for the picker. Each round supports up to 4 interviewers.'
