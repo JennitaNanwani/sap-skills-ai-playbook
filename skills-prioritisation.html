@@ -1510,19 +1510,33 @@ function go(n){
     try{
       const draft=JSON.parse(localStorage.getItem('rsm_draft')||'{}');
       let changed=false;
+      // Build skill→interviewer name map from all rounds
+      const ivMap={};
+      S.rounds.forEach(r=>r.interviewers.forEach(iw=>{
+        if(iw.name) iw.skills.forEach(sk=>{ ivMap[sk]=iw.name; });
+      }));
       S.tech.forEach((sk,i)=>{
-        const key='rsm-tech-sk-'+(i+1);
-        if(!draft[key]){draft[key]=sk;changed=true;}
+        const skKey='rsm-tech-sk-'+(i+1);
+        if(!draft[skKey]){draft[skKey]=sk;changed=true;}
+        const ivKey='rsm-tech-iv-'+(i+1);
+        if(!draft[ivKey]&&ivMap[sk]){draft[ivKey]=ivMap[sk];changed=true;}
       });
       if(changed) localStorage.setItem('rsm_draft',JSON.stringify(draft));
     }catch(e){}
     renderS3();
   }
   if(n===4){
-    // Re-sync tech skills to RSM draft in localStorage (overwrite to keep in sync)
+    // Re-sync tech skills + interviewer names to RSM draft (full overwrite)
     try{
       const draft=JSON.parse(localStorage.getItem('rsm_draft')||'{}');
-      S.tech.forEach((sk,i)=>{ draft['rsm-tech-sk-'+(i+1)]=sk; });
+      const ivMap={};
+      S.rounds.forEach(r=>r.interviewers.forEach(iw=>{
+        if(iw.name) iw.skills.forEach(sk=>{ ivMap[sk]=iw.name; });
+      }));
+      S.tech.forEach((sk,i)=>{
+        draft['rsm-tech-sk-'+(i+1)]=sk;
+        if(ivMap[sk]) draft['rsm-tech-iv-'+(i+1)]=ivMap[sk];
+      });
       localStorage.setItem('rsm_draft',JSON.stringify(draft));
     }catch(e){}
     renderS4();
