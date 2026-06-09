@@ -1506,37 +1506,26 @@ function go(n){
   updStepper(); $('hdr-pill').textContent='Step '+n+' of 4';
   if(n===2) renderS2();
   if(n===3){
-    // Sync tech skills to RSM draft in localStorage (only fill empty slots)
     try{
-      const draft=JSON.parse(localStorage.getItem('rsm_draft')||'{}');
-      let changed=false;
-      // Build skill→interviewer name map from all rounds
-      const ivMap={};
-      S.rounds.forEach(r=>r.interviewers.forEach(iw=>{
-        if(iw.name) iw.skills.forEach(sk=>{ ivMap[sk]=iw.name; });
+      // Write full rounds data so RSM can render Interview Rounds table
+      const rounds=S.rounds.map(r=>({
+        type:r.type,
+        interviewers:r.interviewers.map(iw=>({name:iw.name||'',skills:iw.skills.slice()}))
       }));
-      S.tech.forEach((sk,i)=>{
-        const skKey='rsm-tech-sk-'+(i+1);
-        if(!draft[skKey]){draft[skKey]=sk;changed=true;}
-        const ivKey='rsm-tech-iv-'+(i+1);
-        if(!draft[ivKey]&&ivMap[sk]){draft[ivKey]=ivMap[sk];changed=true;}
-      });
-      if(changed) localStorage.setItem('rsm_draft',JSON.stringify(draft));
+      localStorage.setItem('spt_rounds',JSON.stringify(rounds));
     }catch(e){}
     renderS3();
   }
   if(n===4){
-    // Re-sync tech skills + interviewer names to RSM draft (full overwrite)
     try{
-      const draft=JSON.parse(localStorage.getItem('rsm_draft')||'{}');
-      const ivMap={};
-      S.rounds.forEach(r=>r.interviewers.forEach(iw=>{
-        if(iw.name) iw.skills.forEach(sk=>{ ivMap[sk]=iw.name; });
+      const rounds=S.rounds.map(r=>({
+        type:r.type,
+        interviewers:r.interviewers.map(iw=>({name:iw.name||'',skills:iw.skills.slice()}))
       }));
-      S.tech.forEach((sk,i)=>{
-        draft['rsm-tech-sk-'+(i+1)]=sk;
-        if(ivMap[sk]) draft['rsm-tech-iv-'+(i+1)]=ivMap[sk];
-      });
+      localStorage.setItem('spt_rounds',JSON.stringify(rounds));
+      // Also keep legacy rsm_draft tech skill keys for export compatibility
+      const draft=JSON.parse(localStorage.getItem('rsm_draft')||'{}');
+      S.tech.forEach((sk,i)=>{ draft['rsm-tech-sk-'+(i+1)]=sk; });
       localStorage.setItem('rsm_draft',JSON.stringify(draft));
     }catch(e){}
     renderS4();
