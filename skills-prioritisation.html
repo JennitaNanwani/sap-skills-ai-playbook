@@ -8,19 +8,19 @@
 <script src="./E&amp;T Skills Prioritisation _ SAP_files/xlsx.full.min.js.download"></script>
 <style>
 :root{
-  --blue:#0070F2;--blue-d:#0057C2;--blue-l:#EBF5FB;--blue-ll:#F0F7FF;
-  --green:#107E3E;--green-l:#F1FAF2;
-  --orange:#E76500;--orange-l:#FFF3E0;--orange-b:#E8A000;
-  --red:#B00020;--red-l:#FDECEA;
-  --bg:#F5F6F7;--white:#FFFFFF;--border:#D9DBDD;
-  --text:#32363A;--text-m:#556068;--text-l:#8D9197;
-  --shadow:0 2px 8px rgba(0,0,0,.08);--shadow-l:0 8px 32px rgba(0,0,0,.14);--r:10px;
+  --blue:#D6185A;--blue-d:#B0103F;--blue-l:rgba(214,24,90,.12);--blue-ll:rgba(214,24,90,.06);
+  --green:#40DDB0;--green-l:rgba(64,221,176,.12);
+  --orange:#4CC9FF;--orange-l:rgba(76,201,255,.12);--orange-b:#4CC9FF;
+  --red:#FF6FA0;--red-l:rgba(255,111,160,.12);
+  --bg:#070E1C;--white:#0F1C35;--border:#1B304F;
+  --text:#EEF2FF;--text-m:#8EA8C8;--text-l:#4E6B88;
+  --shadow:0 2px 8px rgba(0,0,0,.3);--shadow-l:0 8px 32px rgba(0,0,0,.5);--r:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
-.hdr{background:var(--white);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+body{font-family:'72 Brand','72','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#070E1C 0%,#0D1B30 60%,#130820 100%);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .hdr-l{display:flex;align-items:center;gap:12px}
-.sap-box{background:#1873CC;color:#fff;font-weight:800;font-size:14px;width:40px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:3px;letter-spacing:.5px}
+.sap-box{background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff;font-weight:800;font-size:14px;width:40px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:6px;letter-spacing:.5px;box-shadow:0 0 14px rgba(214,24,90,.4)}
 .hdr-sep{width:1px;height:20px;background:var(--border)}
 .hdr-sub{font-size:13px;color:var(--text-m);font-weight:500}
 .step-pill{background:var(--blue-l);color:var(--blue-d);font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
@@ -30,7 +30,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .st-i{display:flex;align-items:center;flex:1}.st-i:last-child{flex:0 0 auto}
 .st-c{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:.2s}
 .st-c.pend{background:var(--bg);border:2px solid var(--border);color:var(--text-l)}
-.st-c.act{background:var(--blue);color:#fff;box-shadow:0 0 0 4px var(--blue-l)}
+.st-c.act{background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff;box-shadow:0 0 0 4px rgba(214,24,90,.2)}
 .st-c.done{background:var(--green);color:#fff}
 .st-ln{flex:1;height:2px;background:var(--border);margin:0 10px;transition:.2s}
 .st-ln.done{background:var(--green)}
@@ -44,12 +44,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
 .fg{display:flex;flex-direction:column;gap:5px}
 label{font-size:13px;font-weight:600;color:var(--text)}.req{color:#B00}
-input[type=text],select,textarea{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text);background:var(--white);outline:none;transition:.15s;width:100%}
+input[type=text],select,textarea{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text);background:#0A1528;outline:none;transition:.15s;width:100%}
 input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-l)}
+input::placeholder{color:var(--text-l)}
 textarea{resize:vertical;min-height:56px}
 .tog{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
-.tb{flex:1;padding:9px 14px;border:none;background:var(--white);cursor:pointer;font-size:13px;font-family:inherit;font-weight:500;color:var(--text-m);transition:.15s;border-right:1px solid var(--border)}
-.tb:last-child{border-right:none}.tb.on{background:var(--blue);color:#fff;font-weight:600}.tb:hover:not(.on){background:var(--blue-ll)}
+.tb{flex:1;padding:9px 14px;border:none;background:#0A1528;cursor:pointer;font-size:13px;font-family:inherit;font-weight:500;color:var(--text-m);transition:.15s;border-right:1px solid var(--border)}
+.tb:last-child{border-right:none}.tb.on{background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff;font-weight:600}.tb:hover:not(.on){background:rgba(214,24,90,.08);color:var(--text)}
 .tog-w{display:flex;flex-wrap:wrap;gap:6px}.tog-w .tb{flex:0 0 auto;border:1.5px solid var(--border);border-radius:8px}
 .info-b{background:var(--blue-ll);border:1px solid #90C4F8;border-radius:8px;padding:10px 14px;font-size:13px;color:var(--blue-d);margin-bottom:16px}
 .warn-b{background:var(--orange-l);border:1px solid var(--orange-b);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--orange);margin-top:10px}
@@ -70,7 +71,7 @@ textarea{resize:vertical;min-height:56px}
 .cnt-w.go{background:var(--blue-ll)}.cnt-w.ok{background:var(--green-l)}.cnt-w.ov{background:var(--red-l)}
 .cnt-txt{font-size:14px;font-weight:700}
 .prog{width:140px;height:7px;border-radius:4px;background:var(--border);overflow:hidden;flex-shrink:0}
-.prog-f{height:100%;border-radius:4px;background:var(--blue);transition:width .2s}
+.prog-f{height:100%;border-radius:4px;background:linear-gradient(90deg,#D6185A,#FF6FA0);transition:width .2s}
 .prog-f.ok{background:var(--green)}.prog-f.ov{background:var(--red)}
 /* Custom skill inputs grid (Step 2 - Other profile) */
 .csk-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
@@ -79,9 +80,9 @@ textarea{resize:vertical;min-height:56px}
 .csk-inp.filled{border-color:#81C784;background:var(--green-l)}
 /* Tech skill grid */
 .sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
-.sk-i{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:.12s;user-select:none;background:var(--white)}
-.sk-i:hover:not(.dis){border-color:var(--blue);background:var(--blue-ll)}
-.sk-i.sel{border-color:#4CAF50;background:var(--green-l)}.sk-i.dis{opacity:.4;cursor:not-allowed}
+.sk-i{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:.12s;user-select:none;background:#0A1528}
+.sk-i:hover:not(.dis){border-color:var(--blue);background:rgba(214,24,90,.08)}
+.sk-i.sel{border-color:#40DDB0;background:rgba(64,221,176,.1)}.sk-i.dis{opacity:.4;cursor:not-allowed}
 .sk-ch{width:16px;height:16px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#fff;transition:.12s}
 .sk-i.sel .sk-ch{background:var(--green);border-color:var(--green)}
 .sk-nm{flex:1;font-size:13px;font-weight:500;line-height:1.3}
@@ -111,7 +112,7 @@ textarea{resize:vertical;min-height:56px}
 /* Round card */
 .rc{border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden}
 .rc-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border)}
-.rn{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rn{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .rt-sel{border:none;background:transparent;font-size:13px;font-weight:600;font-family:inherit;color:var(--text);cursor:pointer;flex:1;margin-left:8px;outline:none}
 .rc-cnt{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--blue-l);color:var(--blue-d)}
 .rc-bd{padding:14px}
@@ -135,7 +136,7 @@ textarea{resize:vertical;min-height:56px}
 .add-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border:1.5px dashed var(--blue);border-radius:12px;background:none;color:var(--blue);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.1s}.add-btn:hover{background:var(--blue-ll)}
 /* Modal */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:300;display:flex;align-items:center;justify-content:center}
-.modal{background:var(--white);border-radius:12px;width:540px;max-width:95vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:var(--shadow-l);overflow:hidden}
+.modal{background:#0F1C35;border-radius:12px;width:540px;max-width:95vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:var(--shadow-l);overflow:hidden;border:1px solid var(--border)}
 .modal-hd{padding:18px 22px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
 .modal-hd-r1{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .m-t{font-size:15px;font-weight:700}
@@ -156,7 +157,7 @@ textarea{resize:vertical;min-height:56px}
 .m-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .modal-ft{padding:14px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;flex-shrink:0;background:var(--white)}
 /* Summary */
-.sum-hero{background:linear-gradient(135deg,#0070F2 0%,#0057C2 100%);border-radius:var(--r);padding:22px 26px;color:#fff;margin-bottom:14px}
+.sum-hero{background:linear-gradient(135deg,#D6185A 0%,#0D1B30 100%);border-radius:var(--r);padding:22px 26px;color:#fff;margin-bottom:14px}
 .sum-hero h2{font-size:20px;font-weight:800;margin-bottom:2px}
 .sum-pf-row{font-size:13px;opacity:.82;margin-bottom:4px}
 .sum-pf-row strong{opacity:1}
@@ -175,8 +176,8 @@ textarea{resize:vertical;min-height:56px}
 .exp-btns{display:flex;gap:10px;flex-wrap:wrap}
 .nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
 .btn{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:6px}
-.btn-p{background:var(--blue);color:#fff}.btn-p:hover{background:var(--blue-d)}
-.btn-s{background:var(--white);color:var(--text);border:1.5px solid var(--border)}.btn-s:hover{background:var(--bg)}
+.btn-p{background:linear-gradient(135deg,#D6185A,#FF6FA0);color:#fff}.btn-p:hover{background:linear-gradient(135deg,#B0103F,#D6185A)}
+.btn-s{background:var(--white);color:var(--text);border:1.5px solid var(--border)}.btn-s:hover{background:#142240}
 .btn-g{background:var(--green);color:#fff}.btn-g:hover{background:#0D5C30}
 .btn-xl{background:#1D6F42;color:#fff}.btn-xl:hover{background:#165533}
 /* ── Print View (hidden in browser) ─────────────────────────────── */
@@ -323,7 +324,7 @@ textarea{resize:vertical;min-height:56px}
       <div class="c-hd"><svg width="17" height="17" fill="none" stroke="#0070F2" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><span class="c-t">Step 1: Skill Prioritisation</span></div>
       <!-- HC path -->
       <div id="s2-hc">
-        <p class="c-s" id="s2-desc">Core AI and Professional Skills are pre-selected and mandatory. Choose exactly <strong>6 Tech role-specific skills</strong>.</p>
+        <p class="c-s" id="s2-desc">Core AI and Professional Skills are pre-selected and mandatory. Choose exactly <strong>5 Tech role-specific skills</strong>.</p>
         <div style="margin-bottom:20px">
           <div class="sec-hd"><span class="sec-lb"><span class="dot d-ai"></span>Core AI Skills — Mandatory<span class="lock-t">Locked · 5 Skills</span></span></div>
           <div class="cw" id="ai-chips"></div>
