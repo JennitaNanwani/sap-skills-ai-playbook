@@ -1549,6 +1549,24 @@ function updStepper(){
   [['ln12',1],['ln23',2],['ln34',3]].forEach(([id,s])=>$(id).className='st-ln'+(n>s?' done':''));
 }
 
+// Allow parent page to navigate to a specific step via postMessage
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.action==='goStep'&&typeof e.data.step==='number'){
+    var n=e.data.step;
+    if(n>=1&&n<=4&&n!==S.step){
+      $('s'+S.step).classList.add('hidden');
+      S.step=n;
+      var el=$('s'+n); el.classList.remove('hidden');
+      void el.offsetWidth; el.classList.add('fade'); setTimeout(function(){el.classList.remove('fade');},220);
+      updStepper(); $('hdr-pill').textContent='Step '+n+' of 4';
+      if(n===2) renderS2();
+      if(n===3) renderS3();
+      if(n===4) renderS4();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+});
+
 function startNew(){
   if(!confirm('Start a new plan? Current data will be cleared.')) return;
   S={
