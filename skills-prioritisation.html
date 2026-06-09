@@ -1505,8 +1505,28 @@ function go(n){
   void el.offsetWidth; el.classList.add('fade'); setTimeout(()=>el.classList.remove('fade'),220);
   updStepper(); $('hdr-pill').textContent='Step '+n+' of 4';
   if(n===2) renderS2();
-  if(n===3) renderS3();
-  if(n===4) renderS4();
+  if(n===3){
+    // Sync tech skills to RSM draft in localStorage (only fill empty slots)
+    try{
+      const draft=JSON.parse(localStorage.getItem('rsm_draft')||'{}');
+      let changed=false;
+      S.tech.forEach((sk,i)=>{
+        const key='rsm-tech-sk-'+(i+1);
+        if(!draft[key]){draft[key]=sk;changed=true;}
+      });
+      if(changed) localStorage.setItem('rsm_draft',JSON.stringify(draft));
+    }catch(e){}
+    renderS3();
+  }
+  if(n===4){
+    // Re-sync tech skills to RSM draft in localStorage (overwrite to keep in sync)
+    try{
+      const draft=JSON.parse(localStorage.getItem('rsm_draft')||'{}');
+      S.tech.forEach((sk,i)=>{ draft['rsm-tech-sk-'+(i+1)]=sk; });
+      localStorage.setItem('rsm_draft',JSON.stringify(draft));
+    }catch(e){}
+    renderS4();
+  }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
