@@ -1549,7 +1549,7 @@ function updStepper(){
   [['ln12',1],['ln23',2],['ln34',3]].forEach(([id,s])=>$(id).className='st-ln'+(n>s?' done':''));
 }
 
-// Allow parent page to navigate to a specific step via postMessage or localStorage signal
+// Navigate to a step requested by parent via localStorage
 function navToStep(n){
   if(n>=1&&n<=4&&n!==S.step){
     $('s'+S.step).classList.add('hidden');
@@ -1563,16 +1563,19 @@ function navToStep(n){
     window.scrollTo({top:0,behavior:'smooth'});
   }
 }
-window.addEventListener('message',function(e){
-  if(e.data&&e.data.action==='goStep'&&typeof e.data.step==='number') navToStep(e.data.step);
-});
-// On load, check if parent requested a specific step
-(function(){
+function checkNavStep(){
   try{
     var pending=localStorage.getItem('spt_nav_step');
     if(pending){ localStorage.removeItem('spt_nav_step'); navToStep(parseInt(pending,10)); }
   }catch(e){}
-})();
+}
+// Fires when parent writes spt_nav_step while iframe is already loaded
+window.addEventListener('storage',function(e){ if(e.key==='spt_nav_step'&&e.newValue) checkNavStep(); });
+// Fires on first load
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.action==='goStep'&&typeof e.data.step==='number') navToStep(e.data.step);
+});
+checkNavStep();
 
 function startNew(){
   if(!confirm('Start a new plan? Current data will be cleared.')) return;
