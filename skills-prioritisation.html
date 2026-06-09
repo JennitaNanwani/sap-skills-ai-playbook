@@ -1,2077 +1,1509 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E&T Skills Prioritisation</title>
+<!-- saved from url=(0133)https://static.ekx.cloud.sap/api/chat/files/view/token/6aefb20c-e0da-4a4f-8780-c26144ecd15a?path=%2FET_Skills_Prioritisation_v17.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>E&amp;T Skills Prioritisation | SAP</title>
+<link href="./E&amp;T Skills Prioritisation _ SAP_files/css2" rel="stylesheet">
+<script src="./E&amp;T Skills Prioritisation _ SAP_files/xlsx.full.min.js.download"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --primary: #1D6FE0;
-    --primary-dark: #1558b0;
-    --primary-light: #DBEAFE;
-    --success: #166534;
-    --success-mid: #15803D;
-    --success-light: #DCFCE7;
-    --success-border: #86EFAC;
-    --amber: #D97706;
-    --amber-dark: #92400E;
-    --amber-light: #FEF3C7;
-    --amber-border: #FCD34D;
-    --blue-pill-bg: #DBEAFE;
-    --blue-pill-text: #1E40AF;
-    --blue-pill-border: #93C5FD;
-    --bg: #F3F4F6;
-    --white: #FFFFFF;
-    --grey-50: #F9FAFB;
-    --grey-100: #F3F4F6;
-    --grey-200: #E5E7EB;
-    --grey-300: #D1D5DB;
-    --grey-400: #9CA3AF;
-    --grey-500: #6B7280;
-    --grey-600: #4B5563;
-    --grey-700: #374151;
-    --grey-800: #1F2937;
-    --grey-900: #111827;
-    --radius: 8px;
-    --radius-lg: 12px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
-    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
-  }
-
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--grey-800);
-    min-height: 100vh;
-    padding: 0;
-  }
-
-  /* ── HEADER ── */
-  .app-header {
-    background: var(--white);
-    border-bottom: 2px solid var(--primary);
-    padding: 20px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow);
-  }
-  .app-header h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    letter-spacing: -0.01em;
-  }
-  .app-header p {
-    font-size: 0.875rem;
-    color: var(--grey-500);
-    margin-top: 2px;
-  }
-
-  /* ── MAIN CONTAINER ── */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 32px 24px;
-  }
-
-  /* ── STEP INDICATOR ── */
-  .step-indicator {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 28px 40px;
-    margin-bottom: 28px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-  }
-  .step-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-    position: relative;
-    max-width: 200px;
-  }
-  .step-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 18px;
-    left: calc(50% + 20px);
-    right: calc(-50% + 20px);
-    height: 2px;
-    background: var(--grey-200);
-    transition: background 0.3s;
-  }
-  .step-item.completed:not(:last-child)::after {
-    background: var(--success-mid);
-  }
-  .step-circle {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: all 0.3s;
-    position: relative;
-    z-index: 1;
-    background: var(--grey-200);
-    color: var(--grey-500);
-    border: 2px solid var(--grey-300);
-  }
-  .step-item.current .step-circle {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(29,111,224,0.15);
-  }
-  .step-item.completed .step-circle {
-    background: var(--success-mid);
-    color: white;
-    border-color: var(--success-mid);
-  }
-  .step-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-align: center;
-    color: var(--grey-400);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    line-height: 1.3;
-  }
-  .step-label span {
-    display: block;
-    font-weight: 400;
-    font-size: 0.68rem;
-    text-transform: none;
-    letter-spacing: 0;
-  }
-  .step-item.current .step-label { color: var(--primary); }
-  .step-item.clickable { cursor: pointer; }
-  .step-item.clickable:hover .step-circle {
-    box-shadow: 0 0 0 4px rgba(21,128,61,0.15);
-    transform: scale(1.07);
-    transition: all 0.18s;
-  }
-  .step-item.clickable:hover .step-label { opacity: 0.8; }
-
-  /* ── CARDS ── */
-  .card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    padding: 32px;
-    margin-bottom: 20px;
-  }
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-  }
-  .card-header h2 {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--grey-900);
-  }
-  .card-subtitle {
-    font-size: 0.875rem;
-    color: var(--grey-500);
-    margin-bottom: 28px;
-  }
-  .section-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--primary-light);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    flex-shrink: 0;
-  }
-
-  /* ── FORM ELEMENTS ── */
-  .form-grid {
-    display: grid;
-    gap: 20px;
-  }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .form-group.full { grid-column: 1 / -1; }
-  label {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--grey-700);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  label .required { color: #EF4444; }
-  input[type="text"], select, textarea {
-    padding: 10px 14px;
-    border: 1.5px solid var(--grey-300);
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 0.875rem;
-    color: var(--grey-800);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    background: var(--white);
-    outline: none;
-    width: 100%;
-  }
-  input[type="text"]:focus, select:focus, textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(29,111,224,0.1);
-  }
-  input[type="text"]::placeholder, textarea::placeholder {
-    color: var(--grey-400);
-  }
-  textarea { resize: vertical; min-height: 72px; }
-  select { cursor: pointer; }
-
-  /* ── TOGGLE BUTTONS ── */
-  .toggle-group {
-    display: flex;
-    border: 1.5px solid var(--grey-300);
-    border-radius: var(--radius);
-    overflow: hidden;
-    width: fit-content;
-  }
-  .toggle-btn {
-    padding: 9px 18px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--grey-600);
-    background: var(--white);
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: inherit;
-    white-space: nowrap;
-  }
-  .toggle-btn:not(:last-child) {
-    border-right: 1.5px solid var(--grey-300);
-  }
-  .toggle-btn.active {
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
-  }
-  .toggle-btn:hover:not(.active) { background: var(--grey-50); }
-
-  /* ── INFO BANNER ── */
-  .info-banner {
-    background: #EFF6FF;
-    border: 1.5px solid #BFDBFE;
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    font-size: 0.8125rem;
-    color: #1E40AF;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-  }
-  .info-banner svg { flex-shrink: 0; }
-  .info-banner strong { font-weight: 600; }
-
-  /* ── ACTION BUTTONS ── */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 10px 22px;
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 0.875rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
-  .btn-primary {
-    background: var(--primary);
-    color: white;
-  }
-  .btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
-  .btn-secondary {
-    background: var(--white);
-    color: var(--grey-700);
-    border: 1.5px solid var(--grey-300);
-  }
-  .btn-secondary:hover:not(:disabled) { background: var(--grey-50); }
-  .btn-success {
-    background: var(--success-mid);
-    color: white;
-  }
-  .btn-success:hover:not(:disabled) { background: var(--success); }
-  .btn-outline-white {
-    background: transparent;
-    color: white;
-    border: 2px solid rgba(255,255,255,0.7);
-  }
-  .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
-  .btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
-  .step-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 8px;
-  }
-
-  /* ── SKILL SECTION HEADERS ── */
-  .skill-section {
-    margin-bottom: 28px;
-  }
-  .skill-section-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1.5px solid var(--grey-100);
-  }
-  .skill-section-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--grey-700);
-  }
-  .lock-badge {
-    font-size: 0.68rem;
-    font-weight: 600;
-    background: var(--grey-100);
-    color: var(--grey-500);
-    padding: 2px 8px;
-    border-radius: 99px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  /* ── LOCKED PILLS ── */
-  .locked-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 12px;
-    border-radius: 99px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    white-space: nowrap;
-    cursor: default;
-  }
-  .pill-amber {
-    background: var(--amber-light);
-    color: var(--amber-dark);
-    border: 1.5px solid var(--amber-border);
-  }
-  .pill-blue {
-    background: var(--blue-pill-bg);
-    color: var(--blue-pill-text);
-    border: 1.5px solid var(--blue-pill-border);
-  }
-  .pill-green {
-    background: var(--success-light);
-    color: var(--success);
-    border: 1.5px solid var(--success-border);
-  }
-  .pill-lock {
-    font-size: 0.65rem;
-    opacity: 0.7;
-  }
-
-  /* ── TECH SKILL CARDS ── */
-  .tech-skills-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1.5px solid var(--grey-100);
-  }
-  .skill-counter {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--grey-700);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .progress-bar-wrap {
-    width: 120px;
-    height: 6px;
-    background: var(--grey-200);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--success-mid);
-    border-radius: 99px;
-    transition: width 0.3s;
-  }
-  .skill-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  .skill-card {
-    border: 1.5px solid var(--grey-200);
-    border-radius: var(--radius);
-    padding: 11px 14px;
-    cursor: pointer;
-    transition: all 0.18s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--white);
-    user-select: none;
-  }
-  .skill-card:hover:not(.disabled) {
-    border-color: var(--success-border);
-    background: #F0FDF4;
-  }
-  .skill-card.selected {
-    border-color: var(--success-mid);
-    background: var(--success-light);
-  }
-  .skill-card.disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
-  .skill-card-check {
-    width: 18px;
-    height: 18px;
-    border: 1.5px solid var(--grey-300);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background: var(--white);
-    transition: all 0.18s;
-  }
-  .skill-card.selected .skill-card-check {
-    background: var(--success-mid);
-    border-color: var(--success-mid);
-  }
-  .skill-card-name {
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--grey-700);
-    flex: 1;
-    line-height: 1.35;
-  }
-  .skill-card.selected .skill-card-name { color: var(--success); font-weight: 600; }
-  .codility-tag {
-    font-size: 0.65rem;
-    font-weight: 600;
-    background: var(--grey-100);
-    color: var(--grey-500);
-    border: 1px solid var(--grey-200);
-    padding: 2px 6px;
-    border-radius: 99px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  /* ── STEP 3 ── */
-  .interview-layout {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 20px;
-    align-items: start;
-  }
-  .skills-sidebar {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    position: sticky;
-    top: 160px;
-  }
-  .skills-sidebar h3 {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--grey-500);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1.5px solid var(--grey-100);
-  }
-  .sidebar-group {
-    margin-bottom: 14px;
-  }
-  .sidebar-group-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 6px;
-  }
-  .sidebar-group-label.amber { color: var(--amber); }
-  .sidebar-group-label.blue { color: var(--blue-pill-text); }
-  .sidebar-group-label.green { color: var(--success-mid); }
-  .sidebar-skill {
-    font-size: 0.78rem;
-    padding: 4px 0;
-    color: var(--grey-700);
-    transition: all 0.2s;
-  }
-  .sidebar-skill.assigned {
-    text-decoration: line-through;
-    color: var(--grey-400);
-  }
-
-  /* ── ROUND CARDS ── */
-  .rounds-container { display: flex; flex-direction: column; gap: 14px; }
-  .round-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    border: 1.5px solid var(--grey-200);
-    transition: border-color 0.2s;
-  }
-  .round-card.has-skills { border-color: var(--primary-light); }
-  .round-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    cursor: pointer;
-    background: var(--grey-50);
-    user-select: none;
-    transition: background 0.15s;
-  }
-  .round-header:hover { background: #EFF6FF; }
-  .round-num {
-    width: 28px;
-    height: 28px;
-    background: var(--primary);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .round-name {
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: var(--grey-800);
-    flex: 1;
-  }
-  .round-skill-count {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--primary);
-    background: var(--primary-light);
-    padding: 2px 10px;
-    border-radius: 99px;
-  }
-  .chevron {
-    color: var(--grey-400);
-    transition: transform 0.2s;
-  }
-  .round-card.collapsed .chevron { transform: rotate(-90deg); }
-  .round-body {
-    padding: 18px;
-    border-top: 1.5px solid var(--grey-100);
-  }
-  .round-card.collapsed .round-body { display: none; }
-  .round-fields {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .skills-drop-zone {
-    border: 1.5px dashed var(--grey-300);
-    border-radius: var(--radius);
-    padding: 14px;
-    min-height: 60px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    align-items: flex-start;
-    transition: border-color 0.2s;
-    position: relative;
-    margin-bottom: 10px;
-  }
-  .skills-drop-zone.has-pills { border-color: var(--grey-200); }
-  .drop-placeholder {
-    font-size: 0.8rem;
-    color: var(--grey-400);
-    font-style: italic;
-    align-self: center;
-  }
-  .btn-add-skill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    border: 1.5px dashed var(--primary);
-    border-radius: var(--radius);
-    background: transparent;
-    color: var(--primary);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s;
-  }
-  .btn-add-skill:hover { background: var(--primary-light); }
-  .assigned-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 4px 10px 4px 12px;
-    border-radius: 99px;
-    font-size: 0.78rem;
-    font-weight: 500;
-  }
-  .assigned-pill .remove-skill {
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.15s;
-    line-height: 1;
-    font-size: 0.85rem;
-    margin-left: 2px;
-  }
-  .assigned-pill .remove-skill:hover { opacity: 1; }
-
-  /* ── WARNING BANNER ── */
-  .warning-banner {
-    background: #FFFBEB;
-    border: 1.5px solid var(--amber-border);
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    font-size: 0.8125rem;
-    color: var(--amber-dark);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 16px;
-  }
-  .warning-banner svg { flex-shrink: 0; margin-top: 1px; }
-
-  /* ── STEP 4 SUMMARY ── */
-  .hero-banner {
-    background: linear-gradient(135deg, #1D6FE0 0%, #1558b0 100%);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    color: white;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-md);
-  }
-  .hero-banner h2 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .hero-banner .hero-sub {
-    font-size: 0.9rem;
-    opacity: 0.85;
-    margin-bottom: 24px;
-  }
-  .hero-meta {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .hero-meta-item {
-    background: rgba(255,255,255,0.12);
-    border-radius: var(--radius);
-    padding: 14px;
-  }
-  .hero-meta-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    opacity: 0.7;
-    margin-bottom: 4px;
-  }
-  .hero-meta-value {
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-  .summary-section-title {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--grey-500);
-    margin-bottom: 14px;
-  }
-  .summary-cards {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .summary-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    padding: 20px;
-  }
-  .summary-card h4 {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 12px;
-  }
-  .summary-card h4.amber { color: var(--amber); }
-  .summary-card h4.blue { color: var(--blue-pill-text); }
-  .summary-card h4.green { color: var(--success-mid); }
-  .pill-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
-
-  /* ── ROUNDS TABLE ── */
-  .rounds-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8125rem;
-  }
-  .rounds-table th {
-    background: var(--grey-50);
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--grey-500);
-    padding: 10px 12px;
-    text-align: left;
-    border-bottom: 1.5px solid var(--grey-200);
-  }
-  .rounds-table td {
-    padding: 12px;
-    border-bottom: 1px solid var(--grey-100);
-    color: var(--grey-700);
-    vertical-align: top;
-  }
-  .rounds-table tr:last-child td { border-bottom: none; }
-  .rounds-table tr:hover td { background: var(--grey-50); }
-  .table-round-num {
-    width: 24px;
-    height: 24px;
-    background: var(--primary);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .pills-inline {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-  .pill-sm {
-    font-size: 0.72rem;
-    padding: 3px 9px;
-    border-radius: 99px;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: 0;
-    width: 460px;
-    max-width: 95vw;
-    max-height: 80vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .modal-header {
-    padding: 18px 22px;
-    border-bottom: 1.5px solid var(--grey-100);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .modal-header h3 {
-    font-size: 1rem;
-    font-weight: 700;
-  }
-  .modal-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--grey-400);
-    font-size: 1.25rem;
-    padding: 2px;
-    line-height: 1;
-    transition: color 0.15s;
-  }
-  .modal-close:hover { color: var(--grey-700); }
-  .modal-body {
-    overflow-y: auto;
-    padding: 18px 22px;
-    flex: 1;
-  }
-  .modal-group-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--grey-500);
-    margin: 12px 0 6px;
-  }
-  .modal-group-label:first-child { margin-top: 0; }
-  .modal-skill-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: background 0.15s;
-    user-select: none;
-  }
-  .modal-skill-item:hover { background: var(--grey-50); }
-  .modal-skill-item.checked { background: #F0FDF4; }
-  .modal-skill-checkbox {
-    width: 16px;
-    height: 16px;
-    border: 1.5px solid var(--grey-300);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background: var(--white);
-    transition: all 0.15s;
-  }
-  .modal-skill-item.checked .modal-skill-checkbox {
-    background: var(--success-mid);
-    border-color: var(--success-mid);
-  }
-  .modal-skill-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .modal-skill-dot.amber { background: var(--amber); }
-  .modal-skill-dot.blue { background: var(--primary); }
-  .modal-skill-dot.green { background: var(--success-mid); }
-  .modal-skill-name {
-    font-size: 0.85rem;
-    color: var(--grey-700);
-    flex: 1;
-  }
-  .modal-footer {
-    padding: 14px 22px;
-    border-top: 1.5px solid var(--grey-100);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    background: var(--grey-50);
-  }
-  .modal-footer-count {
-    font-size: 0.8rem;
-    color: var(--grey-500);
-  }
-  .modal-footer-count strong { color: var(--grey-800); }
-
-  /* ── PRINT ── */
-  @media print {
-    .app-header, .step-indicator, .step-actions, .btn-add-skill, .warning-banner { display: none !important; }
-    body { background: white; }
-    .container { max-width: 100%; padding: 0; }
-    .card, .hero-banner, .summary-card { box-shadow: none; page-break-inside: avoid; }
-    .interview-layout { grid-template-columns: 1fr; }
-    .skills-sidebar { display: none; }
-    .step-content:not(.active) { display: none !important; }
-  }
-  .step-content { display: none; }
-  .step-content.active { display: block; }
-
-  /* scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--grey-300); border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--grey-400); }
+:root{
+  --blue:#0070F2;--blue-d:#0057C2;--blue-l:#EBF5FB;--blue-ll:#F0F7FF;
+  --green:#107E3E;--green-l:#F1FAF2;
+  --orange:#E76500;--orange-l:#FFF3E0;--orange-b:#E8A000;
+  --red:#B00020;--red-l:#FDECEA;
+  --bg:#F5F6F7;--white:#FFFFFF;--border:#D9DBDD;
+  --text:#32363A;--text-m:#556068;--text-l:#8D9197;
+  --shadow:0 2px 8px rgba(0,0,0,.08);--shadow-l:0 8px 32px rgba(0,0,0,.14);--r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+.hdr{background:var(--white);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.hdr-l{display:flex;align-items:center;gap:12px}
+.sap-box{background:#1873CC;color:#fff;font-weight:800;font-size:14px;width:40px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:3px;letter-spacing:.5px}
+.hdr-sep{width:1px;height:20px;background:var(--border)}
+.hdr-sub{font-size:13px;color:var(--text-m);font-weight:500}
+.step-pill{background:var(--blue-l);color:var(--blue-d);font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
+.wrap{max-width:980px;margin:0 auto;padding:26px 16px 60px}
+.pg-h{margin-bottom:22px}.pg-h h1{font-size:22px;font-weight:800}.pg-h p{font-size:13px;color:var(--text-m);margin-top:3px}
+.stepper{display:flex;align-items:center;background:var(--white);border-radius:var(--r);padding:18px 22px;margin-bottom:22px;box-shadow:var(--shadow)}
+.st-i{display:flex;align-items:center;flex:1}.st-i:last-child{flex:0 0 auto}
+.st-c{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:.2s}
+.st-c.pend{background:var(--bg);border:2px solid var(--border);color:var(--text-l)}
+.st-c.act{background:var(--blue);color:#fff;box-shadow:0 0 0 4px var(--blue-l)}
+.st-c.done{background:var(--green);color:#fff}
+.st-ln{flex:1;height:2px;background:var(--border);margin:0 10px;transition:.2s}
+.st-ln.done{background:var(--green)}
+.st-lbl{margin-left:8px}.st-lt{font-size:13px;font-weight:600}.st-ls{font-size:11px;color:var(--text-l)}
+.card{background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);padding:24px 26px;margin-bottom:14px}
+.c-hd{display:flex;align-items:center;gap:7px;margin-bottom:3px}
+.c-t{font-size:16px;font-weight:700}.c-s{font-size:13px;color:var(--text-m);margin-bottom:18px}
+.div{border:none;border-top:1px solid var(--border);margin:18px 0}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.r1{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.fg{display:flex;flex-direction:column;gap:5px}
+label{font-size:13px;font-weight:600;color:var(--text)}.req{color:#B00}
+input[type=text],select,textarea{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text);background:var(--white);outline:none;transition:.15s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-l)}
+textarea{resize:vertical;min-height:56px}
+.tog{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.tb{flex:1;padding:9px 14px;border:none;background:var(--white);cursor:pointer;font-size:13px;font-family:inherit;font-weight:500;color:var(--text-m);transition:.15s;border-right:1px solid var(--border)}
+.tb:last-child{border-right:none}.tb.on{background:var(--blue);color:#fff;font-weight:600}.tb:hover:not(.on){background:var(--blue-ll)}
+.tog-w{display:flex;flex-wrap:wrap;gap:6px}.tog-w .tb{flex:0 0 auto;border:1.5px solid var(--border);border-radius:8px}
+.info-b{background:var(--blue-ll);border:1px solid #90C4F8;border-radius:8px;padding:10px 14px;font-size:13px;color:var(--blue-d);margin-bottom:16px}
+.warn-b{background:var(--orange-l);border:1px solid var(--orange-b);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--orange);margin-top:10px}
+.ok-b{background:var(--green-l);border:1px solid #81C784;border-radius:8px;padding:10px 14px;font-size:13px;color:var(--green);margin-top:10px}
+.err-b{background:var(--red-l);border:1px solid #F4B8BB;border-radius:8px;padding:10px 14px;font-size:13px;color:var(--red);margin-top:10px}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sec-lb{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-m);display:flex;align-items:center;gap:6px}
+.lock-t{background:var(--border);color:var(--text-l);font-size:10px;padding:1px 7px;border-radius:8px;font-weight:700;text-transform:uppercase}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+.d-ai{background:var(--orange-b)}.d-prof{background:#5BA4DB}.d-tech{background:#4CAF50}.d-nonhc{background:#0ABFBC}
+.cw{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:16px;font-size:12px;font-weight:600;border:1px solid transparent;white-space:nowrap}
+.chip.ai{background:var(--orange-l);color:var(--orange);border-color:var(--orange-b)}
+.chip.prof{background:var(--blue-l);color:var(--blue-d);border-color:#90C4F8}
+.chip.tech{background:var(--green-l);color:var(--green);border-color:#81C784}
+.chip.nonhc{background:#E0FAFA;color:#007373;border-color:#6CDBDB}
+.cnt-w{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;margin-bottom:12px;gap:12px}
+.cnt-w.go{background:var(--blue-ll)}.cnt-w.ok{background:var(--green-l)}.cnt-w.ov{background:var(--red-l)}
+.cnt-txt{font-size:14px;font-weight:700}
+.prog{width:140px;height:7px;border-radius:4px;background:var(--border);overflow:hidden;flex-shrink:0}
+.prog-f{height:100%;border-radius:4px;background:var(--blue);transition:width .2s}
+.prog-f.ok{background:var(--green)}.prog-f.ov{background:var(--red)}
+/* Custom skill inputs grid (Step 2 - Other profile) */
+.csk-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.csk-inp{padding:8px 11px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text);background:var(--white);outline:none;transition:.15s;width:100%}
+.csk-inp:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-l)}
+.csk-inp.filled{border-color:#81C784;background:var(--green-l)}
+/* Tech skill grid */
+.sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.sk-i{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:.12s;user-select:none;background:var(--white)}
+.sk-i:hover:not(.dis){border-color:var(--blue);background:var(--blue-ll)}
+.sk-i.sel{border-color:#4CAF50;background:var(--green-l)}.sk-i.dis{opacity:.4;cursor:not-allowed}
+.sk-ch{width:16px;height:16px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#fff;transition:.12s}
+.sk-i.sel .sk-ch{background:var(--green);border-color:var(--green)}
+.sk-nm{flex:1;font-size:13px;font-weight:500;line-height:1.3}
+.cod{background:#E3F0FF;color:var(--blue-d);font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+/* Step 3 layout */
+.plan-lay{display:grid;grid-template-columns:210px 1fr;gap:14px}
+.pool-p{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:13px;align-self:start;position:sticky;top:58px;max-height:calc(100vh - 80px);overflow-y:auto}
+.pool-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-l);margin-bottom:9px}
+.pool-s{margin-bottom:10px}
+.pool-sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.pool-sl.ai{color:var(--orange)}.pool-sl.prof{color:var(--blue-d)}.pool-sl.tech{color:var(--green)}
+.pc{display:flex;align-items:center;gap:5px;padding:4px 7px;border-radius:5px;font-size:12px;font-weight:500;margin-bottom:3px}
+.pc.ai-c{color:var(--orange);background:var(--orange-l)}.pc.prof-c{color:var(--blue-d);background:var(--blue-l)}.pc.tech-c{color:var(--green);background:var(--green-l)}.pc.nonhc-c{color:#007373;background:#E0FAFA}
+.pc.asgn{opacity:.32;text-decoration:line-through}
+.pc[draggable="true"]:not(.asgn){cursor:grab}
+.pc[draggable="true"]:not(.asgn):active{cursor:grabbing}
+.pc.drag-active{opacity:.35;transform:scale(.96)}
+.rchip[draggable="true"]{cursor:grab}
+.rchip[draggable="true"]:active{cursor:grabbing}
+.rchip.drag-active{opacity:.35}
+.rzone.dz-over{border:2px dashed var(--blue)!important;background:rgba(0,112,242,.06);border-radius:7px}
+.pool-p.dz-pool-over{outline:2px dashed var(--blue);outline-offset:-2px;background:rgba(0,112,242,.03)}
+.pc-r{margin-left:auto;font-size:9px;font-weight:700;background:rgba(0,0,0,.1);padding:1px 5px;border-radius:4px}
+.tot-bar{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:var(--white);border-radius:7px;margin-top:9px;font-size:12px;font-weight:600;color:var(--text-m);border:1px solid var(--border)}
+.pool-sl.nonhc{color:#007373}
+.rounds-c{display:flex;flex-direction:column;gap:12px}
+/* Round card */
+.rc{border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden}
+.rc-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border)}
+.rn{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rt-sel{border:none;background:transparent;font-size:13px;font-weight:600;font-family:inherit;color:var(--text);cursor:pointer;flex:1;margin-left:8px;outline:none}
+.rc-cnt{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--blue-l);color:var(--blue-d)}
+.rc-bd{padding:14px}
+/* Interviewer row */
+.iw-sec{display:flex;flex-direction:column;gap:8px}
+.iw-row{border:1px solid var(--border);border-radius:8px;padding:11px 13px;background:var(--white)}
+.iw-row-hd{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.iw-badge{width:24px;height:24px;border-radius:50%;background:var(--blue-l);color:var(--blue-d);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.iw-name-in{flex:1;padding:7px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;color:var(--text);background:var(--white);outline:none;transition:.15s}
+.iw-name-in:focus{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-l)}
+.rem-iw-btn{padding:5px 10px;border:1px solid var(--red);background:none;color:var(--red);border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;flex-shrink:0;transition:.1s}
+.rem-iw-btn:hover{background:var(--red-l)}
+.rzone{min-height:40px;border:2px dashed var(--border);border-radius:7px;padding:7px;display:flex;flex-wrap:wrap;gap:5px;align-items:flex-start;align-content:flex-start;margin-bottom:7px}
+.z-hint{font-size:12px;color:var(--text-l);font-style:italic}
+.rchip{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:12px;font-size:12px;font-weight:600}
+.rchip.ai{background:var(--orange-l);color:var(--orange)}.rchip.prof{background:var(--blue-l);color:var(--blue-d)}.rchip.tech{background:var(--green-l);color:var(--green)}.rchip.nonhc{background:#E0FAFA;color:#007373}
+.rx{background:none;border:none;cursor:pointer;color:inherit;opacity:.55;font-size:14px;padding:0 0 0 2px;line-height:1;font-family:inherit}.rx:hover{opacity:1}
+.add-iw-wrap{padding-top:4px}
+.add-iw-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border:1.5px dashed var(--text-l);border-radius:12px;background:none;color:var(--text-m);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:.12s}
+.add-iw-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-ll)}
+.add-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border:1.5px dashed var(--blue);border-radius:12px;background:none;color:var(--blue);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.1s}.add-btn:hover{background:var(--blue-ll)}
+/* Modal */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:300;display:flex;align-items:center;justify-content:center}
+.modal{background:var(--white);border-radius:12px;width:540px;max-width:95vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:var(--shadow-l);overflow:hidden}
+.modal-hd{padding:18px 22px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
+.modal-hd-r1{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.m-t{font-size:15px;font-weight:700}
+.m-cl{background:none;border:none;font-size:22px;cursor:pointer;color:var(--text-l);line-height:1}
+.m-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.m-act{padding:5px 11px;border:1.5px solid var(--border);border-radius:6px;background:var(--white);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--text-m);transition:.12s}
+.m-act:hover{background:var(--bg);border-color:var(--blue);color:var(--blue-d)}
+.m-count{margin-left:auto;font-size:13px;font-weight:700;color:var(--blue-d);background:var(--blue-l);padding:4px 11px;border-radius:12px}
+.modal-body{overflow-y:auto;padding:14px 22px;flex:1}
+.m-sec{margin-bottom:14px}
+.m-sl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-l);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.m-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:13px;border:1.5px solid transparent;margin-bottom:3px;transition:.1s}
+.m-item:hover{background:var(--bg)}.m-item.chk{background:var(--green-l);border-color:#81C784}
+.m-item.oth{background:var(--orange-l);border-color:var(--orange-b)}
+.m-cb{width:17px;height:17px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:#fff;transition:.12s}
+.m-item.chk .m-cb{background:var(--green);border-color:var(--green)}.m-item.oth .m-cb{background:var(--orange);border-color:var(--orange)}
+.m-lbl{flex:1}.m-status{font-size:11px;font-weight:600;padding:2px 7px;border-radius:8px;white-space:nowrap;flex-shrink:0;background:var(--orange-l);color:var(--orange)}
+.m-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.modal-ft{padding:14px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;flex-shrink:0;background:var(--white)}
+/* Summary */
+.sum-hero{background:linear-gradient(135deg,#0070F2 0%,#0057C2 100%);border-radius:var(--r);padding:22px 26px;color:#fff;margin-bottom:14px}
+.sum-hero h2{font-size:20px;font-weight:800;margin-bottom:2px}
+.sum-pf-row{font-size:13px;opacity:.82;margin-bottom:4px}
+.sum-pf-row strong{opacity:1}
+.sum-hero>p{font-size:12px;opacity:.7;margin-bottom:0}
+.sum-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.sm-i .lbl{font-size:11px;opacity:.65;text-transform:uppercase;letter-spacing:.4px}.sm-i .val{font-size:15px;font-weight:700;margin-top:2px}
+.sum-srow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.sum-sb{background:var(--bg);border-radius:8px;padding:13px 15px;border:1px solid var(--border)}
+.sum-sb-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-m);margin-bottom:9px}
+.stbl{width:100%;border-collapse:collapse}
+.stbl th{background:var(--bg);padding:9px 13px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-m);border-bottom:2px solid var(--border)}
+.stbl td{padding:9px 13px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+.stbl tr:last-child td{border-bottom:none}
+.stbl tr.iw-sub td{border-bottom:1px dashed var(--border);background:#FAFBFC}
+.rnb{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.exp-btns{display:flex;gap:10px;flex-wrap:wrap}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.btn{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-p{background:var(--blue);color:#fff}.btn-p:hover{background:var(--blue-d)}
+.btn-s{background:var(--white);color:var(--text);border:1.5px solid var(--border)}.btn-s:hover{background:var(--bg)}
+.btn-g{background:var(--green);color:#fff}.btn-g:hover{background:#0D5C30}
+.btn-xl{background:#1D6F42;color:#fff}.btn-xl:hover{background:#165533}
+/* ── Print View (hidden in browser) ─────────────────────────────── */
+#print-view{display:none}
+/* Print-specific layout classes */
+.pv-pg{padding:24px 28px;font-family:'Inter',system-ui,sans-serif;color:#32363A}
+.pv-hdr{display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:2.5px solid #0070F2;margin-bottom:22px}
+.pv-logo{background:#1873CC;color:#fff;font-weight:800;font-size:14px;width:42px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:3px;letter-spacing:.5px;flex-shrink:0}
+.pv-hdr-info{display:flex;flex-direction:column;gap:2px}
+.pv-hdr-title{font-size:15px;font-weight:800;color:#32363A}
+.pv-hdr-sub{font-size:12px;color:#556068}
+.pv-sec{margin-bottom:24px}
+.pv-sec-hd{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#0070F2;padding-bottom:6px;border-bottom:1px solid #D9DBDD;margin-bottom:14px}
+.pv-ri-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid #D9DBDD;border-radius:8px;overflow:hidden;margin-bottom:0}
+.pv-ri-full{grid-column:1/3}
+.pv-ri-item{padding:10px 14px;border-bottom:1px solid #EEEFF0;display:flex;flex-direction:column;gap:3px}
+.pv-ri-item:nth-child(odd):not(.pv-ri-full){border-right:1px solid #EEEFF0}
+.pv-ri-item:last-child{border-bottom:none}
+.pv-ri-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#8D9197}
+.pv-ri-val{font-size:14px;font-weight:600;color:#32363A}
+.pv-sk-grp{margin-bottom:14px}
+.pv-sk-lbl{font-size:12px;font-weight:700;color:#32363A;margin-bottom:7px}
+/* Print media */
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff;margin:0}
+  .hdr,.wrap,.overlay{display:none!important}
+  #print-view{display:block!important}
+  .pv-pg2{page-break-before:always;break-before:page}
+  .pv-ri-grid{border:1.5px solid #D9DBDD!important}
+  .stbl th{background:#F5F6F7!important}
+  .stbl tr.iw-sub td{background:#FAFBFC!important}
+  .chip.ai{background:#FFF3E0!important;color:#E76500!important;border-color:#E8A000!important}
+  .chip.prof{background:#EBF5FB!important;color:#0057C2!important;border-color:#90C4F8!important}
+  .chip.tech{background:#F1FAF2!important;color:#107E3E!important;border-color:#81C784!important}
+  .chip.nonhc{background:#E0FAFA!important;color:#007373!important;border-color:#6CDBDB!important}
+  .rnb{background:#0070F2!important;color:#fff!important}
+  @page{margin:15mm 14mm}
+}
+.hidden{display:none!important}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.fade{animation:fi .22s ease}
+@media(max-width:720px){.r2,.r3,.csk-grid,.plan-lay,.sum-meta,.sum-srow{grid-template-columns:1fr}.pool-p{display:none}}
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
-<header class="app-header">
-  <h1>E&amp;T Skills Prioritisation</h1>
-  <p>Configure your interview skills plan in 4 guided steps — select skills, assign interviewers, and export.</p>
+<header class="hdr">
+  <div class="hdr-l">
+    <div class="sap-box">SAP</div><div class="hdr-sep"></div>
+    <span class="hdr-sub">Engineering &amp; Tech &nbsp;·&nbsp; Talent Discovery</span>
+  </div>
+  <span id="hdr-pill" class="step-pill">Step 1 of 4</span>
 </header>
+<div class="wrap">
+  <div class="pg-h"><h1>E&amp;T Skills Prioritisation</h1><p>Configure your interview skills plan in 4 guided steps — select skills, assign interviewers, and export.</p></div>
+  <div class="stepper">
+    <div class="st-i"><div class="st-c act" id="sc1">1</div><div class="st-lbl"><div class="st-lt">Role Information</div><div class="st-ls">Profile &amp; Details</div></div></div>
+    <div class="st-ln" id="ln12"></div>
+    <div class="st-i"><div class="st-c pend" id="sc2">2</div><div class="st-lbl"><div class="st-lt">Skill Selection</div><div class="st-ls">Choose 6 Tech Skills</div></div></div>
+    <div class="st-ln" id="ln23"></div>
+    <div class="st-i"><div class="st-c pend" id="sc3">3</div><div class="st-lbl"><div class="st-lt">Interview Plan</div><div class="st-ls">Assign &amp; Schedule</div></div></div>
+    <div class="st-ln" id="ln34"></div>
+    <div class="st-i"><div class="st-c pend" id="sc4">4</div><div class="st-lbl"><div class="st-lt">Summary</div><div class="st-ls">Review &amp; Export</div></div></div>
+  </div>
 
-<div class="container">
-
-  <!-- STEP INDICATOR -->
-  <nav class="step-indicator" id="stepIndicator"></nav>
-
-  <!-- STEP 1: Role Information -->
-  <div class="step-content" id="step1">
+  <!-- ═══ STEP 1 ═══ -->
+  <div id="s1">
     <div class="card">
-      <div class="card-header">
-        <div class="section-icon">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </div>
-        <h2>Role Information</h2>
+      <div class="c-hd"><svg width="17" height="17" fill="none" stroke="#0070F2" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span class="c-t">Role Information</span></div>
+      <p class="c-s">Enter the open role details before configuring the skills plan.</p>
+      <div class="r2">
+        <div class="fg"><label>Hiring Manager <span class="req">*</span></label><input type="text" id="f-hm" placeholder="e.g. Jane Smith"></div>
+        <div class="fg"><label>Position ID</label><input type="text" id="f-pid" placeholder="e.g. 12345678"></div>
       </div>
-      <p class="card-subtitle">Enter the open role details before configuring the skills plan.</p>
-
-      <div class="form-grid">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Hiring Manager <span class="required">*</span></label>
-            <input type="text" id="hiringManager" placeholder="e.g. Jane Smith" oninput="validateStep1()">
+      <div class="r1"><div class="fg"><label>Role Title <span class="req">*</span></label><input type="text" id="f-title" placeholder="e.g. Senior Machine Learning Engineer"></div></div>
+      <div class="r1" style="margin-bottom:4px">
+        <div class="fg">
+          <label>Role Category <span class="req">*</span></label>
+          <div class="tog">
+            <button class="tb on" id="btn-hc" onclick="setHcMode(&#39;hc&#39;)">HC Relevant Role</button>
+            <button class="tb" id="btn-nonhc" onclick="setHcMode(&#39;nonhc&#39;)">Non-HC Relevant Role</button>
           </div>
-          <div class="form-group">
-            <label>Position ID</label>
-            <input type="text" id="positionId" placeholder="e.g. 12345678">
-          </div>
-        </div>
-
-        <div class="form-group full">
-          <label>Role Title <span class="required">*</span></label>
-          <input type="text" id="roleTitle" placeholder="e.g. Senior Machine Learning Engineer" oninput="validateStep1()">
-        </div>
-
-        <div class="form-group full">
-          <label>Role Category <span class="required">*</span></label>
-          <div class="toggle-group">
-            <button class="toggle-btn active" onclick="setRoleCategory('hc')" id="btnHC">HC Relevant Role</button>
-            <button class="toggle-btn" onclick="setRoleCategory('nonhc')" id="btnNonHC">Non-HC Relevant Role</button>
-          </div>
-        </div>
-
-        <div class="form-group full">
-          <label>Role Level / Type <span class="required">*</span></label>
-          <div class="toggle-group">
-            <button class="toggle-btn active" onclick="setRoleType('ic')" id="btnIC">T1–T5PF · Single Contributor</button>
-            <button class="toggle-btn" onclick="setRoleType('pm')" id="btnPM">T4PM/T5PM · People Manager</button>
-          </div>
-          <div class="toggle-group" id="gradeSubGroup" style="margin-top:8px;">
-            <button class="toggle-btn active" onclick="setGrade('T1')" id="btnT1">T1</button>
-            <button class="toggle-btn" onclick="setGrade('T2')" id="btnT2">T2</button>
-            <button class="toggle-btn" onclick="setGrade('T3')" id="btnT3">T3</button>
-            <button class="toggle-btn" onclick="setGrade('T4PF')" id="btnT4PF">T4PF</button>
-            <button class="toggle-btn" onclick="setGrade('T5PF')" id="btnT5PF">T5PF</button>
-          </div>
-        </div>
-
-        <div class="form-group full">
-          <label>Job Profile <span class="required">*</span></label>
-          <select id="jobProfile" onchange="onJobProfileChange()">
-            <option value="">— Select a Job Profile —</option>
-            <optgroup label="Engineering">
-              <option value="Application Engineering">Application Engineering</option>
-              <option value="Data and Applied Science">Data and Applied Science</option>
-              <option value="Data Engineering">Data Engineering</option>
-              <option value="DevOps Engineering">DevOps Engineering</option>
-              <option value="Machine Learning Engineering">Machine Learning Engineering</option>
-              <option value="Platform Engineering">Platform Engineering</option>
-              <option value="Quality Assurance Engineering">Quality Assurance Engineering</option>
-              <option value="Site Reliability Engineering">Site Reliability Engineering</option>
-              <option value="Software Architecture Engineering">Software Architecture Engineering</option>
-            </optgroup>
-            <optgroup label="Information Security">
-              <option value="Incident Response">Incident Response</option>
-              <option value="Information Security Compliance">Information Security Compliance</option>
-              <option value="Information Security Risk Management">Information Security Risk Management</option>
-              <option value="Offensive Security Testing">Offensive Security Testing</option>
-              <option value="Threat Analysis">Threat Analysis</option>
-              <option value="Vulnerability Management">Vulnerability Management</option>
-            </optgroup>
-            <optgroup label="Product">
-              <option value="Product Management">Product Management</option>
-              <option value="Product Marketing">Product Marketing</option>
-              <option value="Translation">Translation</option>
-              <option value="User Assistance Development">User Assistance Development</option>
-            </optgroup>
-            <optgroup label="Design">
-              <option value="User Experience Design">User Experience Design</option>
-              <option value="User Experience Research">User Experience Research</option>
-              <option value="Visual Design">Visual Design</option>
-            </optgroup>
-          </select>
         </div>
       </div>
-
-      <div class="info-banner" id="infoBanner" style="display:none;">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        <span id="infoBannerText"></span>
+      <hr class="div">
+      <div class="r2" id="s1-rt-row">
+        <div class="fg">
+          <label>Role Level / Type <span class="req">*</span></label>
+          <div class="tog">
+            <button class="tb on" id="btn-t1" onclick="setRT(&#39;T1-T4PF&#39;)">T1–T5PF &nbsp;·&nbsp; Single Contributor</button>
+            <button class="tb" id="btn-t4pm" onclick="setRT(&#39;T4PM&#39;)">T4PM/T5PM &nbsp;·&nbsp; People Manager</button>
+          </div>
+          <!-- Sub-toggle: Single Contributor types -->
+          <div class="tog" id="sub-sc" style="margin-top:6px">
+            <button class="tb on" id="btn-rt-T1" onclick="setRoleType(&#39;T1&#39;)">T1</button>
+            <button class="tb" id="btn-rt-T2" onclick="setRoleType(&#39;T2&#39;)">T2</button>
+            <button class="tb" id="btn-rt-T3" onclick="setRoleType(&#39;T3&#39;)">T3</button>
+            <button class="tb" id="btn-rt-T4PF" onclick="setRoleType(&#39;T4PF&#39;)">T4PF</button>
+            <button class="tb" id="btn-rt-T5PF" onclick="setRoleType(&#39;T5PF&#39;)">T5PF</button>
+            <button class="tb hidden" id="btn-rt-nonHC" onclick="setRoleType(&#39;nonHC&#39;)">nonHC relevant</button>
+          </div>
+          <!-- Sub-toggle: People Manager types -->
+          <div class="tog hidden" id="sub-pm" style="margin-top:6px">
+            <button class="tb on" id="btn-rt-T4PM" onclick="setRoleType(&#39;T4PM&#39;)">T4PM &nbsp;·&nbsp; People Manager</button>
+            <button class="tb" id="btn-rt-T5PM" onclick="setRoleType(&#39;T5PM&#39;)">T5PM &nbsp;·&nbsp; Senior Manager</button>
+          </div>
+        </div>
+        <div class="fg" id="profile-fg">
+          <label>Job Profile <span class="req">*</span></label>
+          <select id="f-profile" onchange="onProf()"><option value="">-- Select Job Profile --</option><optgroup label="Engineering"><option value="Application Engineering">Application Engineering</option><option value="Data and Applied Science">Data and Applied Science</option><option value="Data Engineering">Data Engineering</option><option value="DevOps Engineering">DevOps Engineering</option><option value="Machine Learning Engineering">Machine Learning Engineering</option><option value="Platform Engineering">Platform Engineering</option><option value="Quality Assurance Engineering">Quality Assurance Engineering</option><option value="Site Reliability Engineering">Site Reliability Engineering</option><option value="Software Architecture Engineering">Software Architecture Engineering</option></optgroup><optgroup label="Product"><option value="Product Management">Product Management</option><option value="Product Marketing">Product Marketing</option><option value="Translation">Translation</option><option value="User Assistance Development">User Assistance Development</option></optgroup><optgroup label="Information Security"><option value="Incident Response">Incident Response</option><option value="Information Security Compliance">Information Security Compliance</option><option value="Information Security Risk Management">Information Security Risk Management</option><option value="Offensive Security Testing">Offensive Security Testing</option><option value="Threat Analysis">Threat Analysis</option><option value="Vulnerability Management">Vulnerability Management</option></optgroup><optgroup label="Design"><option value="User Experience Design">User Experience Design</option><option value="User Experience Research">User Experience Research</option><option value="Visual Design">Visual Design</option></optgroup><optgroup label="Customer Engagement"><option value="Customer-Facing Project / Program Management">Customer-Facing Project / Program Management</option><option value="Business Process Consulting">Business Process Consulting</option></optgroup><option disabled="">──────────</option><option value="Other">Other (Custom Profile)</option></select>
+        </div>
       </div>
-
-      <div class="step-actions" style="margin-top:28px;">
-        <div></div>
-        <button class="btn btn-primary" id="btnStep1Next" onclick="goToStep(2)" disabled>
-          Next: Skill Selection
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+      <!-- Non-HC Position Type — shown only when nonHC mode active -->
+      <div id="nonhc-role-section" class="hidden">
+        <div class="fg">
+          <label>Non-HC Position Type <span class="req">*</span></label>
+          <div style="font-size:12px;color:var(--text-m);margin-bottom:9px;line-height:1.6">
+            Job Family: <strong>Non-Headcount Relevant Jobs</strong> &nbsp;·&nbsp;
+            Career Level: <strong>N.A.</strong> &nbsp;·&nbsp;
+            Grade Level: <strong>xx-00 (non-headcount relevant)</strong>
+          </div>
+          <div class="tog-w" id="nonhc-pos-tog">
+            <button class="tb" id="btn-nhc-0" onclick="setNonhcPosition(&#39;Vocational Training Student / Apprentice&#39;)">Vocational Training Student / Apprentice</button>
+            <button class="tb" id="btn-nhc-1" onclick="setNonhcPosition(&#39;Temporary 6-month fixed salary&#39;)">Temporary 6-month fixed salary</button>
+            <button class="tb" id="btn-nhc-2" onclick="setNonhcPosition(&#39;Temporary 12-month fixed salary&#39;)">Temporary 12-month fixed salary</button>
+            <button class="tb" id="btn-nhc-3" onclick="setNonhcPosition(&#39;Temporary hourly paid&#39;)">Temporary hourly paid</button>
+            <button class="tb" id="btn-nhc-4" onclick="setNonhcPosition(&#39;Diploma Student / Intern&#39;)">Diploma Student / Intern</button>
+            <button class="tb" id="btn-nhc-5" onclick="setNonhcPosition(&#39;PhD Student&#39;)">PhD Student</button>
+          </div>
+        </div>
       </div>
+      <!-- Custom profile name — shown only when "Other" is selected -->
+      <div id="other-pname-div" class="hidden" style="margin-top:-4px;margin-bottom:14px">
+        <div class="fg"><label>Custom Job Profile Name <span class="req">*</span></label><input type="text" id="f-other-profile" placeholder="e.g. Custom Engineering Role" oninput="S.customProfileName=this.value.trim()"></div>
+      </div>
+      <div id="prof-hint" class="hidden"></div>
+      <div id="s1-err" class="hidden"></div>
+      <div class="nav"><div></div><button class="btn btn-p" onclick="go(2)">Next: Skill Selection →</button></div>
     </div>
   </div>
 
-  <!-- STEP 2: Skill Selection -->
-  <div class="step-content" id="step2">
+  <!-- ═══ STEP 2 ═══ -->
+  <div id="s2" class="hidden">
     <div class="card">
-      <div class="card-header">
-        <div class="section-icon" style="background:#FEF3C7; color:#D97706;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-            <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-          </svg>
+      <div class="c-hd"><svg width="17" height="17" fill="none" stroke="#0070F2" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><span class="c-t">Step 1: Skill Prioritisation</span></div>
+      <!-- HC path -->
+      <div id="s2-hc">
+        <p class="c-s" id="s2-desc">Core AI and Professional Skills are pre-selected and mandatory. Choose exactly <strong>6 Tech role-specific skills</strong>.</p>
+        <div style="margin-bottom:20px">
+          <div class="sec-hd"><span class="sec-lb"><span class="dot d-ai"></span>Core AI Skills — Mandatory<span class="lock-t">Locked · 5 Skills</span></span></div>
+          <div class="cw" id="ai-chips"></div>
         </div>
-        <h2>Step 1: Skill Prioritisation</h2>
-      </div>
-      <p class="card-subtitle" id="step2Subtitle">Core AI and Professional Skills are mandatory and pre-selected. Choose exactly 6 Tech role-specific skills for your role.</p>
-
-      <!-- Section A: Core AI -->
-      <div class="skill-section">
-        <div class="skill-section-header">
-          <span class="skill-section-title" style="color:#92400E;">CORE AI SKILLS — MANDATORY FOR ALL ROLES</span>
-          <span class="lock-badge" style="background:#FEF3C7;color:#92400E;border:1px solid #FCD34D;">
-            <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-            LOCKED · 4 SKILLS
-          </span>
+        <div style="margin-bottom:20px">
+          <div class="sec-hd"><span class="sec-lb"><span class="dot d-prof"></span>Professional Skills — Mandatory<span class="lock-t" id="prof-lock">Locked</span></span></div>
+          <div class="cw" id="prof-chips"></div>
         </div>
-        <div class="locked-pills" id="coreAIPills"></div>
-      </div>
-
-      <!-- Section B: Professional -->
-      <div class="skill-section">
-        <div class="skill-section-header">
-          <span class="skill-section-title" style="color:#1E40AF;">PROFESSIONAL SKILLS — MANDATORY</span>
-          <span class="lock-badge" style="background:#DBEAFE;color:#1E40AF;border:1px solid #93C5FD;">
-            <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-            LOCKED · 8 SKILLS
-          </span>
-        </div>
-        <div class="locked-pills" id="professionalPills"></div>
-      </div>
-
-      <!-- Section C: Tech -->
-      <div class="skill-section">
-        <div class="tech-skills-header">
-          <span class="skill-section-title" style="color:#166534;">TECH ROLE-SPECIFIC SKILLS — SELECT EXACTLY 6</span>
-          <div class="skill-counter">
-            <span id="techSkillCounter">0 / 6 selected</span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar-fill" id="techProgressBar" style="width:0%"></div>
-            </div>
+        <!-- Custom skills section — shown only for "Other" profile -->
+        <div id="custom-sk-sec" class="hidden" style="margin-bottom:14px">
+          <div class="sec-hd"><span class="sec-lb"><span class="dot d-tech"></span>Enter your 5 Custom Tech Skills</span></div>
+          <div class="csk-grid">
+            <div class="fg"><label style="font-size:12px">Skill 1</label><input class="csk-inp" type="text" id="csk0" placeholder="Enter skill name" oninput="updCustomSkill(0,this.value)"></div>
+            <div class="fg"><label style="font-size:12px">Skill 2</label><input class="csk-inp" type="text" id="csk1" placeholder="Enter skill name" oninput="updCustomSkill(1,this.value)"></div>
+            <div class="fg"><label style="font-size:12px">Skill 3</label><input class="csk-inp" type="text" id="csk2" placeholder="Enter skill name" oninput="updCustomSkill(2,this.value)"></div>
+            <div class="fg"><label style="font-size:12px">Skill 4</label><input class="csk-inp" type="text" id="csk3" placeholder="Enter skill name" oninput="updCustomSkill(3,this.value)"></div>
+            <div class="fg"><label style="font-size:12px">Skill 5</label><input class="csk-inp" type="text" id="csk4" placeholder="Enter skill name" oninput="updCustomSkill(4,this.value)"></div>
           </div>
+          <div class="sec-hd" style="margin-top:6px"><span class="sec-lb"><span class="dot d-tech"></span>Your Custom Skills — Click to select / deselect</span></div>
         </div>
-        <div class="skill-grid" id="techSkillGrid"></div>
+        <!-- Tech grid + counter (used for both predefined and custom) -->
+        <div id="tech-section">
+          <div id="tech-std-hd" class="sec-hd"><span class="sec-lb"><span class="dot d-tech"></span>Tech Role-Specific Skills — Select exactly 5</span></div>
+          <div class="cnt-w go" id="cnt-w"><span class="cnt-txt" id="cnt-txt">0 / 6 selected</span><div class="prog"><div class="prog-f" id="prog-f" style="width:0%"></div></div></div>
+          <div class="sk-grid" id="tech-grid"></div>
+        </div>
       </div>
-
-      <div class="step-actions">
-        <button class="btn btn-secondary" onclick="goToStep(1)">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          Back
-        </button>
-        <button class="btn btn-primary" id="btnStep2Next" onclick="goToStep(3)" disabled>
-          Next: Interview Plan
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+      <!-- Non-HC path -->
+      <div id="s2-nonhc" class="hidden">
+        <p class="c-s">Select exactly <strong>6 skills</strong> from the 9 core skills for this role.</p>
+        <div class="cnt-w go" id="nonhc-cnt-w"><span class="cnt-txt" id="nonhc-cnt-txt">0 / 6 selected</span><div class="prog"><div class="prog-f" id="nonhc-prog-f" style="width:0%"></div></div></div>
+        <div class="sk-grid" id="nonhc-skill-grid"></div>
       </div>
+      <div id="s2-msg" class="hidden" style="margin-top:10px"></div>
+      <div class="nav"><button class="btn btn-s" onclick="go(1)">← Back</button><button class="btn btn-p" onclick="go(3)">Next: Interview Plan →</button></div>
     </div>
   </div>
 
-  <!-- STEP 3: Interview Plan -->
-  <div class="step-content" id="step3">
-    <div class="card" style="padding:20px 24px;">
-      <div class="card-header">
-        <div class="section-icon" style="background:#F0FDF4;color:#166534;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
+  <!-- ═══ STEP 3 ═══ -->
+  <div id="s3" class="hidden">
+    <div class="card">
+      <div class="c-hd"><svg width="17" height="17" fill="none" stroke="#0070F2" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span class="c-t">Steps 2 &amp; 3: Interview Plan &amp; Skill Assignment</span></div>
+      <p class="c-s" id="s3-desc">Each round supports <strong>up to 4 interviewers</strong>. Click <strong>+ Add Skills</strong> on an interviewer row to assign skills. All <span id="total-sc">15</span> skills must be assigned before continuing.</p>
+      <div class="plan-lay" id="plan-lay">
+        <div class="pool-p" id="pool-panel">
+          <div class="pool-t">Skills Pool</div>
+          <div class="pool-s"><div class="pool-sl ai">Core AI (5)</div><div id="pool-ai"></div></div>
+          <div class="pool-s"><div class="pool-sl prof" id="pool-prof-lbl">Professional</div><div id="pool-prof"></div></div>
+          <div class="pool-s"><div class="pool-sl tech">Tech (5)</div><div id="pool-tech"></div></div>
+          <div class="pool-s hidden" id="pool-nonhc-sec"><div class="pool-sl nonhc">Selected Skills (6)</div><div id="pool-nonhc"></div></div>
+          <div class="tot-bar" id="tot-bar">0 assigned</div>
         </div>
-        <h2>Steps 2 &amp; 3: Interview Plan &amp; Skill Assignment</h2>
+        <div class="rounds-c" id="rounds-c"></div>
       </div>
-      <p class="card-subtitle" style="margin-bottom:0;">Click <strong>+ Add Skill</strong> in a round to assign skills. Aim for ~3 skills per interviewer. All 18 skills must be assigned before continuing.</p>
-    </div>
-
-    <div class="interview-layout">
-      <!-- Left Sidebar -->
-      <div class="skills-sidebar">
-        <h3>Skills to Assign</h3>
-        <div class="sidebar-group">
-          <div class="sidebar-group-label amber">CORE AI (4)</div>
-          <div id="sidebarCoreAI"></div>
-        </div>
-        <div class="sidebar-group">
-          <div class="sidebar-group-label blue">PROFESSIONAL (8)</div>
-          <div id="sidebarProfessional"></div>
-        </div>
-        <div class="sidebar-group">
-          <div class="sidebar-group-label green">TECH SKILLS (6)</div>
-          <div id="sidebarTech"></div>
-        </div>
-      </div>
-
-      <!-- Right: Rounds -->
-      <div>
-        <div class="rounds-container" id="roundsContainer"></div>
-
-        <div id="warningBanner" class="warning-banner" style="display:none;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span id="warningText"></span>
-        </div>
-
-        <div class="step-actions" style="margin-top:16px;">
-          <button class="btn btn-secondary" onclick="goToStep(2)">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Back
-          </button>
-          <button class="btn btn-primary" id="btnStep3Next" onclick="goToStep(4)" disabled>
-            Next: Summary
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
+      <div id="s3-msg" class="hidden"></div>
+      <div class="nav"><button class="btn btn-s" onclick="go(2)">← Back</button><button class="btn btn-p" onclick="go(4)">Next: Summary →</button></div>
     </div>
   </div>
 
-  <!-- STEP 4: Summary -->
-  <div class="step-content" id="step4">
-    <!-- Hero Banner -->
-    <div class="hero-banner">
-      <h2 id="summaryRoleTitle">—</h2>
-      <div class="hero-sub" id="summaryRoleSub">—</div>
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <div class="hero-meta-label">Hiring Manager</div>
-          <div class="hero-meta-value" id="summaryHM">—</div>
-        </div>
-        <div class="hero-meta-item">
-          <div class="hero-meta-label">Position ID</div>
-          <div class="hero-meta-value" id="summaryPosID">—</div>
-        </div>
-        <div class="hero-meta-item">
-          <div class="hero-meta-label">Role Type</div>
-          <div class="hero-meta-value" id="summaryRoleType">—</div>
-        </div>
+  <!-- ═══ STEP 4 ═══ -->
+  <div id="s4" class="hidden">
+    <div class="sum-hero">
+      <h2 id="sum-title">Skills Prioritisation Plan</h2>
+      <div class="sum-pf-row">Job Profile: <strong id="sum-profile"></strong></div>
+      <p id="sum-sub">T1–T4PF</p>
+      <div class="sum-meta">
+        <div class="sm-i"><div class="lbl">Hiring Manager</div><div class="val" id="sum-hm"></div></div>
+        <div class="sm-i"><div class="lbl">Position ID</div><div class="val" id="sum-pid"></div></div>
+        <div class="sm-i"><div class="lbl">Role Type</div><div class="val" id="sum-rt"></div></div>
       </div>
     </div>
-
-    <!-- Mandatory Skills -->
-    <p class="summary-section-title">Mandatory Skills</p>
-    <div class="summary-cards" style="margin-bottom:20px;">
-      <div class="summary-card">
-        <h4 class="amber">CORE AI SKILLS (4)</h4>
-        <div class="pill-group" id="summaryCoreAI"></div>
+    <div class="card" id="sum-hc-card">
+      <div class="c-t" style="margin-bottom:13px">Mandatory Skills</div>
+      <div class="sum-srow">
+        <div class="sum-sb"><div class="sum-sb-t">Core AI Skills (5)</div><div class="cw" id="sum-ai"></div></div>
+        <div class="sum-sb"><div class="sum-sb-t" id="sum-prof-t">Professional Skills</div><div class="cw" id="sum-prof"></div></div>
       </div>
-      <div class="summary-card">
-        <h4 class="blue">PROFESSIONAL SKILLS (8)</h4>
-        <div class="pill-group" id="summaryProfessional"></div>
-      </div>
+      <div class="sum-sb" style="background:none;padding:0"><div class="sum-sb-t" style="margin-bottom:9px">Selected Tech Skills (5)</div><div class="cw" id="sum-tech"></div></div>
     </div>
-
-    <!-- Tech Skills -->
-    <p class="summary-section-title">Selected Tech Skills</p>
-    <div class="summary-card" style="margin-bottom:20px;">
-      <h4 class="green">SELECTED TECH SKILLS (6)</h4>
-      <div class="pill-group" id="summaryTech"></div>
+    <div class="card hidden" id="sum-nonhc-card">
+      <div class="c-t" style="margin-bottom:13px">Selected Mandatory Skills (6)</div>
+      <div class="cw" id="sum-nonhc-skills"></div>
     </div>
-
-    <!-- Interview Rounds -->
-    <p class="summary-section-title">Interview Rounds</p>
-    <div class="card" style="padding:0; overflow:hidden; margin-bottom:24px;">
-      <table class="rounds-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Interview Type</th>
-            <th>Interviewer</th>
-            <th>Skills Assigned</th>
-            <th>Duration</th>
-            <th>Mode</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody id="summaryRoundsBody"></tbody>
+    <div class="card">
+      <div class="c-t" style="margin-bottom:13px">Interview Rounds</div>
+      <table class="stbl">
+        <thead><tr><th>#</th><th>Type</th><th>Interviewer</th><th>Skills Assigned</th><th>Duration</th><th>Mode</th><th>Notes</th></tr></thead>
+        <tbody id="sum-tbody"></tbody>
       </table>
     </div>
-
-    <div class="step-actions">
-      <button class="btn btn-secondary" onclick="goToStep(3)">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <div style="display:flex;gap:10px;">
-        <button class="btn btn-secondary" onclick="printPlan()">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          Print / PDF
-        </button>
-        <button class="btn btn-success" onclick="newPlan()">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
-          New Plan
-        </button>
-      </div>
-    </div>
-  </div>
-
-</div><!-- end container -->
-
-<!-- MODAL: Add Skill -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 id="modalTitle">Add Skills to Round</h3>
-      <button class="modal-close" onclick="closeModal()">&#10005;</button>
-    </div>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-footer">
-      <span class="modal-footer-count" id="modalSelCount">0 skills selected</span>
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-secondary" onclick="closeModal()" style="padding:8px 16px;">Cancel</button>
-        <button class="btn btn-primary" id="btnAddSelected" onclick="assignSelectedSkills()" style="padding:8px 16px;" disabled>Add Selected</button>
+    <div class="nav">
+      <button class="btn btn-s" onclick="go(3)">← Back</button>
+      <div class="exp-btns">
+        <button class="btn btn-g" onclick="startNew()"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg> New Plan</button>
+        <button class="btn btn-s" onclick="startPrint()"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg> Print / PDF</button>
+        <button class="btn btn-xl" onclick="exportExcel()"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg> Export as Excel</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ═══ MODAL ═══ -->
+<div class="overlay hidden" id="overlay" onclick="closeM(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-hd">
+      <div class="modal-hd-r1">
+        <span class="m-t" id="m-title">Add Skills</span>
+        <button class="m-cl" onclick="closeM()">×</button>
+      </div>
+      <div class="m-actions">
+        <button class="m-act" onclick="mSelUnassigned()">Unassigned Only</button>
+        <button class="m-act" onclick="mSelAll()">Select All</button>
+        <button class="m-act" onclick="mClear()">Clear</button>
+        <span class="m-count" id="m-count">0 selected</span>
+      </div>
+    </div>
+    <div class="modal-body" id="m-body"></div>
+    <div class="modal-ft">
+      <button class="btn btn-s" onclick="closeM()">Cancel</button>
+      <button class="btn btn-p" id="m-assign-btn" onclick="assignPicked()">Assign 0 Skills</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRINT VIEW (invisible in browser, rendered on print) ═══ -->
+<div id="print-view">
+
+  <!-- PAGE 1: Role Information + Mandatory Skills -->
+  <div class="pv-pg">
+    <div class="pv-hdr">
+      <div class="pv-logo">SAP</div>
+      <div class="pv-hdr-info">
+        <div class="pv-hdr-title">E&amp;T Interview Skills Prioritisation</div>
+        <div class="pv-hdr-sub">Engineering &amp; Tech &nbsp;·&nbsp; Talent Discovery</div>
+      </div>
+    </div>
+
+    <div class="pv-sec">
+      <div class="pv-sec-hd">Role Information</div>
+      <div class="pv-ri-grid">
+        <div class="pv-ri-item pv-ri-full">
+          <span class="pv-ri-lbl">Job Profile</span>
+          <span class="pv-ri-val" id="pv-profile"></span>
+        </div>
+        <div class="pv-ri-item pv-ri-full">
+          <span class="pv-ri-lbl">Job Title (Role Title)</span>
+          <span class="pv-ri-val" id="pv-title"></span>
+        </div>
+        <div class="pv-ri-item">
+          <span class="pv-ri-lbl">Hiring Manager</span>
+          <span class="pv-ri-val" id="pv-hm"></span>
+        </div>
+        <div class="pv-ri-item">
+          <span class="pv-ri-lbl">Position ID</span>
+          <span class="pv-ri-val" id="pv-pid"></span>
+        </div>
+        <div class="pv-ri-item pv-ri-full">
+          <span class="pv-ri-lbl">Role Type</span>
+          <span class="pv-ri-val" id="pv-rt"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HC mandatory skills -->
+    <div class="pv-sec" id="pv-hc-skills">
+      <div class="pv-sec-hd">Mandatory Skills</div>
+      <div class="pv-sk-grp">
+        <div class="pv-sk-lbl">Core AI Skills (4)</div>
+        <div class="cw" id="pv-ai"></div>
+      </div>
+      <div class="pv-sk-grp">
+        <div class="pv-sk-lbl" id="pv-prof-lbl">Professional Skills</div>
+        <div class="cw" id="pv-prof"></div>
+      </div>
+      <div class="pv-sk-grp">
+        <div class="pv-sk-lbl">Selected Tech Skills (5)</div>
+        <div class="cw" id="pv-tech"></div>
+      </div>
+    </div>
+    <!-- Non-HC selected skills -->
+    <div class="pv-sec hidden" id="pv-nonhc-skills">
+      <div class="pv-sec-hd">Selected Mandatory Skills (6)</div>
+      <div class="cw" id="pv-nonhc-sk"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: Interview Rounds (always new page) -->
+  <div class="pv-pg pv-pg2">
+    <div class="pv-hdr">
+      <div class="pv-logo">SAP</div>
+      <div class="pv-hdr-info">
+        <div class="pv-hdr-title">E&amp;T Interview Skills Prioritisation — Interview Rounds</div>
+        <div class="pv-hdr-sub" id="pv-rnd-sub"></div>
+      </div>
+    </div>
+    <div class="pv-sec">
+      <div class="pv-sec-hd">Interview Rounds</div>
+      <table class="stbl" style="font-size:12px">
+        <thead>
+          <tr>
+            <th style="width:28px">#</th>
+            <th>Interview Type</th>
+            <th>Interviewer</th>
+            <th>Skills Assigned</th>
+            <th style="width:70px">Duration</th>
+            <th style="width:90px">Mode</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="pv-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
 <script>
-// ══════════════════════════════════════════════════════
-//  DATA & STATE
-// ══════════════════════════════════════════════════════
-const CORE_AI_SKILLS = [
-  'Agentic AI Day-to-Day Practice',
-  'AI Adoption Mindset',
-  'AI Output Quality Assurance',
-  'Context Engineering'
-];
-const PROFESSIONAL_SKILLS = [
-  'Adaptive Leadership',
-  'Collaboration',
-  'Complex Problem Solving',
-  'Creative Thinking',
-  'Customer Focus',
-  'Effective Communication',
-  'Learning Agility',
-  'Team Performance Management'
-];
-const TECH_SKILLS_MAP = {
-  // ── ENGINEERING ──────────────────────────────────────
-  'Application Engineering': [
-    { name: 'Agentic Engineering', codility: false },
-    { name: 'AI Assisted Development', codility: false },
-    { name: 'Application Security', codility: false },
-    { name: 'Cloud Architecture', codility: false },
-    { name: 'Continuous Integration/Continuous Delivery (CI/CD)', codility: false },
-    { name: 'High Availability Engineering', codility: false },
-    { name: 'Observability', codility: false },
-    { name: 'Semantic Retrieval', codility: false }
-  ],
-  'Data and Applied Science': [
-    { name: 'AI Assisted Development', codility: false },
-    { name: 'Data Engineering', codility: false },
-    { name: 'Deep Learning', codility: false },
-    { name: 'Feature Engineering', codility: false },
-    { name: 'Model Training', codility: false },
-    { name: 'Semantic Retrieval', codility: false }
-  ],
-  'Data Engineering': [
-    { name: 'AI Assisted Development', codility: false },
-    { name: 'Data Enrichment', codility: false },
-    { name: 'Data Ethics', codility: false },
-    { name: 'Data Governance', codility: false },
-    { name: 'Data Infrastructure Management', codility: false },
-    { name: 'Data Orchestration', codility: false },
-    { name: 'Data Pipeline Development', codility: false },
-    { name: 'Data Product Lifecycle Management', codility: false },
-    { name: 'Data Validation', codility: false },
-    { name: 'Database Engineering', codility: false },
-    { name: 'Knowledge Graph Integration and Interaction', codility: false },
-    { name: 'Master Data Management', codility: false },
-    { name: 'Personal Identifiable Information (PII) Handling', codility: false },
-    { name: 'SAP Data and Analytics Ecosystem', codility: false },
-    { name: 'Scripting', codility: false },
-    { name: 'Semantic Retrieval', codility: false },
-    { name: 'Spark Runtime', codility: false }
-  ],
-  'DevOps Engineering': [
-    { name: 'Cloud Architecture', codility: false },
-    { name: 'Cloud Platform System', codility: false },
-    { name: 'Continuous Integration/Continuous Delivery (CI/CD)', codility: false },
-    { name: 'Database Engineering', codility: false },
-    { name: 'Identity and Access Management', codility: false },
-    { name: 'Incident Management', codility: false },
-    { name: 'Infrastructure Automation', codility: false },
-    { name: 'Observability', codility: false },
-    { name: 'Programming Languages', codility: false },
-    { name: 'Scripting', codility: false },
-    { name: 'Test Automation', codility: false }
-  ],
-  'Machine Learning Engineering': [
-    { name: 'AI Assisted Development', codility: false },
-    { name: 'Big Data Handling', codility: false },
-    { name: 'Cloud Platform System', codility: false },
-    { name: 'Data Ethics', codility: false },
-    { name: 'Machine Learning Operations (MLOps)', codility: false },
-    { name: 'Semantic Retrieval', codility: false }
-  ],
-  'Platform Engineering': [
-    { name: 'AI Assisted Development', codility: false },
-    { name: 'Cloud Architecture', codility: false },
-    { name: 'Cloud Financial Management (FinOps)', codility: false },
-    { name: 'Cloud Platform System', codility: false },
-    { name: 'Container Virtualization', codility: false },
-    { name: 'Continuous Integration/Continuous Delivery (CI/CD)', codility: false },
-    { name: 'High Availability Engineering', codility: false },
-    { name: 'Identity and Access Management', codility: false },
-    { name: 'Infrastructure as Code (IaC)', codility: false },
-    { name: 'Observability', codility: false },
-    { name: 'Scalability', codility: false },
-    { name: 'Test Automation', codility: false }
-  ],
-  'Quality Assurance Engineering': [
-    { name: 'Continuous Integration/Continuous Delivery (CI/CD)', codility: false },
-    { name: 'High Availability Design', codility: false },
-    { name: 'Root Cause Analysis', codility: false },
-    { name: 'SAP Global Development Policy', codility: false },
-    { name: 'SAP Product Standards', codility: false },
-    { name: 'Scripting', codility: false },
-    { name: 'Software Audit', codility: false },
-    { name: 'Software Testing Life Cycle', codility: false },
-    { name: 'Software Testing Methodologies', codility: false },
-    { name: 'Software Testing Tools', codility: false },
-    { name: 'Test Automation', codility: false },
-    { name: 'Test Strategy Development', codility: false }
-  ],
-  'Site Reliability Engineering': [
-    { name: 'Cloud Architecture', codility: false },
-    { name: 'Cloud Platform System', codility: false },
-    { name: 'Cloud Security Infrastructure', codility: false },
-    { name: 'Continuous Integration/Continuous Delivery (CI/CD)', codility: false },
-    { name: 'Database Engineering', codility: false },
-    { name: 'High Availability Engineering', codility: false },
-    { name: 'Identity and Access Management', codility: false },
-    { name: 'Infrastructure Automation', codility: false },
-    { name: 'Observability', codility: false },
-    { name: 'Operating Systems', codility: false },
-    { name: 'Programming Languages', codility: false },
-    { name: 'Root Cause Analysis', codility: false },
-    { name: 'Scalability', codility: false },
-    { name: 'Test Automation', codility: false },
-    { name: 'Web Development', codility: false }
-  ],
-  'Software Architecture Engineering': [
-    { name: 'Agentic Engineering', codility: false },
-    { name: 'AI Assisted Development', codility: false },
-    { name: 'Cloud Architecture', codility: false },
-    { name: 'Cloud Security Architecture', codility: false },
-    { name: 'Continuous Integration/Continuous Delivery (CI/CD)', codility: false },
-    { name: 'High Availability Design', codility: false },
-    { name: 'LLMOps Architecture', codility: false },
-    { name: 'Machine Learning Operations (MLOps)', codility: false },
-    { name: 'Scalability Design', codility: false },
-    { name: 'Semantic Retrieval', codility: false },
-    { name: 'Systems Thinking', codility: false },
-    { name: 'Technical Leadership', codility: false }
-  ],
-  // ── INFORMATION SECURITY ─────────────────────────────
-  'Incident Response': [
-    { name: 'Computer Security Incident Response', codility: false },
-    { name: 'Cyber Incident Response', codility: false },
-    { name: 'Cybersecurity Forensic Analyst', codility: false },
-    { name: 'Endpoint Detection And Response', codility: false },
-    { name: 'Incident Management', codility: false },
-    { name: 'Incident Response Management', codility: false },
-    { name: 'IT Security', codility: false },
-    { name: 'Malware Analysis', codility: false },
-    { name: 'Malware Reverse Engineering', codility: false },
-    { name: 'Security Operations (SecOps)', codility: false },
-    { name: 'Threat Management', codility: false }
-  ],
-  'Information Security Compliance': [
-    { name: 'Information Security Audits', codility: false },
-    { name: 'NIST Cybersecurity Framework (CSF)', codility: false }
-  ],
-  'Information Security Risk Management': [
-    { name: 'Information Security Management', codility: false },
-    { name: 'Information Technology Controls', codility: false },
-    { name: 'IT Risk Management', codility: false },
-    { name: 'Risk Management Information Systems', codility: false },
-    { name: 'Risk Management Tools', codility: false }
-  ],
-  'Offensive Security Testing': [
-    { name: 'Infrastructure Security', codility: false },
-    { name: 'IT Security', codility: false },
-    { name: 'Linux Commands', codility: false },
-    { name: 'Open Web Application Security Project (OWASP)', codility: false },
-    { name: 'Penetration Testing', codility: false },
-    { name: 'Red Teaming', codility: false },
-    { name: 'Scripting', codility: false },
-    { name: 'Security Operations (SecOps)', codility: false },
-    { name: 'Social Engineering', codility: false },
-    { name: 'System Security Analysis', codility: false }
-  ],
-  'Threat Analysis': [
-    { name: 'Activity-based Intelligence', codility: false },
-    { name: 'Advanced Security Analytics', codility: false },
-    { name: 'All-Source Intelligence', codility: false },
-    { name: 'Attack Patterns', codility: false },
-    { name: 'Cyber Threat Analysis', codility: false },
-    { name: 'Cyber Threat Intelligence', codility: false },
-    { name: 'Intelligence Analysis', codility: false },
-    { name: 'Intelligence Data Handling', codility: false },
-    { name: 'Measurement and Signature Intelligence', codility: false },
-    { name: 'Open Source Intelligence', codility: false },
-    { name: 'Security Patterns', codility: false }
-  ],
-  'Vulnerability Management': [
-    { name: 'Attack Patterns', codility: true },
-    { name: 'Attack Surface Management', codility: true },
-    { name: 'Third Party Risk Management', codility: true },
-    { name: 'Vulnerability Assessments', codility: true },
-    { name: 'Vulnerability Management', codility: true },
-    { name: 'Vulnerability Scanning', codility: true }
-  ],
-  // ── PRODUCT ──────────────────────────────────────────
-  'Product Management': [
-    { name: 'AI Assisted Development', codility: false },
-    { name: 'Semantic Retrieval', codility: false }
-  ],
-  'Product Marketing': [],
-  'Translation': [
-    { name: 'Computer-Assisted Translation', codility: false },
-    { name: 'Software Localization', codility: false }
-  ],
-  'User Assistance Development': [
-    { name: 'Content Engineering', codility: false },
-    { name: 'Ontologies', codility: false },
-    { name: 'Semantic Retrieval', codility: false }
-  ],
-  // ── DESIGN ───────────────────────────────────────────
-  'User Experience Design': [
-    { name: 'Semantic Retrieval', codility: false }
-  ],
-  'User Experience Research': [
-    { name: 'Semantic Retrieval', codility: false }
-  ],
-  'Visual Design': [
-    { name: 'Semantic Retrieval', codility: false }
-  ]
-};
-const PROFILE_META = {
-  // Engineering
-  'Application Engineering':           { category: 'Engineering', count: 8 },
-  'Data and Applied Science':          { category: 'Engineering', count: 6 },
-  'Data Engineering':                  { category: 'Engineering', count: 17 },
-  'DevOps Engineering':                { category: 'Engineering', count: 11 },
-  'Machine Learning Engineering':      { category: 'Engineering', count: 6 },
-  'Platform Engineering':              { category: 'Engineering', count: 12 },
-  'Quality Assurance Engineering':     { category: 'Engineering', count: 12 },
-  'Site Reliability Engineering':      { category: 'Engineering', count: 15 },
-  'Software Architecture Engineering': { category: 'Engineering', count: 12 },
-  // Information Security
-  'Incident Response':                    { category: 'Information Security', count: 11 },
-  'Information Security Compliance':      { category: 'Information Security', count: 2 },
-  'Information Security Risk Management': { category: 'Information Security', count: 5 },
-  'Offensive Security Testing':           { category: 'Information Security', count: 10 },
-  'Threat Analysis':                      { category: 'Information Security', count: 11 },
-  'Vulnerability Management':             { category: 'Information Security', count: 6 },
-  // Product
-  'Product Management':        { category: 'Product', count: 2 },
-  'Product Marketing':         { category: 'Product', count: 0 },
-  'Translation':               { category: 'Product', count: 2 },
-  'User Assistance Development': { category: 'Product', count: 3 },
-  // Design
-  'User Experience Design':    { category: 'Design', count: 1 },
-  'User Experience Research':  { category: 'Design', count: 1 },
-  'Visual Design':             { category: 'Design', count: 1 }
-};
-const ROUND_NAMES = [
-  'Recruiter Interview',
-  'Hiring Owner / Tech Interview',
-  'Tech Interview',
-  'Optional Interview'
-];
+const D={"validation": {"duration": ["30 Mins", "45 Mins", "60 Mins", "90 Mins", "120 Mins"], "mode": ["MS Teams Video", "Face to Face"], "core_ai": ["Agentic AI Day-to-Day Practice", "AI Adoption Capability", "AI Output Quality Assurance", "Context Engineering", "System-integrated Vibe Coding"], "professional_t1": ["Learning Agility", "Collaboration", "Complex Problem Solving", "Creative Thinking", "Effective Communication"], "professional_t4pm": ["Adaptive Leadership", "Collaboration", "Complex Problem Solving", "Creative Thinking", "Customer Focus", "Effective Communication", "Learning Agility", "Team Performance Management"]}, "profiles": {"Application Engineering": {"category": "Engineering", "key": "Application_Engineering", "skills": ["Agentic Engineering", "Agentic Orchestration", "AI Assisted Development", "Application Security", "Cloud Architecture", "Continuous Integration/Continuous Delivery (CI/CD)", "Evaluation and Benchmark Engineering", "High Availability Engineering", "Observability", "Semantic Retrieval", "Troubleshooting (Problem Solving)"]}, "Data and Applied Science": {"category": "Engineering", "key": "Data_and_Applied_Science", "skills": ["AI Assisted Development", "Agentic Orchestration", "Data Engineering", "Deep Learning", "Ethical AI", "Feature Engineering", "Model Training", "Semantic Retrieval"]}, "Data Engineering": {"category": "Engineering", "key": "Data_Engineering", "skills": ["Data Enrichment", "Data Ethics", "Data Governance", "Data Infrastructure Management", "Data Orchestration", "Data Pipeline Development", "Data Product Lifecycle Management", "Data Validation", "Database Engineering", "Knowledge Graph Integration and Interaction", "Master Data Management", "Personal Identifiable Information (PII) Handling", "SAP Data and Analytics Ecosystem", "Scripting", "Spark Runtime"]}, "DevOps Engineering": {"category": "Engineering", "key": "DevOps_Engineering", "skills": ["Artificial Intelligence", "Cloud Architecture", "Cloud Platform System", "Continuous Integration/Continuous Delivery (CI/CD)", "Database Engineering", "Identity and Access Management", "Incident Management", "Infrastructure Automation", "Observability", "Programming Languages", "Scripting", "Test Automation", "Troubleshooting (Problem Solving)"]}, "Machine Learning Engineering": {"category": "Engineering", "key": "Machine_Learning_Engineering", "skills": ["AI Assisted Development", "AI Governance Operations", "Agentic Orchestration", "Big Data Handling", "Cloud Platform System", "Data Ethics", "Machine Learning Operations (MLOps)", "Rapid Field Prototyping", "Semantic Retrieval"]}, "Platform Engineering": {"category": "Engineering", "key": "Platform_Engineering", "skills": ["AI Assisted Development", "AI Governance Operations", "Agentic Orchestration", "Cloud Architecture", "Continuous Integration/Continuous Delivery (CI/CD)", "Observability", "Scalability", "Test Automation"]}, "Quality Assurance Engineering": {"category": "Engineering", "key": "Quality_Assurance_Engineering", "skills": ["Continuous Integration/Continuous Delivery (CI/CD)", "High Availability Design", "Root Cause Analysis", "SAP Global Development Policy", "SAP Product Standards", "Scripting", "Software Audit", "Software Testing Life Cycle", "Software Testing Methodologies", "Software Testing Tools", "Test Automation", "Test Strategy Development", "Troubleshooting (Problem Solving)"]}, "Site Reliability Engineering": {"category": "Engineering", "key": "Site_Reliability_Engineering", "skills": ["Cloud Architecture", "Cloud Platform System", "Cloud Security Infrastructure", "Continuous Integration/Continuous Delivery (CI/CD)", "Database Engineering", "High Availability Engineering", "Identity and Access Management", "Infrastructure Automation", "Observability", "Operating Systems", "Programming Languages", "Root Cause Analysis", "Scalability", "Test Automation", "Troubleshooting (Problem Solving)", "Web Development"]}, "Software Architecture Engineering": {"category": "Engineering", "key": "Software_Architecture_Engineering", "skills": ["Agentic Engineering", "Agentic Orchestration", "AI Assisted Development", "Cloud Architecture", "Cloud Security Architecture", "Continuous Integration/Continuous Delivery (CI/CD)", "Evaluation and Benchmark Engineering", "Scalability Design", "Semantic Retrieval", "Systems Thinking", "Technical Leadership"]}, "Product Management": {"category": "Product", "key": "Product_Management", "skills": ["AI Assisted Development", "AI Assisted Prototyping", "Competitive Analysis", "Customer Engagement", "Data‑Driven Decision Making", "Market Research", "Product Lifecycle Management", "Product Roadmap Development", "Software Development Life Cycle", "Storytelling"]}, "Product Marketing": {"category": "Product", "key": "Product_Marketing", "skills": ["Campaign Management", "Competitive Analysis", "Content Development", "Customer Engagement", "Digital Marketing", "Go-To-Market Strategy", "Market Research", "Positioning Strategy", "Public Speaking", "Sales Enablement", "Storytelling", "Strategic Thinking"]}, "Translation": {"category": "Product", "key": "Translation", "skills": ["Computer-Assisted Translation", "Digital Content Management", "Generative AI Day-to-Day Practice", "Language Consulting", "Linguistic Quality Assurance", "Proofreading", "Software Localization", "Terminology Management", "UI/UX Writing", "Web Accessibility Standards"]}, "User Assistance Development": {"category": "Product", "key": "User_Assistance_Development", "skills": ["AI Assisted Prototyping", "AI Content Curation", "Content Design", "Content Engineering", "Data‑Driven Decision Making", "Information Architecture", "Ontologies", "Semantic Retrieval", "UI/UX Writing", "User Research Methods"]}, "Incident Response": {"category": "Information Security", "key": "Incident_Response", "skills": ["Computer Security Incident Response", "Cyber Incident Response", "Cybersecurity Forensic Analyst", "Endpoint Detection And Response", "Incident Management", "Incident Response Management", "IT Security", "Malware Analysis", "Malware Reverse Engineering", "Security Operations (SecOps)", "Threat Management"]}, "Information Security Compliance": {"category": "Information Security", "key": "Information_Security_Compliance", "skills": ["Audit Management", "Audit Planning", "Audit Processes", "Audit Report Preparation", "Audit Risk", "Audit Scheduling", "Audit Working Papers", "Certified Compliance Specialist", "Certified Lead Auditor", "Control Deficiency Management", "Information Security Audits", "NIST Cybersecurity Framework (CSF)"]}, "Information Security Risk Management": {"category": "Information Security", "key": "Information_Security_Risk_Management", "skills": ["Information Security Management", "Information Technology Controls", "Information Technology Management", "IT Risk Management", "Risk Analysis", "Risk Management Framework", "Risk Management Information Systems", "Risk Management Tools", "Risk Mindset", "Risk Mitigation", "Risk Register", "Security Interest"]}, "Offensive Security Testing": {"category": "Information Security", "key": "Offensive_Security_Testing", "skills": ["Infrastructure Security", "IT Security", "Linux Commands", "Open Web Application Security Project (OWASP)", "Penetration Testing", "Red Teaming", "Report Writing", "Scripting", "Security Operations (SecOps)", "Security Recommendations", "Social Engineering", "System Security Analysis"]}, "Threat Analysis": {"category": "Information Security", "key": "Threat_Analysis", "skills": ["Activity-based intelligence", "Advanced Security Analytics", "All-Source intelligence", "Attack Patterns", "Cyber Threat Analysis", "Cyber Threat Intelligence", "Intelligence Analysis", "Intelligence Data Handling", "Measurement and Signature Intelligence", "Open Source Intelligence", "Report Writing", "Security Patterns"]}, "Vulnerability Management": {"category": "Information Security", "key": "Vulnerability_Management", "skills": ["Attack Patterns", "Attack Surface Management", "Cross-Functional Collaboration", "Third Party Risk Management", "Vulnerability Assessments", "Vulnerability Management", "Vulnerability Scanning"]}, "User Experience Design": {"category": "Design", "key": "User_Experience_Design", "skills": ["AI Journey Mapping", "Creative Problem Solving", "Design Thinking", "Design Tools", "Information Architecture", "Interaction Design", "Responsible AI (RAI) Design", "Storytelling", "UI/UX Design Systems", "Usability Testing", "User Journey Mapping"]}, "User Experience Research": {"category": "Design", "key": "User_Experience_Research", "skills": ["AI Assisted Prototyping", "AI Journey Mapping", "Contextual Inquiry", "Data Analysis", "Data Collection", "Evaluative Research", "Generative Research", "Participant Recruitment", "Research Planning & Design", "Responsible AI (RAI) Design", "Usability Testing"]}, "Visual Design": {"category": "Design", "key": "Visual_Design", "skills": ["AI Assisted Prototyping", "Color Theory", "Design Iconography", "Design Tools", "Digital Illustration", "Graphic Design", "Motion Graphic Design", "Page & Screen Layout", "Typography", "UI/UX Design Systems", "Visual Composition"]}, "Customer-Facing Project / Program Management": {"category": "Customer Engagement", "key": "Customer_Facing_PM", "skills": ["Conflict Management", "Customer Orientation", "Document Management", "Plan Execution", "Project Coordination", "Project Implementation", "Project Management", "Project Planning and Execution", "Project Schedules", "Project Scoping", "Scope Management", "Team Performance Management", "Time-Boxed Engagement Orchestration"]}, "Business Process Consulting": {"category": "Customer Engagement", "key": "Business_Process_Consulting", "skills": ["AI-Workforce Transformation Planning", "Business Architecture", "Business Process Analysis", "Business Process Automation", "Business Process Management", "Business Process Modeling", "Change Management", "Customer Value Proposition", "Design Thinking", "Effective Communication", "Process Mining & Optimization", "Scenario Testing", "Strategic Thinking"]}}, "assessments": {"Application Engineering": {"Agentic Engineering": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Agentic Orchestration": {"codility": true, "test": "TensorflowStreamingMetrics"}, "AI Assisted Development": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Application Security": {"codility": false, "test": ""}, "Cloud Architecture": {"codility": false, "test": ""}, "Continuous Integration/Continuous Delivery (CI/CD)": {"codility": false, "test": ""}, "Evaluation & Benchmark Engineering": {"codility": false, "test": ""}, "High Availability Engineering": {"codility": false, "test": ""}, "Observability": {"codility": true, "test": "KubernetesIngressDefinition"}, "Semantic Retrieval": {"codility": false, "test": ""}, "Troubleshooting": {"codility": false, "test": ""}}, "Data and Applied Science": {"AI Assisted Development": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Agentic Orchestration": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Data Engineering": {"codility": false, "test": ""}, "Deep Learning": {"codility": true, "test": "KerasImageClassification"}, "Ethical AI": {"codility": false, "test": ""}, "Feature Engineering": {"codility": true, "test": "MarketingClassification"}, "Model Training": {"codility": true, "test": "MarketingClassification"}, "Semantic Retrieval": {"codility": false, "test": ""}}, "Data Engineering": {"Data Enrichment": {"codility": false, "test": ""}, "Data Ethics": {"codility": false, "test": ""}, "Data Governance": {"codility": false, "test": ""}, "Data Infrastructure Management": {"codility": true, "test": "SparkChargePoints"}, "Data Orchestration": {"codility": false, "test": ""}, "Data Pipeline Development": {"codility": false, "test": ""}, "Data Product Lifecycle Management": {"codility": false, "test": ""}, "Data Validation": {"codility": false, "test": ""}, "Database Engineering": {"codility": true, "test": "SparkChargePoints"}, "Knowledge Graph Integration": {"codility": false, "test": ""}, "Master Data Management": {"codility": false, "test": ""}, "PII Handling": {"codility": false, "test": ""}, "SAP Data & Analytics": {"codility": false, "test": ""}, "Scripting": {"codility": true, "test": "PysparkParseGroup"}, "Spark Runtime": {"codility": true, "test": "SparkChargePoints"}}, "DevOps Engineering": {"Artificial Intelligence": {"codility": false, "test": ""}, "Cloud Architecture": {"codility": false, "test": ""}, "Cloud Platform System": {"codility": false, "test": ""}, "Continuous Integration/Continuous Delivery (CI/CD)": {"codility": false, "test": ""}, "Database Engineering": {"codility": true, "test": "SparkChargePoints"}, "Identity and Access Management": {"codility": false, "test": ""}, "Incident Management": {"codility": false, "test": ""}, "Infrastructure Automation": {"codility": false, "test": ""}, "Observability": {"codility": true, "test": "GridFindMax"}, "Programming Languages": {"codility": false, "test": ""}, "Scripting": {"codility": true, "test": "PysparkParseGroup"}, "Test Automation": {"codility": true, "test": "TestingLargeBeforeSmall"}, "Troubleshooting (Problem Solving)": {"codility": false, "test": ""}}, "Incident Response": {"Computer Security Incident Response": {"codility": false, "test": ""}, "Cyber Incident Response": {"codility": false, "test": ""}, "Cybersecurity Forensic Analyst": {"codility": true, "test": "KerasImageClassification"}, "Endpoint Detection And Response": {"codility": false, "test": ""}, "Incident Management": {"codility": false, "test": ""}, "Incident Response Management": {"codility": false, "test": ""}, "IT Security": {"codility": false, "test": ""}, "Malware Analysis": {"codility": false, "test": ""}, "Malware Reverse Engineering": {"codility": false, "test": ""}, "Security Operations (SecOps)": {"codility": false, "test": ""}, "Threat Management": {"codility": false, "test": ""}}, "Information Security Compliance": {"Audit Management": {"codility": false, "test": ""}, "Audit Planning": {"codility": false, "test": ""}, "Audit Processes": {"codility": false, "test": ""}, "Audit Report Preparation": {"codility": false, "test": ""}, "Audit Risk": {"codility": false, "test": ""}, "Audit Scheduling": {"codility": false, "test": ""}, "Audit Working Papers": {"codility": false, "test": ""}, "Certified Compliance Specialist": {"codility": false, "test": ""}, "Certified Lead Auditor": {"codility": false, "test": ""}, "Control Deficiency Management": {"codility": false, "test": ""}, "Information Security Audits": {"codility": false, "test": ""}, "NIST Cybersecurity Framework (CSF)": {"codility": true, "test": "KerasImageClassification"}}, "Information Security Risk Management": {"Information Security Management": {"codility": false, "test": ""}, "Information Technology Controls": {"codility": false, "test": ""}, "Information Technology Management": {"codility": false, "test": ""}, "IT Risk Management": {"codility": false, "test": ""}, "Risk Analysis": {"codility": false, "test": ""}, "Risk Management Framework": {"codility": false, "test": ""}, "Risk Management Information Systems": {"codility": false, "test": ""}, "Risk Management Tools": {"codility": false, "test": ""}, "Risk Mindset": {"codility": false, "test": ""}, "Risk Mitigation": {"codility": false, "test": ""}, "Risk Register": {"codility": false, "test": ""}, "Security Interest": {"codility": false, "test": ""}}, "Machine Learning Engineering": {"AI Assisted Development": {"codility": true, "test": "TensorflowStreamingMetrics"}, "AI Governance Operations": {"codility": false, "test": ""}, "Agentic Orchestration": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Big Data Handling": {"codility": true, "test": "SparkChargePoints"}, "Cloud Platform System": {"codility": false, "test": ""}, "Data Ethics": {"codility": false, "test": ""}, "MLOps": {"codility": false, "test": ""}, "Rapid Field Prototyping": {"codility": true, "test": "GridFindMax"}, "Semantic Retrieval": {"codility": false, "test": ""}}, "Offensive Security Testing": {"Infrastructure Security": {"codility": true, "test": "KubernetesIngressDefinition"}, "IT Security": {"codility": false, "test": ""}, "Linux Commands": {"codility": false, "test": ""}, "Open Web Application Security Project (OWASP)": {"codility": false, "test": ""}, "Penetration Testing": {"codility": false, "test": ""}, "Red Teaming": {"codility": false, "test": ""}, "Report Writing": {"codility": false, "test": ""}, "Scripting": {"codility": true, "test": "PysparkParseGroup"}, "Security Operations (SecOps)": {"codility": false, "test": ""}, "Security Recommendations": {"codility": false, "test": ""}, "Social Engineering": {"codility": false, "test": ""}, "System Security Analysis": {"codility": false, "test": ""}}, "Platform Engineering": {"AI Assisted Development": {"codility": true, "test": "TensorflowStreamingMetrics"}, "AI Governance Operations": {"codility": false, "test": ""}, "Agentic Orchestration": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Cloud Architecture": {"codility": false, "test": ""}, "Continuous Integration/Continuous Delivery (CI/CD)": {"codility": false, "test": ""}, "Observability": {"codility": true, "test": "KubernetesIngressDefinition"}, "Scalability": {"codility": true, "test": "DockerComposeNginx"}, "Test Automation": {"codility": true, "test": "TestingLargeBeforeSmall"}}, "Product Management": {"AI Assisted Development": {"codility": true, "test": "TensorflowStreamingMetrics"}, "AI Assisted Prototyping": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Competitive Analysis": {"codility": false, "test": ""}, "Customer Engagement": {"codility": false, "test": ""}, "Data-Driven Decision Making": {"codility": false, "test": ""}, "Market Research": {"codility": false, "test": ""}, "Product Lifecycle Management": {"codility": false, "test": ""}, "Product Roadmap": {"codility": false, "test": ""}, "SDLC": {"codility": false, "test": ""}, "Storytelling": {"codility": false, "test": ""}}, "Product Marketing": {"Campaign Management": {"codility": false, "test": ""}, "Competitive Analysis": {"codility": false, "test": ""}, "Content Development": {"codility": false, "test": ""}, "Customer Engagement": {"codility": false, "test": ""}, "Digital Marketing": {"codility": false, "test": ""}, "Go-To-Market Strategy": {"codility": false, "test": ""}, "Market Research": {"codility": false, "test": ""}, "Positioning Strategy": {"codility": false, "test": ""}, "Public Speaking": {"codility": false, "test": ""}, "Sales Enablement": {"codility": false, "test": ""}, "Storytelling": {"codility": false, "test": ""}, "Strategic Thinking": {"codility": false, "test": ""}}, "Quality Assurance Engineering": {"Continuous Integration/Continuous Delivery (CI/CD)": {"codility": false, "test": ""}, "High Availability Design": {"codility": false, "test": ""}, "Root Cause Analysis": {"codility": false, "test": ""}, "SAP Global Development Policy": {"codility": false, "test": ""}, "SAP Product Standards": {"codility": false, "test": ""}, "Scripting": {"codility": false, "test": ""}, "Software Audit": {"codility": false, "test": ""}, "Software Testing Life Cycle": {"codility": false, "test": ""}, "Software Testing Methodologies": {"codility": false, "test": ""}, "Software Testing Tools": {"codility": false, "test": ""}, "Test Automation": {"codility": true, "test": "TestingLargeBeforeSmall"}, "Test Strategy Development": {"codility": false, "test": ""}, "Troubleshooting (Problem Solving)": {"codility": false, "test": ""}}, "Site Reliability Engineering": {"Cloud Architecture": {"codility": false, "test": ""}, "Cloud Platform System": {"codility": false, "test": ""}, "Cloud Security Infrastructure": {"codility": true, "test": "DockerComposeNginx"}, "Continuous Integration/Continuous Delivery (CI/CD)": {"codility": false, "test": ""}, "Database Engineering": {"codility": true, "test": "SparkChargePoints"}, "High Availability Engineering": {"codility": false, "test": ""}, "Identity and Access Management": {"codility": false, "test": ""}, "Infrastructure Automation": {"codility": false, "test": ""}, "Observability": {"codility": true, "test": "GridFindMax"}, "Operating Systems": {"codility": false, "test": ""}, "Programming Languages": {"codility": false, "test": ""}, "Root Cause Analysis": {"codility": false, "test": ""}, "Scalability": {"codility": true, "test": "McqDocker1"}, "Test Automation": {"codility": true, "test": "TestingLargeBeforeSmall"}, "Troubleshooting (Problem Solving)": {"codility": false, "test": ""}, "Web Development": {"codility": true, "test": "ReactStyledComponents"}}, "Software Architecture Engineering": {"Agentic Engineering": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Agentic Orchestration": {"codility": true, "test": "TensorflowStreamingMetrics"}, "AI Assisted Development": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Cloud Architecture": {"codility": false, "test": ""}, "Cloud Security Architecture": {"codility": true, "test": "KubernetesIngressDefinition"}, "Continuous Integration/Continuous Delivery (CI/CD)": {"codility": false, "test": ""}, "Evaluation & Benchmark Engineering": {"codility": false, "test": ""}, "Scalability Design": {"codility": true, "test": "SpringCacheHazelcast"}, "Semantic Retrieval": {"codility": false, "test": ""}, "Systems Thinking": {"codility": false, "test": ""}, "Technical Leadership": {"codility": false, "test": ""}}, "Threat Analysis": {"Activity-based intelligence": {"codility": false, "test": ""}, "Advanced Security Analytics": {"codility": false, "test": ""}, "All-Source intelligence": {"codility": false, "test": ""}, "Attack Patterns": {"codility": false, "test": ""}, "Cyber Threat Analysis": {"codility": false, "test": ""}, "Cyber Threat Intelligence": {"codility": false, "test": ""}, "Intelligence Analysis": {"codility": false, "test": ""}, "Intelligence Data Handling": {"codility": false, "test": ""}, "Measurement and Signature Intelligence": {"codility": false, "test": ""}, "Open Source Intelligence": {"codility": false, "test": ""}, "Report Writing": {"codility": false, "test": ""}, "Security Patterns": {"codility": false, "test": ""}}, "Translation": {"Computer-Assisted Translation": {"codility": false, "test": ""}, "Digital Content Management": {"codility": false, "test": ""}, "Generative AI Day-to-Day Practice": {"codility": false, "test": ""}, "Language Consulting": {"codility": false, "test": ""}, "Linguistic Quality Assurance": {"codility": true, "test": "ReactDynamicChipList"}, "Proofreading": {"codility": false, "test": ""}, "Software Localization": {"codility": false, "test": ""}, "Terminology Management": {"codility": false, "test": ""}, "UI/UX Writing": {"codility": false, "test": ""}, "Web Accessibility Standards": {"codility": false, "test": ""}}, "User Assistance Development": {"AI Assisted Prototyping": {"codility": true, "test": "TensorflowStreamingMetrics"}, "AI Content Curation": {"codility": false, "test": ""}, "Content Design": {"codility": false, "test": ""}, "Content Engineering": {"codility": false, "test": ""}, "Data-Driven Decision Making": {"codility": false, "test": ""}, "Information Architecture": {"codility": false, "test": ""}, "Ontologies": {"codility": false, "test": ""}, "Semantic Retrieval": {"codility": false, "test": ""}, "UI/UX Writing": {"codility": false, "test": ""}, "User Research Methods": {"codility": false, "test": ""}}, "User Experience Design": {"AI Journey Mapping": {"codility": false, "test": ""}, "Creative Problem Solving": {"codility": false, "test": ""}, "Design Thinking": {"codility": false, "test": ""}, "Design Tools": {"codility": false, "test": ""}, "Information Architecture": {"codility": false, "test": ""}, "Interaction Design": {"codility": false, "test": ""}, "Responsible AI (RAI) Design": {"codility": false, "test": ""}, "Storytelling": {"codility": false, "test": ""}, "UI/UX Design Systems": {"codility": false, "test": ""}, "Usability Testing": {"codility": false, "test": ""}, "User Journey Mapping": {"codility": false, "test": ""}}, "User Experience Research": {"AI Assisted Prototyping": {"codility": true, "test": "TensorflowStreamingMetrics"}, "AI Journey Mapping": {"codility": false, "test": ""}, "Contextual Inquiry": {"codility": false, "test": ""}, "Data Analysis": {"codility": true, "test": "MarketingClassification"}, "Data Collection": {"codility": false, "test": ""}, "Evaluative Research": {"codility": false, "test": ""}, "Generative Research": {"codility": false, "test": ""}, "Participant Recruitment": {"codility": false, "test": ""}, "Research Planning & Design": {"codility": false, "test": ""}, "Responsible AI (RAI) Design": {"codility": false, "test": ""}, "Usability Testing": {"codility": false, "test": ""}}, "Visual Design": {"AI Assisted Prototyping": {"codility": true, "test": "TensorflowStreamingMetrics"}, "Color Theory": {"codility": false, "test": ""}, "Design Iconography": {"codility": false, "test": ""}, "Design Tools": {"codility": false, "test": ""}, "Digital Illustration": {"codility": false, "test": ""}, "Graphic Design": {"codility": false, "test": ""}, "Motion Graphic Design": {"codility": false, "test": ""}, "Page & Screen Layout": {"codility": false, "test": ""}, "Typography": {"codility": false, "test": ""}, "UI/UX Design Systems": {"codility": false, "test": ""}, "Visual Composition": {"codility": false, "test": ""}}, "Vulnerability Management": {"Attack Patterns": {"codility": false, "test": ""}, "Attack Surface Management": {"codility": false, "test": ""}, "Cross-Functional Collaboration": {"codility": false, "test": ""}, "Third Party Risk Management": {"codility": false, "test": ""}, "Vulnerability Assessments": {"codility": false, "test": ""}, "Vulnerability Management": {"codility": false, "test": ""}, "Vulnerability Scanning": {"codility": false, "test": ""}}}};
 
-const state = {
-  currentStep: 1,
-  highestStep: 1,
-  hiringManager: '',
-  positionId: '',
-  roleTitle: '',
-  roleType: 'ic',
-  jobProfile: '',
-  selectedTechSkills: [],
-  rounds: ROUND_NAMES.map((name, i) => ({
-    id: i,
-    name,
-    interviewer: '',
-    duration: '60 Mins',
-    mode: 'MS Teams Video',
-    notes: '',
-    skills: []
-  })),
-  modalTargetRound: null
-};
+// ── Drag & Drop state ─────────────────────────────────────────────────────────
+let _dsk=null, _dsrc=null;
 
-// ══════════════════════════════════════════════════════
-//  STEP INDICATOR
-// ══════════════════════════════════════════════════════
-const STEP_LABELS = [
-  ['Role Information', 'Profile & Details'],
-  ['Skill Selection', 'Choose 6 Tech Skills'],
-  ['Interview Plan', 'Assign & Schedule'],
-  ['Summary', 'Review & Export']
-];
-
-function renderStepIndicator() {
-  const nav = document.getElementById('stepIndicator');
-  nav.innerHTML = STEP_LABELS.map((lbl, i) => {
-    const n = i + 1;
-    const isCurrent = n === state.currentStep;
-    const isCompleted = n < state.currentStep;
-    // Clickable if already visited (completed or current), but not future steps
-    const isClickable = n <= state.highestStep;
-    let cls = 'step-item';
-    if (isCurrent) cls += ' current';
-    if (isCompleted) cls += ' completed';
-    if (isClickable && !isCurrent) cls += ' clickable';
-    const circleInner = isCompleted
-      ? `<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>`
-      : n;
-    const clickAttr = isClickable && !isCurrent ? `onclick="goToStep(${n})"` : '';
-    return `<div class="${cls}" ${clickAttr}>
-      <div class="step-circle">${circleInner}</div>
-      <div class="step-label">${lbl[0]}<span>${lbl[1]}</span></div>
-    </div>`;
-  }).join('');
+function _dstart(sk,src,e){
+  _dsk=sk; _dsrc=src;
+  e.dataTransfer.effectAllowed='move';
+  e.dataTransfer.setData('text/plain',sk);
+  setTimeout(()=>e.target.classList.add('drag-active'),0);
+}
+function _dend(e){ e.target.classList.remove('drag-active'); _dsk=null; _dsrc=null; }
+function _dropZone(ri,ii,e){
+  e.preventDefault();
+  const sk=_dsk||e.dataTransfer.getData('text/plain');
+  if(!sk) return;
+  const iw=S.rounds[ri].interviewers[ii];
+  // If dragged from another interviewer, remove it there first
+  if(_dsrc&&_dsrc.type==='iw'){
+    S.rounds[_dsrc.ri].interviewers[_dsrc.ii].skills=
+      S.rounds[_dsrc.ri].interviewers[_dsrc.ii].skills.filter(x=>x!==sk);
+  }
+  // HC: exclusive assignment — remove from any other interviewer
+  if(S.hcMode!=='nonhc'){
+    S.rounds.forEach((r,rIdx)=>r.interviewers.forEach((iw2,iwIdx)=>{
+      if(rIdx!==ri||iwIdx!==ii) iw2.skills=iw2.skills.filter(x=>x!==sk);
+    }));
+  }
+  if(!iw.skills.includes(sk)) iw.skills.push(sk);
+  _dsk=null; _dsrc=null;
+  renderPool(); renderRounds(); updTotal();
+}
+function _dropPool(e){
+  e.preventDefault();
+  const sk=_dsk||e.dataTransfer.getData('text/plain');
+  if(!sk||!_dsrc||_dsrc.type!=='iw') return;
+  S.rounds[_dsrc.ri].interviewers[_dsrc.ii].skills=
+    S.rounds[_dsrc.ri].interviewers[_dsrc.ii].skills.filter(x=>x!==sk);
+  _dsk=null; _dsrc=null;
+  renderPool(); renderRounds(); updTotal();
 }
 
-// ══════════════════════════════════════════════════════
-//  NAVIGATION
-// ══════════════════════════════════════════════════════
-function goToStep(n) {
-  document.querySelector(`#step${state.currentStep}`).classList.remove('active');
-  state.currentStep = n;
-  if (n > state.highestStep) state.highestStep = n;
-  document.querySelector(`#step${n}`).classList.add('active');
-  renderStepIndicator();
-  if (n === 2) renderStep2();
-  if (n === 3) renderStep3();
-  if (n === 4) renderStep4();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+// ── Non-HC skills pool ────────────────────────────────────────────────────────
+const NONHC_SKILLS = [
+  'AI Adoption Capability','Context Engineering','AI Output Quality Assurance',
+  'Agentic AI Day-to-Day Practice','Effective Communication','Learning Agility',
+  'Collaboration','Complex Problem Solving','Tech Competency'
+];
+const NONHC_POSITIONS = [
+  'Vocational Training Student / Apprentice',
+  'Temporary 6-month fixed salary',
+  'Temporary 12-month fixed salary',
+  'Temporary hourly paid',
+  'Diploma Student / Intern',
+  'PhD Student'
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function mkRound(type){
+  return {type, dur:'60 Mins', mode:'MS Teams Video', interviewers:[{name:'',notes:'',freeSkills:'',skills:[]}]};
 }
 
-// ══════════════════════════════════════════════════════
-//  STEP 1
-// ══════════════════════════════════════════════════════
-function setRoleCategory(c) {
-  state.roleCategory = c;
-  document.getElementById('btnHC').classList.toggle('active', c === 'hc');
-  document.getElementById('btnNonHC').classList.toggle('active', c === 'nonhc');
-  validateStep1();
+// ── State ─────────────────────────────────────────────────────────────────────
+let S = {
+  step:1, hm:'', pid:'', title:'', rt:'T1-T4PF', roleType:'T1',
+  hcMode:'hc', nonhcSkills:[], nonhcPosition:'',
+  profile:'', customProfileName:'', customSkills:['','','','',''],
+  tech:[],
+  rounds:[
+    mkRound('Recruiter Interview'),
+    mkRound('Hiring Owner / Tech Interview'),
+    mkRound('Tech Interview'),
+    mkRound('Optional Interview'),
+  ],
+  pickR:-1, pickI:0
+};
+let pickerSel = new Set();
+
+const $ = id => document.getElementById(id);
+const profs = () => S.rt === 'T4PM' ? D.validation.professional_t4pm : D.validation.professional_t1;
+const totalSk = () => D.validation.core_ai.length + profs().length + 5;
+function roleLabel(t){ return t==='T4PM'?'People Manager':t==='T5PM'?'Senior Manager':t==='nonHC'?'Non-HC Relevant':'Single Contributor'; }
+function roleDisp(){
+  if(S.hcMode==='nonhc') return S.nonhcPosition || 'Non-HC Relevant';
+  return (S.roleType||S.rt)+' \u00b7 '+roleLabel(S.roleType||'T1');
 }
 
-function setGrade(g) {
-  state.grade = g;
-  ['T1','T2','T3','T4PF','T5PF'].forEach(function(id){
-    document.getElementById('btn'+id).classList.toggle('active', g === id);
+// All assigned skills across all rounds & interviewers
+const usedSet = () => new Set(
+  S.rounds.flatMap(r => r.interviewers.flatMap(iw => iw.skills))
+);
+
+// Find which round+interviewer holds a skill → {ri, ii} or null
+function getAssignment(s){
+  for(let ri=0;ri<S.rounds.length;ri++){
+    const ivs = S.rounds[ri].interviewers;
+    for(let ii=0;ii<ivs.length;ii++){
+      if(ivs[ii].skills.includes(s)) return {ri,ii};
+    }
+  }
+  return null;
+}
+
+// Label for pool sidebar badge
+function poolLabel(s){
+  const a = getAssignment(s);
+  if(!a) return null;
+  const hasMultiIw = S.rounds[a.ri].interviewers.length > 1;
+  return hasMultiIw ? 'R'+(a.ri+1)+'/I'+(a.ii+1) : 'R'+(a.ri+1);
+}
+
+const isCod = s => {
+  if(S.profile === 'Other') return false;
+  const a = (D.assessments[S.profile]||{})[s];
+  return a && a.codility;
+};
+const typeOf = s => S.nonhcSkills.includes(s)?'nonhc':D.validation.core_ai.includes(s)?'ai':profs().includes(s)?'prof':'tech';
+
+// ── Profile dropdown init ─────────────────────────────────────────────────────
+(function(){
+  const sel = $('f-profile');
+  const cats = {};
+  Object.entries(D.profiles).forEach(([n,v])=>{
+    if(!cats[v.category]) cats[v.category]=[];
+    cats[v.category].push(n);
   });
-  validateStep1();
-}
-
-function setRoleType(t) {
-  state.roleType = t;
-  state.grade = t === 'ic' ? 'T1' : null;
-  document.getElementById('btnIC').classList.toggle('active', t === 'ic');
-  document.getElementById('btnPM').classList.toggle('active', t === 'pm');
-  var gradeGroup = document.getElementById('gradeSubGroup');
-  gradeGroup.style.display = t === 'ic' ? '' : 'none';
-  if (t === 'ic') {
-    ['T1','T2','T3','T4PF','T5PF'].forEach(function(id){
-      document.getElementById('btn'+id).classList.toggle('active', id === 'T1');
+  Object.entries(cats).forEach(([cat,names])=>{
+    const og=document.createElement('optgroup'); og.label=cat;
+    names.forEach(n=>{
+      const o=document.createElement('option'); o.value=n; o.textContent=n;
+      og.appendChild(o);
     });
-  }
-  validateStep1();
-}
+    sel.appendChild(og);
+  });
+  // Add "Other" at the bottom
+  const sep=document.createElement('option'); sep.disabled=true; sep.textContent='\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500';
+  sel.appendChild(sep);
+  const oth=document.createElement('option'); oth.value='Other'; oth.textContent='Other (Custom Profile)';
+  sel.appendChild(oth);
+})();
 
-function onJobProfileChange() {
-  const val = document.getElementById('jobProfile').value;
-  state.jobProfile = val;
-  const banner = document.getElementById('infoBanner');
-  if (val && PROFILE_META[val]) {
-    const m = PROFILE_META[val];
-    const skillText = m.count === 0
-      ? `<strong>No role-specific Tech Skills</strong> — only Mandatory skills apply`
-      : `<strong>${m.count} Tech Skills</strong> available. Select 6 below.`;
-    document.getElementById('infoBannerText').innerHTML =
-      `<strong>${val}</strong> — ${m.category} · ${skillText}`;
-    banner.style.display = 'flex';
+function setHcMode(m){
+  S.hcMode=m;
+  $('btn-hc').classList.toggle('on',m==='hc');
+  $('btn-nonhc').classList.toggle('on',m==='nonhc');
+  const isHc=m==='hc';
+  $('profile-fg').classList.toggle('hidden',!isHc);
+  $('s1-rt-row').classList.toggle('hidden',!isHc);
+  $('nonhc-role-section').classList.toggle('hidden',isHc);
+  // People Manager track only available for HC
+  $('btn-t4pm').classList.toggle('hidden',!isHc);
+  if(!isHc){
+    // If on PM track, switch back to SC
+    if(S.rt==='T4PM') setRT('T1-T4PF');
+    // All 9 nonHC skills are mandatory — auto-populate
+    S.nonhcSkills = [...NONHC_SKILLS];
+    // Keep nonHC T-level in state
+    $('btn-rt-nonHC').classList.remove('hidden');
+    setRoleType('nonHC');
+    $('prof-hint').classList.add('hidden');
+    $('other-pname-div').classList.add('hidden');
+    // Sync nonHC position button states to current selection
+    setNonhcPosition(S.nonhcPosition);
   } else {
-    banner.style.display = 'none';
+    // Hide nonHC T-level option; reset if it was selected
+    $('btn-rt-nonHC').classList.add('hidden');
+    if(S.roleType==='nonHC') setRoleType('T1');
   }
-  // reset tech skills if profile changes
-  state.selectedTechSkills = [];
-  validateStep1();
 }
 
-function validateStep1() {
-  state.hiringManager = document.getElementById('hiringManager').value.trim();
-  state.positionId = document.getElementById('positionId').value.trim();
-  state.roleTitle = document.getElementById('roleTitle').value.trim();
-  state.jobProfile = document.getElementById('jobProfile').value;
-  const ok = state.hiringManager && state.roleTitle && state.jobProfile;
-  document.getElementById('btnStep1Next').disabled = !ok;
+function setNonhcPosition(pos){
+  S.nonhcPosition=pos;
+  NONHC_POSITIONS.forEach((p,i)=>{
+    $('btn-nhc-'+i).classList.toggle('on',p===pos);
+  });
 }
 
-// ══════════════════════════════════════════════════════
-//  STEP 2
-// ══════════════════════════════════════════════════════
-function renderStep2() {
-  const skills = TECH_SKILLS_MAP[state.jobProfile] || [];
-  const maxSelect = Math.min(5, skills.length);
-
-  // Update subtitle
-  const subtitle = maxSelect === 0
-    ? 'Core AI and Professional Skills are mandatory and pre-selected. No additional Tech skills apply for this role.'
-    : maxSelect < 5
-      ? `Core AI and Professional Skills are mandatory and pre-selected. Choose up to ${maxSelect} Tech role-specific skills for your role.`
-      : 'Core AI and Professional Skills are mandatory and pre-selected. Choose exactly 5 Tech role-specific skills for your role.';
-  document.getElementById('step2Subtitle').textContent = subtitle;
-
-  // Update tech section header label
-  const techLabel = maxSelect === 0
-    ? 'TECH ROLE-SPECIFIC SKILLS — NONE FOR THIS ROLE'
-    : maxSelect < 5
-      ? `TECH ROLE-SPECIFIC SKILLS — SELECT UP TO ${maxSelect}`
-      : 'TECH ROLE-SPECIFIC SKILLS — SELECT EXACTLY 5';
-  document.querySelector('.tech-skills-header .skill-section-title').textContent = techLabel;
-
-  // Core AI pills
-  document.getElementById('coreAIPills').innerHTML = CORE_AI_SKILLS.map(s =>
-    `<span class="pill pill-amber"><span class="pill-lock">🔒</span>${s}</span>`
-  ).join('');
-  // Professional pills
-  document.getElementById('professionalPills').innerHTML = PROFESSIONAL_SKILLS.map(s =>
-    `<span class="pill pill-blue"><span class="pill-lock">🔒</span>${s}</span>`
-  ).join('');
-  // Tech skills grid
-  renderTechGrid();
+function setRT(t){
+  S.rt=t;
+  $('btn-t1').classList.toggle('on',t==='T1-T4PF');
+  $('btn-t4pm').classList.toggle('on',t==='T4PM');
+  if(t==='T1-T4PF'){
+    $('sub-sc').classList.remove('hidden');
+    $('sub-pm').classList.add('hidden');
+    const cur=S.roleType;
+    setRoleType(['T1','T2','T3','T4PF','T5PF'].includes(cur)?cur:'T1');
+  } else {
+    $('sub-sc').classList.add('hidden');
+    $('sub-pm').classList.remove('hidden');
+    const cur=S.roleType;
+    setRoleType(['T4PM','T5PM'].includes(cur)?cur:'T4PM');
+  }
 }
 
-function renderTechGrid() {
-  const skills = TECH_SKILLS_MAP[state.jobProfile] || [];
-  const maxSelect = Math.min(5, skills.length);
-  const selected = state.selectedTechSkills;
-  const maxed = selected.length >= maxSelect;
-  const grid = document.getElementById('techSkillGrid');
+function setRoleType(t){
+  S.roleType=t;
+  ['T1','T2','T3','T4PF','T5PF','nonHC','T4PM','T5PM'].forEach(rt=>{
+    const btn=$('btn-rt-'+rt);
+    if(btn) btn.classList.toggle('on',rt===t);
+  });
+}
 
-  if (skills.length === 0) {
-    grid.innerHTML = `<p style="color:var(--grey-400);font-size:0.85rem;grid-column:1/-1;padding:8px 0;">No role-specific Tech Skills for this profile.</p>`;
-    document.getElementById('techSkillCounter').textContent = `0 / 0 selected`;
-    document.getElementById('techProgressBar').style.width = '0%';
-    document.getElementById('btnStep2Next').disabled = false;
+function onProf(){
+  S.profile=$('f-profile').value;
+  S.tech=[]; S.customSkills=['','','','',''];
+  const el=$('prof-hint'), od=$('other-pname-div');
+  if(!S.profile){ el.classList.add('hidden'); od.classList.add('hidden'); return; }
+  if(S.profile==='Other'){
+    el.classList.add('hidden');
+    od.classList.remove('hidden');
     return;
   }
-
-  grid.innerHTML = skills.map(sk => {
-    const isSel = selected.includes(sk.name);
-    const isDisabled = !isSel && maxed;
-    let cls = 'skill-card';
-    if (isSel) cls += ' selected';
-    if (isDisabled) cls += ' disabled';
-    const checkSvg = isSel
-      ? `<svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>`
-      : '';
-    const codBadge = sk.codility ? `<span class="codility-tag">Codility</span>` : '';
-    return `<div class="${cls}" onclick="toggleTechSkill('${escapeAttr(sk.name)}')" title="${sk.name}">
-      <div class="skill-card-check">${checkSvg}</div>
-      <span class="skill-card-name">${sk.name}</span>
-      ${codBadge}
-    </div>`;
-  }).join('');
-
-  document.getElementById('techSkillCounter').textContent = `${selected.length} / ${maxSelect} selected`;
-  document.getElementById('techProgressBar').style.width = `${maxSelect > 0 ? (selected.length / maxSelect) * 100 : 0}%`;
-  document.getElementById('btnStep2Next').disabled = selected.length !== maxSelect;
+  od.classList.add('hidden');
+  const info=D.profiles[S.profile];
+  el.className='info-b';
+  el.innerHTML='<strong>'+S.profile+'</strong> &mdash; '+info.category
+    +' &nbsp;&middot;&nbsp; <strong>'+info.skills.length+' Tech Skills</strong> available for selection.';
+  el.classList.remove('hidden');
 }
 
-function toggleTechSkill(name) {
-  const skills = TECH_SKILLS_MAP[state.jobProfile] || [];
-  const maxSelect = Math.min(5, skills.length);
-  const idx = state.selectedTechSkills.indexOf(name);
-  if (idx >= 0) {
-    state.selectedTechSkills.splice(idx, 1);
+// ── Step 2 ────────────────────────────────────────────────────────────────────
+function renderS2(){
+  if(S.hcMode==='nonhc'){ renderS2_nonhc(); return; }
+  $('s2-hc').classList.remove('hidden');
+  $('s2-nonhc').classList.add('hidden');
+  $('ai-chips').innerHTML=D.validation.core_ai.map(s=>'<span class="chip ai">'+s+'</span>').join('');
+  const ps=profs();
+  $('prof-chips').innerHTML=ps.map(s=>'<span class="chip prof">'+s+'</span>').join('');
+  $('prof-lock').textContent='Locked \u00b7 '+ps.length+' Skills';
+
+  const isOther=S.profile==='Other';
+  $('custom-sk-sec').classList.toggle('hidden',!isOther);
+  $('tech-std-hd').classList.toggle('hidden',isOther);
+
+  if(isOther){
+    for(let i=0;i<6;i++){
+      const el=$('csk'+i);
+      if(el){ el.value=S.customSkills[i]||''; el.classList.toggle('filled',!!(S.customSkills[i])); }
+    }
+    $('s2-desc').innerHTML='Core AI and Professional Skills are pre-selected. Enter your 5 custom Tech Skills below, then click each to select.';
   } else {
-    if (state.selectedTechSkills.length >= maxSelect) return;
-    state.selectedTechSkills.push(name);
+    $('s2-desc').innerHTML='Core AI and Professional Skills are pre-selected and mandatory. Choose exactly <strong>5 Tech role-specific skills</strong>.';
   }
   renderTechGrid();
 }
 
-function escapeAttr(s) { return s.replace(/'/g, "\\'"); }
-
-// ══════════════════════════════════════════════════════
-//  STEP 3
-// ══════════════════════════════════════════════════════
-function getAllSkills() {
-  return [
-    ...CORE_AI_SKILLS.map(s => ({ name: s, type: 'amber' })),
-    ...PROFESSIONAL_SKILLS.map(s => ({ name: s, type: 'blue' })),
-    ...state.selectedTechSkills.map(s => ({ name: s, type: 'green' }))
-  ];
+function renderS2_nonhc(){
+  $('s2-hc').classList.add('hidden');
+  $('s2-nonhc').classList.remove('hidden');
+  $('s2-desc').innerHTML='All <strong>9 skills</strong> below are mandatory for Non-HC roles and are automatically included.';
+  renderNonhcGrid();
 }
 
-function getAssignedSkills() {
-  const set = new Set();
-  state.rounds.forEach(r => r.skills.forEach(s => set.add(s)));
-  return set;
-}
-
-function renderStep3() {
-  renderSidebar();
-  renderRounds();
-  updateStep3Warning();
-}
-
-function renderSidebar() {
-  const assigned = getAssignedSkills();
-  ['sidebarCoreAI', 'sidebarProfessional', 'sidebarTech'].forEach((id, gi) => {
-    const list = gi === 0 ? CORE_AI_SKILLS : gi === 1 ? PROFESSIONAL_SKILLS : state.selectedTechSkills;
-    document.getElementById(id).innerHTML = list.map(s =>
-      `<div class="sidebar-skill ${assigned.has(s) ? 'assigned' : ''}">${assigned.has(s) ? '✓ ' : ''}${s}</div>`
-    ).join('');
+function renderNonhcGrid(){
+  // All 9 nonHC skills are mandatory — display as pre-selected, non-toggleable
+  $('nonhc-cnt-txt').textContent='9 / 9 \u2014 all mandatory';
+  $('nonhc-prog-f').style.width='100%';
+  $('nonhc-prog-f').className='prog-f ok';
+  $('nonhc-cnt-w').className='cnt-w ok';
+  const grid=$('nonhc-skill-grid'); grid.innerHTML='';
+  NONHC_SKILLS.forEach(sk=>{
+    const d=document.createElement('div');
+    d.className='sk-i sel';
+    d.style.cursor='default';
+    const ch=document.createElement('div'); ch.className='sk-ch'; ch.textContent='\u2713';
+    const nm=document.createElement('span'); nm.className='sk-nm'; nm.textContent=sk;
+    d.appendChild(ch); d.appendChild(nm);
+    grid.appendChild(d);
   });
 }
 
-function renderRounds() {
-  const container = document.getElementById('roundsContainer');
-  container.innerHTML = state.rounds.map((round, ri) => renderRoundCard(round, ri)).join('');
-  // Attach event listeners for inputs
-  state.rounds.forEach((round, ri) => {
-    const prefix = `r${ri}`;
-    const intEl = document.getElementById(`${prefix}_int`);
-    const durEl = document.getElementById(`${prefix}_dur`);
-    const modeEl = document.getElementById(`${prefix}_mode`);
-    const notesEl = document.getElementById(`${prefix}_notes`);
-    if (intEl) intEl.addEventListener('input', () => { state.rounds[ri].interviewer = intEl.value; });
-    if (durEl) durEl.addEventListener('change', () => { state.rounds[ri].duration = durEl.value; });
-    if (modeEl) modeEl.addEventListener('change', () => { state.rounds[ri].mode = modeEl.value; });
-    if (notesEl) notesEl.addEventListener('input', () => { state.rounds[ri].notes = notesEl.value; });
+function renderTechGrid(){
+  if(S.profile==='Other'){ renderCustomGrid(); return; }
+  const info=D.profiles[S.profile];
+  if(!info){ $('tech-grid').innerHTML=''; return; }
+  const n=S.tech.length;
+  const grid=$('tech-grid'); grid.innerHTML='';
+  info.skills.forEach(sk=>{
+    const sel=S.tech.includes(sk), dis=n>=5&&!sel;
+    const d=document.createElement('div');
+    d.className='sk-i'+(sel?' sel':'')+(dis?' dis':'');
+    if(!dis) d.onclick=()=>togTech(sk);
+    const ch=document.createElement('div'); ch.className='sk-ch'; ch.textContent=sel?'\u2713':'';
+    const nm=document.createElement('span'); nm.className='sk-nm'; nm.textContent=sk;
+    d.appendChild(ch); d.appendChild(nm);
+    grid.appendChild(d);
+  });
+  updCounter(n);
+}
+
+function renderCustomGrid(){
+  // Keep only non-empty custom skills that are still in the list
+  S.tech=S.tech.filter(t=>S.customSkills.includes(t)&&t.trim());
+  const n=S.tech.length;
+  updCounter(n);
+  const grid=$('tech-grid'); grid.innerHTML='';
+  const nonEmpty=S.customSkills.filter(s=>s.trim());
+  if(!nonEmpty.length){
+    grid.innerHTML='<div style="color:var(--text-l);font-size:13px;padding:8px 0;font-style:italic">Fill in the skill fields above and they will appear here as selectable cards.</div>';
+    return;
+  }
+  nonEmpty.forEach(sk=>{
+    const sel=S.tech.includes(sk), dis=n>=5&&!sel;
+    const d=document.createElement('div');
+    d.className='sk-i'+(sel?' sel':'')+(dis?' dis':'');
+    if(!dis) d.onclick=()=>togTech(sk);
+    const ch=document.createElement('div'); ch.className='sk-ch'; ch.textContent=sel?'\u2713':'';
+    const nm=document.createElement('span'); nm.className='sk-nm'; nm.textContent=sk;
+    d.appendChild(ch); d.appendChild(nm);
+    grid.appendChild(d);
   });
 }
 
-function renderRoundCard(round, ri) {
-  const skillCount = round.skills.length;
-  const assigned = getAssignedSkills();
-  const allSk = getAllSkills();
-  const typeMap = {};
-  allSk.forEach(s => { typeMap[s.name] = s.type; });
-
-  const pillsHtml = round.skills.map(sname => {
-    const type = typeMap[sname] || 'blue';
-    return `<span class="assigned-pill pill-${type}">${sname}
-      <span class="remove-skill" onclick="removeSkillFromRound(${ri},'${escapeAttr(sname)}')" title="Remove">&#10005;</span>
-    </span>`;
-  }).join('');
-
-  const durOpts = ['30 Mins', '45 Mins', '60 Mins', '90 Mins'].map(o =>
-    `<option${round.duration === o ? ' selected' : ''}>${o}</option>`).join('');
-  const modeOpts = ['MS Teams Video', 'In-Person', 'Phone Call', 'Zoom'].map(o =>
-    `<option${round.mode === o ? ' selected' : ''}>${o}</option>`).join('');
-
-  return `<div class="round-card ${skillCount > 0 ? 'has-skills' : ''}" id="roundCard_${ri}">
-    <div class="round-header" onclick="toggleRound(${ri})">
-      <div class="round-num">${ri + 1}</div>
-      <div class="round-name">${round.name}</div>
-      <span class="round-skill-count">&#8595; ${skillCount} skill${skillCount !== 1 ? 's' : ''}</span>
-      <svg class="chevron" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="round-body">
-      <div class="round-fields">
-        <div class="form-group">
-          <label>Interviewer</label>
-          <input type="text" id="r${ri}_int" placeholder="Name" value="${escHtml(round.interviewer)}">
-        </div>
-        <div class="form-group">
-          <label>Duration</label>
-          <select id="r${ri}_dur">${durOpts}</select>
-        </div>
-        <div class="form-group">
-          <label>Mode</label>
-          <select id="r${ri}_mode">${modeOpts}</select>
-        </div>
-        <div class="form-group full">
-          <label>Notes / Additional Inputs</label>
-          <textarea id="r${ri}_notes" placeholder="Languages, tools, assessments, focus areas...">${escHtml(round.notes)}</textarea>
-        </div>
-      </div>
-      <div class="skills-drop-zone ${skillCount > 0 ? 'has-pills' : ''}">
-        ${skillCount === 0 ? '<span class="drop-placeholder">No skills assigned yet</span>' : pillsHtml}
-      </div>
-      <button class="btn-add-skill" onclick="openModal(${ri})">
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Add Skill
-      </button>
-    </div>
-  </div>`;
+function updCounter(n){
+  $('cnt-txt').textContent=n+' / 5 selected';
+  $('prog-f').style.width=Math.min(n/5*100,100)+'%';
+  $('prog-f').className='prog-f'+(n===5?' ok':n>5?' ov':'');
+  $('cnt-w').className='cnt-w '+(n===5?'ok':n>5?'ov':'go');
 }
 
-function escHtml(s) {
-  if (!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function togTech(sk){
+  if(S.tech.includes(sk)) S.tech=S.tech.filter(s=>s!==sk);
+  else if(S.tech.length<5) S.tech.push(sk);
+  renderTechGrid();
 }
 
-function toggleRound(ri) {
-  const card = document.getElementById(`roundCard_${ri}`);
-  card.classList.toggle('collapsed');
+function updCustomSkill(i,val){
+  const old=S.customSkills[i];
+  const trimmed=val.trim();
+  S.customSkills[i]=trimmed;
+  const el=$('csk'+i); if(el) el.classList.toggle('filled',!!trimmed);
+  // Remove old from tech if changed
+  if(old&&old!==trimmed) S.tech=S.tech.filter(s=>s!==old);
+  // Auto-select new value if there's room
+  if(trimmed&&!S.tech.includes(trimmed)&&S.tech.length<5) S.tech.push(trimmed);
+  renderCustomGrid();
 }
 
-function removeSkillFromRound(ri, sname) {
-  const idx = state.rounds[ri].skills.indexOf(sname);
-  if (idx >= 0) state.rounds[ri].skills.splice(idx, 1);
-  renderStep3();
+// ── Step 3 ────────────────────────────────────────────────────────────────────
+function renderS3(){
+  const nonhc=S.hcMode==='nonhc';
+  $('s3-desc').innerHTML=nonhc
+    ?'<strong>Drag skills</strong> onto an interviewer row, or click <strong>+ Add Skills</strong> for the picker. Each round supports up to 4 interviewers.'
+    :'<strong>Drag skills</strong> from the pool onto an interviewer row, or click <strong>+ Add Skills</strong> for the picker. All <span id="total-sc">'+totalSk()+'</span> skills must be assigned before continuing.';
+  // Pool is always visible; total-sc only needed for HC
+  if(!nonhc) $('total-sc').textContent=totalSk();
+  $('pool-prof-lbl').textContent='Professional ('+profs().length+')';
+  renderPool(); renderRounds(); updTotal();
 }
 
-function updateStep3Warning() {
-  const assigned = getAssignedSkills();
-  const all = getAllSkills();
-  const unassigned = all.filter(s => !assigned.has(s.name));
-  const warn = document.getElementById('warningBanner');
-  const warnText = document.getElementById('warningText');
-  if (unassigned.length > 0) {
-    warnText.innerHTML = `<strong>${unassigned.length} skill${unassigned.length > 1 ? 's' : ''} not yet assigned:</strong> ${unassigned.map(s => s.name).join(', ')}.`;
-    warn.style.display = 'flex';
-    document.getElementById('btnStep3Next').disabled = true;
+function renderPool(){
+  const nonhc=S.hcMode==='nonhc';
+  ['pool-ai','pool-prof','pool-tech'].forEach(id=>{ const el=$(id); if(el) el.parentElement.style.display=nonhc?'none':''; });
+  $('pool-nonhc-sec').classList.toggle('hidden',!nonhc);
+
+  // Helper: make a pool chip draggable (unassigned chips only)
+  function mkDrag(d,s){
+    d.draggable=true;
+    d.addEventListener('dragstart',function(e){ _dstart(s,{type:'pool'},e); });
+    d.addEventListener('dragend',_dend);
+  }
+
+  if(nonhc){
+    $('pool-nonhc').innerHTML='';
+    S.nonhcSkills.forEach(s=>{
+      const a=getAssignment(s), lbl=poolLabel(s);
+      const d=document.createElement('div');
+      d.className='pc nonhc-c'+(a?' asgn':'');
+      d.textContent=s;
+      if(a){ const b=document.createElement('span'); b.className='pc-r'; b.textContent=lbl; d.appendChild(b); }
+      else { mkDrag(d,s); }
+      $('pool-nonhc').appendChild(d);
+    });
   } else {
-    warn.style.display = 'none';
-    document.getElementById('btnStep3Next').disabled = false;
-  }
-}
-
-// ══════════════════════════════════════════════════════
-//  MODAL
-// ══════════════════════════════════════════════════════
-let modalSelectedSkills = new Set();
-
-function openModal(ri) {
-  state.modalTargetRound = ri;
-  modalSelectedSkills = new Set();
-  const assigned = getAssignedSkills();
-  const allSk = getAllSkills();
-  const available = allSk.filter(s => !assigned.has(s.name));
-
-  document.getElementById('modalTitle').textContent = `Add Skills to: ${state.rounds[ri].name}`;
-  updateModalFooter();
-
-  const groups = [
-    { label: 'CORE AI SKILLS', type: 'amber', skills: available.filter(s => s.type === 'amber') },
-    { label: 'PROFESSIONAL SKILLS', type: 'blue', skills: available.filter(s => s.type === 'blue') },
-    { label: 'TECH SKILLS', type: 'green', skills: available.filter(s => s.type === 'green') }
-  ].filter(g => g.skills.length > 0);
-
-  if (groups.length === 0) {
-    document.getElementById('modalBody').innerHTML = '<p style="color:var(--grey-500);font-size:0.875rem;text-align:center;padding:20px 0;">All skills have been assigned.</p>';
-  } else {
-    document.getElementById('modalBody').innerHTML = groups.map(g =>
-      `<div class="modal-group-label">${g.label}</div>` +
-      g.skills.map(s =>
-        `<div class="modal-skill-item" id="msi_${CSS.escape(s.name)}" onclick="toggleModalSkill('${escapeAttr(s.name)}')">
-          <div class="modal-skill-checkbox" id="mscb_${CSS.escape(s.name)}"></div>
-          <div class="modal-skill-dot ${g.type}"></div>
-          <span class="modal-skill-name">${s.name}</span>
-        </div>`
-      ).join('')
-    ).join('');
-  }
-
-  document.getElementById('modalOverlay').classList.add('open');
-}
-
-function toggleModalSkill(sname) {
-  if (modalSelectedSkills.has(sname)) {
-    modalSelectedSkills.delete(sname);
-  } else {
-    modalSelectedSkills.add(sname);
-  }
-  // update item visual
-  const item = document.getElementById(`msi_${CSS.escape(sname)}`);
-  const cb = document.getElementById(`mscb_${CSS.escape(sname)}`);
-  if (item && cb) {
-    const checked = modalSelectedSkills.has(sname);
-    item.classList.toggle('checked', checked);
-    cb.innerHTML = checked
-      ? `<svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>`
-      : '';
-  }
-  updateModalFooter();
-}
-
-function updateModalFooter() {
-  const count = modalSelectedSkills.size;
-  document.getElementById('modalSelCount').innerHTML =
-    `<strong>${count}</strong> skill${count !== 1 ? 's' : ''} selected`;
-  document.getElementById('btnAddSelected').disabled = count === 0;
-}
-
-function assignSelectedSkills() {
-  const ri = state.modalTargetRound;
-  if (ri === null) return;
-  modalSelectedSkills.forEach(sname => {
-    if (!state.rounds[ri].skills.includes(sname)) {
-      state.rounds[ri].skills.push(sname);
+    function mk(arr,cls,elId){
+      $(elId).innerHTML='';
+      arr.forEach(s=>{
+        const a=getAssignment(s), lbl=poolLabel(s);
+        const d=document.createElement('div');
+        d.className='pc '+cls+(a?' asgn':'');
+        d.textContent=s;
+        if(a){ const b=document.createElement('span'); b.className='pc-r'; b.textContent=lbl; d.appendChild(b); }
+        else { mkDrag(d,s); }
+        $(elId).appendChild(d);
+      });
     }
+    mk(D.validation.core_ai,'ai-c','pool-ai');
+    mk(profs(),'prof-c','pool-prof');
+    mk(S.tech,'tech-c','pool-tech');
+  }
+
+  // Pool panel: drop target — dropping an assigned chip here unassigns it
+  const pp=$('pool-panel');
+  if(pp){
+    pp.ondragover=function(e){ e.preventDefault(); pp.classList.add('dz-pool-over'); e.dataTransfer.dropEffect='move'; };
+    pp.ondragleave=function(e){ if(!pp.contains(e.relatedTarget)) pp.classList.remove('dz-pool-over'); };
+    pp.ondrop=function(e){ pp.classList.remove('dz-pool-over'); _dropPool(e); };
+  }
+}
+
+function renderRounds(){
+  const col=$('rounds-c'); col.innerHTML='';
+  const typeOpts=['Recruiter Interview','Hiring Owner / Tech Interview','Tech Interview','Optional Interview'];
+  S.rounds.forEach((r,i)=>{
+    const rc=document.createElement('div'); rc.className='rc'; rc.id='rc'+i;
+    // Header
+    const hd=document.createElement('div'); hd.className='rc-hd';
+    const rn=document.createElement('div'); rn.className='rn'; rn.textContent=i+1;
+    const tsel=document.createElement('select'); tsel.className='rt-sel';
+    tsel.innerHTML=typeOpts.map(t=>'<option'+(r.type===t?' selected':'')+'>'+t+'</option>').join('');
+    tsel.onchange=()=>{ S.rounds[i].type=tsel.value; };
+    const totalAssigned=r.interviewers.reduce((s,iw)=>s+iw.skills.length,0);
+    const cnt=document.createElement('span'); cnt.className='rc-cnt'; cnt.id='rcc'+i;
+    cnt.textContent=totalAssigned+' skill'+(totalAssigned!==1?'s':'');
+    hd.appendChild(rn); hd.appendChild(tsel); hd.appendChild(cnt);
+
+    // Body
+    const bd=document.createElement('div'); bd.className='rc-bd';
+
+    // Interviewers section
+    const iwSec=document.createElement('div'); iwSec.className='iw-sec'; iwSec.id='iw-sec-'+i;
+    r.interviewers.forEach((_,ii)=>{ iwSec.appendChild(buildIwRow(i,ii,r.interviewers.length)); });
+
+    // Add Interviewer button (if < 4)
+    if(r.interviewers.length<4){
+      const wrap=document.createElement('div'); wrap.className='add-iw-wrap';
+      const btn=document.createElement('button'); btn.className='add-iw-btn';
+      btn.textContent='+ Add Interviewer';
+      btn.onclick=()=>addInterviewer(i);
+      wrap.appendChild(btn); iwSec.appendChild(wrap);
+    }
+
+    bd.appendChild(iwSec);
+    rc.appendChild(hd); rc.appendChild(bd);
+    col.appendChild(rc);
   });
-  closeModal();
-  renderStep3();
 }
 
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  state.modalTargetRound = null;
-  modalSelectedSkills = new Set();
+function buildIwRow(ri,ii,totalIws){
+  const iw=S.rounds[ri].interviewers[ii];
+  const div=document.createElement('div'); div.className='iw-row';
+
+  // Row header: badge + name + optional remove button
+  const hd=document.createElement('div'); hd.className='iw-row-hd';
+  const badge=document.createElement('div'); badge.className='iw-badge'; badge.textContent='I'+(ii+1);
+  const nameIn=document.createElement('input'); nameIn.type='text'; nameIn.className='iw-name-in';
+  nameIn.value=iw.name; nameIn.placeholder='Interviewer '+(ii+1)+' Name';
+  nameIn.oninput=()=>{ S.rounds[ri].interviewers[ii].name=nameIn.value; };
+  hd.appendChild(badge); hd.appendChild(nameIn);
+  if(totalIws>1){
+    const rem=document.createElement('button'); rem.className='rem-iw-btn'; rem.textContent='\u00d7 Remove';
+    rem.onclick=()=>removeInterviewer(ri,ii);
+    hd.appendChild(rem);
+  }
+
+  // Duration + Mode row — shown only on first interviewer (shared for the round)
+  if(ii===0){
+    const row2=document.createElement('div'); row2.className='r2'; row2.style.marginBottom='8px';
+    const fgDur=document.createElement('div'); fgDur.className='fg';
+    fgDur.innerHTML='<label>Duration</label>';
+    const dops=D.validation.duration.map(d=>'<option'+(S.rounds[ri].dur===d?' selected':'')+'>'+d+'</option>').join('');
+    const durSel=document.createElement('select'); durSel.innerHTML=dops;
+    durSel.onchange=()=>{ S.rounds[ri].dur=durSel.value; };
+    fgDur.appendChild(durSel);
+    const fgMode=document.createElement('div'); fgMode.className='fg';
+    fgMode.innerHTML='<label>Mode</label>';
+    const mops=D.validation.mode.map(m=>'<option'+(S.rounds[ri].mode===m?' selected':'')+'>'+m+'</option>').join('');
+    const modeSel=document.createElement('select'); modeSel.innerHTML=mops;
+    modeSel.onchange=()=>{ S.rounds[ri].mode=modeSel.value; };
+    fgMode.appendChild(modeSel);
+    row2.appendChild(fgDur); row2.appendChild(fgMode);
+    div.appendChild(row2);
+  }
+
+  // Notes / Additional Inputs (per interviewer)
+  const fgNotes=document.createElement('div'); fgNotes.className='fg'; fgNotes.style.marginBottom='12px';
+  fgNotes.innerHTML='<label>Notes / Additional Inputs</label>';
+  const noteTa=document.createElement('textarea'); noteTa.placeholder='Languages, tools, assessments, focus areas\u2026';
+  noteTa.value=iw.notes||''; noteTa.oninput=()=>{ S.rounds[ri].interviewers[ii].notes=noteTa.value; };
+  fgNotes.appendChild(noteTa);
+
+  // Helper: wire drag & drop onto a skill zone
+  function wireZone(zone){
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('dz-over');e.dataTransfer.dropEffect='move';});
+    zone.addEventListener('dragleave',e=>{if(!zone.contains(e.relatedTarget))zone.classList.remove('dz-over');});
+    zone.addEventListener('drop',e=>{zone.classList.remove('dz-over');_dropZone(ri,ii,e);});
+  }
+  // Helper: make a chip draggable from this interviewer
+  function wireDrag(sp,sk){
+    sp.draggable=true;
+    sp.addEventListener('dragstart',e=>{e.stopPropagation();_dstart(sk,{type:'iw',ri,ii},e);});
+    sp.addEventListener('dragend',_dend);
+  }
+
+  if(S.hcMode==='nonhc'){
+    // Non-HC: skill zone + drag & drop + add button
+    const zone=document.createElement('div'); zone.className='rzone';
+    wireZone(zone);
+    if(!iw.skills.length){
+      zone.innerHTML='<span class="z-hint">Drag a skill here or click + Add Skills</span>';
+    } else {
+      iw.skills.forEach(s=>{
+        const sp=document.createElement('span'); sp.className='rchip nonhc'; sp.textContent=s;
+        wireDrag(sp,s);
+        const rx=document.createElement('button'); rx.className='rx'; rx.innerHTML='\u00d7';
+        rx.onclick=(e)=>{ e.stopPropagation(); rmSk(ri,ii,s); };
+        sp.appendChild(rx); zone.appendChild(sp);
+      });
+    }
+    const addR=document.createElement('div'); addR.style.marginTop='6px';
+    const addBtn=document.createElement('button'); addBtn.className='add-btn';
+    addBtn.textContent='+ Add Skills';
+    addBtn.onclick=()=>openM(ri,ii);
+    addR.appendChild(addBtn);
+    div.appendChild(hd); div.appendChild(fgNotes); div.appendChild(zone); div.appendChild(addR);
+  } else {
+    // HC: skill zone + drag & drop + add button
+    const zone=document.createElement('div'); zone.className='rzone';
+    wireZone(zone);
+    if(!iw.skills.length){
+      zone.innerHTML='<span class="z-hint">Drag a skill here or click + Add Skills</span>';
+    } else {
+      iw.skills.forEach(s=>{
+        const t=typeOf(s);
+        const sp=document.createElement('span'); sp.className='rchip '+t; sp.textContent=s;
+        wireDrag(sp,s);
+        const rx=document.createElement('button'); rx.className='rx'; rx.innerHTML='\u00d7';
+        rx.onclick=(e)=>{ e.stopPropagation(); rmSk(ri,ii,s); };
+        sp.appendChild(rx); zone.appendChild(sp);
+      });
+    }
+    const addR=document.createElement('div'); addR.style.marginTop='6px';
+    const addBtn=document.createElement('button'); addBtn.className='add-btn';
+    addBtn.textContent='+ Add Skills';
+    addBtn.onclick=()=>openM(ri,ii);
+    addR.appendChild(addBtn);
+    div.appendChild(hd); div.appendChild(fgNotes); div.appendChild(zone); div.appendChild(addR);
+  }
+  return div;
 }
 
-function closeModalOutside(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
+function addInterviewer(ri){
+  if(S.rounds[ri].interviewers.length<4){
+    S.rounds[ri].interviewers.push({name:'',notes:'',freeSkills:'',skills:[]});
+    renderPool(); renderRounds(); updTotal();
+  }
+}
+function removeInterviewer(ri,ii){
+  if(S.rounds[ri].interviewers.length<=1) return;
+  // Skills are returned to pool automatically (just remove interviewer)
+  S.rounds[ri].interviewers.splice(ii,1);
+  renderPool(); renderRounds(); updTotal();
+}
+function rmSk(ri,ii,sk){
+  S.rounds[ri].interviewers[ii].skills=S.rounds[ri].interviewers[ii].skills.filter(s=>s!==sk);
+  renderPool(); renderRounds(); updTotal();
+}
+function updTotal(){
+  const tot=S.hcMode==='nonhc'?S.nonhcSkills.length:totalSk();
+  const used=S.rounds.flatMap(r=>r.interviewers.flatMap(iw=>iw.skills)).length;
+  $('tot-bar').innerHTML=used+' / '+tot+' assigned'+(S.hcMode==='hc'&&used===tot?' \u2713':'');
 }
 
-// ══════════════════════════════════════════════════════
-//  STEP 4
-// ══════════════════════════════════════════════════════
-function renderStep4() {
-  document.getElementById('summaryRoleTitle').textContent = state.roleTitle || '—';
-  document.getElementById('summaryRoleSub').textContent =
-    `${state.jobProfile} · ${state.roleType === 'ic' ? 'T1–T4PF · Individual Contributor' : 'T4PM · People Manager'}`;
-  document.getElementById('summaryHM').textContent = state.hiringManager || '—';
-  document.getElementById('summaryPosID').textContent = state.positionId || '—';
-  document.getElementById('summaryRoleType').textContent =
-    state.roleType === 'ic' ? 'Individual Contributor' : 'People Manager';
+// ── Modal ─────────────────────────────────────────────────────────────────────
+function openM(ri,ii){
+  S.pickR=ri; S.pickI=ii;
+  pickerSel=new Set(S.rounds[ri].interviewers[ii].skills);
+  const r=S.rounds[ri], iwCount=r.interviewers.length;
+  const iwLabel=iwCount>1?' \u2014 Interviewer '+(ii+1):'';
+  $('m-title').textContent='Add Skills \u2014 Round '+(ri+1)+iwLabel+': '+r.type;
+  renderModal();
+  $('overlay').classList.remove('hidden');
+}
+function closeM(e){
+  if(e&&e.target!==$('overlay')) return;
+  $('overlay').classList.add('hidden');
+}
+function togglePicker(sk){
+  if(pickerSel.has(sk)) pickerSel.delete(sk); else pickerSel.add(sk);
+  renderModal();
+}
+function mSelUnassigned(){
+  const used=usedSet(), cur=S.rounds[S.pickR].interviewers[S.pickI].skills;
+  const pool=S.hcMode==='nonhc'?S.nonhcSkills:[...D.validation.core_ai,...profs(),...S.tech];
+  pool.forEach(s=>{ if(!used.has(s)||cur.includes(s)) pickerSel.add(s); });
+  renderModal();
+}
+function mSelAll(){
+  const pool=S.hcMode==='nonhc'?S.nonhcSkills:[...D.validation.core_ai,...profs(),...S.tech];
+  pool.forEach(s=>pickerSel.add(s));
+  renderModal();
+}
+function mClear(){ pickerSel.clear(); renderModal(); }
 
-  document.getElementById('summaryCoreAI').innerHTML =
-    CORE_AI_SKILLS.map(s => `<span class="pill pill-amber">${s}</span>`).join('');
-  document.getElementById('summaryProfessional').innerHTML =
-    PROFESSIONAL_SKILLS.map(s => `<span class="pill pill-blue">${s}</span>`).join('');
-  document.getElementById('summaryTech').innerHTML =
-    state.selectedTechSkills.map(s => `<span class="pill pill-green">${s}</span>`).join('');
+function renderModal(){
+  const used=usedSet(), cur=S.rounds[S.pickR].interviewers[S.pickI].skills;
+  const n=pickerSel.size;
+  $('m-count').textContent=n+' selected';
+  $('m-assign-btn').textContent='Assign '+n+' Skill'+(n!==1?'s':'');
+  const body=$('m-body'); body.innerHTML='';
 
-  const allSk = getAllSkills();
-  const typeMap = {};
-  allSk.forEach(s => { typeMap[s.name] = s.type; });
-
-  document.getElementById('summaryRoundsBody').innerHTML = state.rounds.map((r, ri) => {
-    const skillPills = r.skills.map(sname => {
-      const t = typeMap[sname] || 'blue';
-      return `<span class="pill-sm pill-${t}">${sname}</span>`;
-    }).join('');
-    return `<tr>
-      <td><div class="table-round-num">${ri + 1}</div></td>
-      <td style="font-weight:600;">${r.name}</td>
-      <td>${r.interviewer || '<span style="color:var(--grey-400)">—</span>'}</td>
-      <td><div class="pills-inline">${skillPills || '<span style="color:var(--grey-400)">—</span>'}</div></td>
-      <td>${r.duration}</td>
-      <td>${r.mode}</td>
-      <td style="max-width:180px;word-break:break-word;">${escHtml(r.notes) || '<span style="color:var(--grey-400)">—</span>'}</td>
-    </tr>`;
-  }).join('');
+  function mkSec(title,arr,dotCls){
+    const sec=document.createElement('div'); sec.className='m-sec';
+    const lbl=document.createElement('div'); lbl.className='m-sl';
+    const dot=document.createElement('span'); dot.className='m-dot '+dotCls;
+    lbl.appendChild(dot); lbl.appendChild(document.createTextNode(' '+title));
+    sec.appendChild(lbl);
+    arr.forEach(s=>{
+      const isChk=pickerSel.has(s), inOth=used.has(s)&&!cur.includes(s);
+      const a=getAssignment(s);
+      const item=document.createElement('div');
+      item.className='m-item'+(isChk?' chk':inOth?' oth':'');
+      item.onclick=()=>togglePicker(s);
+      const cb=document.createElement('div'); cb.className='m-cb';
+      cb.textContent=isChk?'\u2713':(inOth?'\u2192':'');
+      const lbl2=document.createElement('span'); lbl2.className='m-lbl'; lbl2.textContent=s;
+      item.appendChild(cb); item.appendChild(lbl2);
+      if(inOth&&a){
+        const st=document.createElement('span'); st.className='m-status';
+        st.textContent='R'+(a.ri+1)+(S.rounds[a.ri].interviewers.length>1?'/I'+(a.ii+1):'');
+        item.appendChild(st);
+      }
+      sec.appendChild(item);
+    });
+    body.appendChild(sec);
+  }
+  if(S.hcMode==='nonhc'){
+    mkSec('Selected Skills ('+S.nonhcSkills.length+')',S.nonhcSkills,'d-nonhc');
+  } else {
+    mkSec('Core AI Skills ('+D.validation.core_ai.length+')',D.validation.core_ai,'d-ai');
+    mkSec('Professional Skills',profs(),'d-prof');
+    mkSec('Tech Skills',S.tech,'d-tech');
+  }
 }
 
-function printPlan() { window.print(); }
-
-function newPlan() {
-  if (!confirm('Start a new plan? All current data will be cleared.')) return;
-  // reset state
-  state.hiringManager = '';
-  state.positionId = '';
-  state.roleTitle = '';
-  state.roleType = 'ic';
-  state.jobProfile = '';
-  state.selectedTechSkills = [];
-  state.highestStep = 1;
-  state.rounds = ROUND_NAMES.map((name, i) => ({
-    id: i, name,
-    interviewer: '', duration: '60 Mins', mode: 'MS Teams Video', notes: '', skills: []
-  }));
-  // reset form
-  document.getElementById('hiringManager').value = '';
-  document.getElementById('positionId').value = '';
-  document.getElementById('roleTitle').value = '';
-  document.getElementById('jobProfile').value = '';
-  document.getElementById('infoBanner').style.display = 'none';
-  document.getElementById('btnIC').classList.add('active');
-  document.getElementById('btnPM').classList.remove('active');
-  document.getElementById('btnStep1Next').disabled = true;
-  goToStep(1);
+function assignPicked(){
+  const ri=S.pickR, ii=S.pickI;
+  // Remove newly picked skills from any other interviewer/round
+  S.rounds.forEach((r,rIdx)=>{
+    r.interviewers.forEach((iw,iwIdx)=>{
+      if(rIdx!==ri||iwIdx!==ii) iw.skills=iw.skills.filter(s=>!pickerSel.has(s));
+    });
+  });
+  S.rounds[ri].interviewers[ii].skills=[...pickerSel];
+  $('overlay').classList.add('hidden');
+  renderPool(); renderRounds(); updTotal();
 }
 
-// ══════════════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  renderStepIndicator();
-  document.getElementById('step1').classList.add('active');
-});
+// ── Step 4 ────────────────────────────────────────────────────────────────────
+function renderS4(){
+  const nonhc=S.hcMode==='nonhc';
+  $('sum-title').textContent=S.title||'Skills Prioritisation Plan';
+  const dispProf=nonhc?(S.nonhcPosition||'Non-HC Relevant Role'):(S.profile==='Other'?(S.customProfileName||'Other'):S.profile);
+  $('sum-profile').textContent=dispProf;
+  $('sum-sub').textContent=roleDisp();
+  $('sum-hm').textContent=S.hm||'\u2014';
+  $('sum-pid').textContent=S.pid||'\u2014';
+  $('sum-rt').textContent=roleDisp();
+
+  // Mandatory skills section — HC vs nonHC
+  $('sum-hc-card').classList.toggle('hidden',nonhc);
+  $('sum-nonhc-card').classList.toggle('hidden',!nonhc);
+  if(nonhc){
+    $('sum-nonhc-skills').innerHTML=S.nonhcSkills.map(s=>'<span class="chip ai">'+s+'</span>').join('');
+  } else {
+    $('sum-ai').innerHTML=D.validation.core_ai.map(s=>'<span class="chip ai">'+s+'</span>').join('');
+    $('sum-prof').innerHTML=profs().map(s=>'<span class="chip prof">'+s+'</span>').join('');
+    $('sum-tech').innerHTML=S.tech.map(s=>'<span class="chip tech">'+s+'</span>').join('');
+    $('sum-prof-t').textContent='Professional Skills ('+profs().length+')';
+  }
+
+  const tb=$('sum-tbody'); tb.innerHTML='';
+  S.rounds.forEach((r,i)=>{
+    const hasContent=r.interviewers.some(iw=>iw.skills.length||iw.name||iw.notes);
+    if(!hasContent) return;
+    r.interviewers.forEach((iw,ii)=>{
+      if(!iw.skills.length&&!iw.name) return;
+      const tr=document.createElement('tr');
+      tr.className=ii>0?'iw-sub':'';
+      const skillsCell=iw.skills.map(s=>'<span class="chip '+(nonhc?'nonhc':typeOf(s))+'" style="font-size:11px;padding:3px 8px">'+s+'</span>').join(' ')||'<em style="color:var(--text-l)">None</em>';
+      tr.innerHTML=
+        '<td>'+(ii===0?'<span class="rnb">'+(i+1)+'</span>':'')+'</td>'
+        +'<td>'+(ii===0?'<strong>'+r.type+'</strong>':'')+'</td>'
+        +'<td>'+(iw.name||'<em style="color:var(--text-l)">\u2014</em>')+'</td>'
+        +'<td style="min-width:200px">'+skillsCell+'</td>'
+        +'<td>'+(ii===0?r.dur:'')+'</td>'
+        +'<td>'+(ii===0?r.mode:'')+'</td>'
+        +'<td style="max-width:160px;word-break:break-word">'+(iw.notes||'\u2014')+'</td>';
+      tb.appendChild(tr);
+    });
+  });
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function go(n){
+  if(n===2){
+    if(!$('f-hm').value.trim()){ msg('s1-err','err','Please enter the Hiring Manager name.'); return; }
+    if(!$('f-title').value.trim()){ msg('s1-err','err','Please enter the Role Title.'); return; }
+    if(S.hcMode==='hc'){
+      if(!$('f-profile').value){ msg('s1-err','err','Please select a Job Profile.'); return; }
+      if(S.profile==='Other'&&!$('f-other-profile').value.trim()){
+        msg('s1-err','err','Please enter a name for the custom Job Profile.'); return;
+      }
+    } else {
+      if(!S.nonhcPosition){ msg('s1-err','err','Please select a Non-HC Position Type.'); return; }
+    }
+    S.hm=$('f-hm').value.trim(); S.pid=$('f-pid').value.trim(); S.title=$('f-title').value.trim();
+    S.customProfileName=S.profile==='Other'?$('f-other-profile').value.trim():'';
+    $('s1-err').classList.add('hidden');
+  }
+  if(n===3){
+    if(S.hcMode==='nonhc'){
+      // All 9 skills are mandatory and auto-selected — no validation needed
+    } else {
+      if(S.tech.length!==5){
+        const m=S.profile==='Other'
+          ?'Please enter and select all 6 custom tech skills.'
+          :'Please select exactly 5 Tech role-specific skills.';
+        msg('s2-msg','warn',m); return;
+      }
+    }
+    $('s2-msg').classList.add('hidden');
+  }
+  if(n===4){
+    if(S.hcMode==='hc'){
+      const all=[...D.validation.core_ai,...profs(),...S.tech];
+      const used=usedSet();
+      const un=all.filter(s=>!used.has(s));
+      if(un.length>0){
+        msg('s3-msg','warn',un.length+' skill'+(un.length>1?'s':'')+' not yet assigned: '
+          +un.slice(0,3).join(', ')+(un.length>3?'\u2026':'')); return;
+      }
+    }
+    $('s3-msg').classList.add('hidden');
+  }
+  $('s'+S.step).classList.add('hidden');
+  S.step=n;
+  const el=$('s'+n); el.classList.remove('hidden');
+  void el.offsetWidth; el.classList.add('fade'); setTimeout(()=>el.classList.remove('fade'),220);
+  updStepper(); $('hdr-pill').textContent='Step '+n+' of 4';
+  if(n===2) renderS2();
+  if(n===3) renderS3();
+  if(n===4) renderS4();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function msg(id,type,text){
+  const el=$(id); el.textContent=text;
+  el.className=type==='warn'?'warn-b':type==='ok'?'ok-b':'err-b';
+  el.classList.remove('hidden');
+}
+function updStepper(){
+  const n=S.step;
+  for(let i=1;i<=4;i++){
+    const c=$('sc'+i);
+    if(i<n){ c.className='st-c done'; c.innerHTML='&#10003;'; }
+    else if(i===n){ c.className='st-c act'; c.textContent=i; }
+    else{ c.className='st-c pend'; c.textContent=i; }
+  }
+  [['ln12',1],['ln23',2],['ln34',3]].forEach(([id,s])=>$(id).className='st-ln'+(n>s?' done':''));
+}
+
+function startNew(){
+  if(!confirm('Start a new plan? Current data will be cleared.')) return;
+  S={
+    step:1,hm:'',pid:'',title:'',rt:'T1-T4PF',roleType:'T1',
+    hcMode:'hc',nonhcSkills:[],nonhcPosition:'',
+    profile:'',customProfileName:'',customSkills:['','','','',''],
+    tech:[],
+    rounds:[
+      mkRound('Recruiter Interview'),mkRound('Hiring Owner / Tech Interview'),
+      mkRound('Tech Interview'),mkRound('Optional Interview'),
+    ],
+    pickR:-1,pickI:0
+  };
+  $('f-hm').value='';$('f-pid').value='';$('f-title').value='';$('f-profile').value='';
+  $('f-other-profile').value='';
+  $('other-pname-div').classList.add('hidden');
+  $('prof-hint').classList.add('hidden');
+  setHcMode('hc');   // resets nonhc-role-section, btn-rt-nonHC, shows profile-fg
+  setRT('T1-T4PF');
+  for(let i=2;i<=4;i++) $('s'+i).classList.add('hidden');
+  $('s1').classList.remove('hidden');
+  updStepper();$('hdr-pill').textContent='Step 1 of 4';
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+//  EXCEL EXPORT (SheetJS)
+// ══════════════════════════════════════════════════════════════════════════════
+function exportExcel(){
+  if(typeof XLSX==='undefined'){
+    alert('SheetJS library could not be loaded. Please check your internet connection.');
+    return;
+  }
+  const wb=XLSX.utils.book_new();
+  const sheetName=S.rt==='T4PM'?'Skill Prioritisation_T4PM':'Skill Prioritisation_T1-T4PF';
+  XLSX.utils.book_append_sheet(wb,buildPriSheet(),sheetName);
+  XLSX.utils.book_append_sheet(wb,buildJobProfilesSheet(),'Job Profiles');
+  XLSX.utils.book_append_sheet(wb,buildAssessmentsSheet(),'Assessments');
+  XLSX.utils.book_append_sheet(wb,buildValidationSheet(),'Validation Lists');
+  const profSlug=(S.profile==='Other'?S.customProfileName:S.profile).replace(/ /g,'_');
+  const fname='ET_Skills_Plan_'+profSlug+'_'+new Date().toISOString().slice(0,10)+'.xlsx';
+  XLSX.writeFile(wb,fname);
+}
+
+function buildPriSheet(){
+  const N=n=>Array(n).fill(null);
+  const numCols=14;
+  const rows=[];
+  rows.push(['E&T Interview Skills Prioritisation Template',...N(numCols-1)]);
+  for(let i=0;i<19;i++) rows.push(N(numCols));
+  const dispProf=S.hcMode==='nonhc'?(S.nonhcPosition||'Non-HC Relevant Role'):(S.profile==='Other'?S.customProfileName:S.profile);
+  rows[1]=['Hiring Manager:  '+S.hm,...N(numCols-1)];
+  rows[2]=['Position id:  '+S.pid,...N(numCols-1)];
+  rows[3]=['Role Title: '+S.title,...N(numCols-1)];
+  rows[4]=['Job Profile: '+dispProf,...N(numCols-1)];
+  for(let i=0;i<5;i++) rows.push(N(numCols));
+  rows.push(['Step 1: Skill Prioritisation',null,null,null,null,null,null,null,
+             'Step 2: Interviewer Assignment',null,null,
+             'Step 3: Additional Attributes',null,null]);
+  rows.push(['Job Profile','Tech Role_Specific Skills',null,null,
+             'Core AI Skills',null,'Professional Skills',null,
+             'Duration','Mode of Interview','Interviewer',
+             'Additional Inputs / Languages / Tool / Assessments',null,null]);
+
+  const aiList=D.validation.core_ai;
+  const profList=S.rt==='T4PM'?D.validation.professional_t4pm:D.validation.professional_t1;
+  let firstRow=true;
+
+  S.rounds.forEach((r,ri)=>{
+    r.interviewers.forEach((iw,ii)=>{
+      const techSk=iw.skills.filter(s=>S.tech.includes(s));
+      const aiSk=iw.skills.filter(s=>aiList.includes(s));
+      const profSk=iw.skills.filter(s=>profList.includes(s));
+      const extra=[...techSk.slice(3),...aiSk.slice(2),...profSk.slice(2)];
+      const notesStr=extra.length
+        ?(iw.notes?iw.notes+'; ':'')+extra.join('; ')
+        :(iw.notes||null);
+      rows.push([
+        (firstRow)?dispProf.replace(/ /g,'_'):null,
+        techSk[0]||null,techSk[1]||null,techSk[2]||null,
+        aiSk[0]||null,aiSk[1]||null,
+        profSk[0]||null,profSk[1]||null,
+        ii===0?r.dur:null,
+        ii===0?r.mode:null,
+        iw.name||null,
+        notesStr,null,null
+      ]);
+      firstRow=false;
+    });
+  });
+
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!merges']=[
+    {s:{r:0,c:0},e:{r:0,c:numCols-1}},
+    {s:{r:25,c:0},e:{r:25,c:7}},{s:{r:25,c:8},e:{r:25,c:10}},{s:{r:25,c:11},e:{r:25,c:numCols-1}},
+    {s:{r:26,c:1},e:{r:26,c:3}},{s:{r:26,c:4},e:{r:26,c:5}},
+    {s:{r:26,c:6},e:{r:26,c:7}},{s:{r:26,c:11},e:{r:26,c:numCols-1}},
+  ];
+  ws['!cols']=[{wch:32},{wch:36},{wch:36},{wch:36},{wch:30},{wch:30},{wch:26},{wch:26},{wch:12},{wch:18},{wch:24},{wch:38},{wch:20},{wch:20}];
+  return ws;
+}
+
+function buildJobProfilesSheet(){
+  const pNames=Object.keys(D.profiles);
+  const header=['Job_Profile',...pNames.map(n=>n.replace(/ /g,'_'))];
+  const maxSk=Math.max(...pNames.map(n=>D.profiles[n].skills.length));
+  const rows=[header];
+  for(let i=0;i<maxSk;i++){
+    const row=[pNames[i]?pNames[i].replace(/ /g,'_'):null];
+    pNames.forEach(n=>row.push(D.profiles[n].skills[i]||null));
+    rows.push(row);
+  }
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:32},...pNames.map(()=>({wch:36}))];
+  return ws;
+}
+
+function buildAssessmentsSheet(){
+  const header=['Job Profile','SAP Skills as per New Taxonomy','Evaluation Method','Test','Assessment 1','Assessment 2'];
+  const rows=[header];
+  Object.entries(D.assessments).forEach(([role,skills])=>{
+    Object.entries(skills).forEach(([skill,info])=>{
+      rows.push([role,skill,
+        'Human Evaluation',
+        info.test||'Not Available','Not Available',null]);
+    });
+  });
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:35},{wch:45},{wch:30},{wch:30},{wch:20},{wch:20}];
+  return ws;
+}
+
+function buildValidationSheet(){
+  const v=D.validation;
+  const header=['Duration','Mode','Core AI Skills','Professional Skills (T1 - T4PF)','Professional Skills (T4PM)'];
+  const maxLen=Math.max(v.duration.length,v.mode.length,v.core_ai.length,v.professional_t1.length,v.professional_t4pm.length);
+  const rows=[header];
+  for(let i=0;i<maxLen;i++){
+    rows.push([v.duration[i]||null,v.mode[i]||null,v.core_ai[i]||null,v.professional_t1[i]||null,v.professional_t4pm[i]||null]);
+  }
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:14},{wch:18},{wch:32},{wch:32},{wch:32}];
+  return ws;
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  PRINT VIEW
+// ══════════════════════════════════════════════════════════════════════════
+function buildPrintView(){
+  const nonhc=S.hcMode==='nonhc';
+  const dispProf = nonhc ? (S.nonhcPosition||'Non-HC Relevant Role') : (S.profile==='Other' ? (S.customProfileName||'Other') : S.profile);
+
+  // Page 1 — Role Info
+  $('pv-profile').textContent = dispProf || '\u2014';
+  $('pv-title').textContent   = S.title  || '\u2014';
+  $('pv-hm').textContent      = S.hm     || '\u2014';
+  $('pv-pid').textContent     = S.pid    || '\u2014';
+  $('pv-rt').textContent      = roleDisp();
+
+  // Page 1 — Mandatory Skills (HC vs nonHC)
+  $('pv-hc-skills').classList.toggle('hidden',nonhc);
+  $('pv-nonhc-skills').classList.toggle('hidden',!nonhc);
+  if(nonhc){
+    $('pv-nonhc-sk').innerHTML = S.nonhcSkills.map(s=>'<span class="chip ai">'+s+'</span>').join('');
+  } else {
+    $('pv-ai').innerHTML   = D.validation.core_ai.map(s=>'<span class="chip ai">'+s+'</span>').join('');
+    $('pv-prof').innerHTML = profs().map(s=>'<span class="chip prof">'+s+'</span>').join('');
+    $('pv-tech').innerHTML = S.tech.map(s=>'<span class="chip tech">'+s+'</span>').join('');
+    $('pv-prof-lbl').textContent = 'Professional Skills ('+profs().length+')';
+  }
+
+  // Page 2 — subtitle
+  $('pv-rnd-sub').textContent = dispProf + ' \u00b7 ' + roleDisp();
+
+  // Page 2 — Rounds table
+  const tb = $('pv-tbody'); tb.innerHTML = '';
+  S.rounds.forEach((r,i)=>{
+    const hasContent = r.interviewers.some(iw=>iw.skills.length||iw.name||iw.notes);
+    if(!hasContent) return;
+    r.interviewers.forEach((iw,ii)=>{
+      if(ii>0 && !iw.skills.length && !iw.name) return;
+      const tr = document.createElement('tr');
+      if(ii>0) tr.className='iw-sub';
+      const skillsCell = iw.skills.map(s=>'<span class="chip '+(nonhc?'nonhc':typeOf(s))+'" style="font-size:11px;padding:2px 7px">'+s+'</span>').join(' ')||'\u2014';
+      tr.innerHTML =
+        '<td>'+(ii===0?'<span class="rnb">'+(i+1)+'</span>':'')+'</td>'
+        +'<td>'+(ii===0?'<strong>'+r.type+'</strong>':'')+'</td>'
+        +'<td style="white-space:nowrap">'+(iw.name||'\u2014')+'</td>'
+        +'<td>'+skillsCell+'</td>'
+        +'<td>'+(ii===0?r.dur:'')+'</td>'
+        +'<td>'+(ii===0?r.mode:'')+'</td>'
+        +'<td style="max-width:130px;word-break:break-word">'+(iw.notes||'\u2014')+'</td>';
+      tb.appendChild(tr);
+    });
+  });
+}
+
+function startPrint(){
+  buildPrintView();
+  window.print();
+}
+
 </script>
-</body>
-</html>
+
+<div id="pdx-extension-overlay-PROD-EU" style="position: fixed; height: 100%; width: 100%; inset: 0px; background-color: rgba(0, 0, 0, 0.3); z-index: 2147483644; visibility: hidden;"><iframe id="pdx-extension-iframe-PROD-EU" name="pdx-extension-iframe-PROD-EU" src="./E&amp;T Skills Prioritisation _ SAP_files/saved_resource.html" style="position: absolute; top: 10px; right: 20px; background-color: rgb(255, 255, 255); border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 16px; z-index: 2147483645; height: 600px; width: 375px; max-height: 100vh; min-height: 400px; box-sizing: border-box !important;"></iframe><div id="pdx-extension-spinner-container-PROD-EU" style="position: absolute; top: 10px; right: 20px; background-color: rgb(255, 255, 255); border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 16px; z-index: 2147483646; height: 600px; width: 375px; visibility: hidden;"><img id="pdx-extension-spinner-PROD-EU" src="chrome-extension://fkngieejgklkhemipomakofmmdebmimm/assets/svg/enso_48x48.svg" title="Loading..." style="position: absolute; z-index: 2147483647; top: 276px; right: 163.5px; visibility: inherit;"><img id="pdx-extension-spinner-label-PROD-EU" src="chrome-extension://fkngieejgklkhemipomakofmmdebmimm/assets/svg/loading.svg" style="position: absolute; z-index: 2147483647; top: 344px; right: 155.5px; visibility: inherit; color: rgb(85, 85, 85); font-family: &quot;Open Sans&quot;; font-style: normal; font-weight: 600; font-size: 14px; line-height: 20px; direction: ltr;"></div></div></body></html>
