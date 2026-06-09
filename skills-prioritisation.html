@@ -987,7 +987,7 @@
         <div class="form-row">
           <div class="form-group">
             <label>Hiring Manager <span class="required">*</span></label>
-            <input type="text" id="hiringManager" placeholder="Full name" oninput="validateStep1()">
+            <input type="text" id="hiringManager" placeholder="e.g. Jane Smith" oninput="validateStep1()">
           </div>
           <div class="form-group">
             <label>Position ID</label>
@@ -1001,10 +1001,25 @@
         </div>
 
         <div class="form-group full">
+          <label>Role Category <span class="required">*</span></label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" onclick="setRoleCategory('hc')" id="btnHC">HC Relevant Role</button>
+            <button class="toggle-btn" onclick="setRoleCategory('nonhc')" id="btnNonHC">Non-HC Relevant Role</button>
+          </div>
+        </div>
+
+        <div class="form-group full">
           <label>Role Level / Type <span class="required">*</span></label>
           <div class="toggle-group">
-            <button class="toggle-btn active" onclick="setRoleType('ic')" id="btnIC">T1–T4PF · Individual Contributor</button>
-            <button class="toggle-btn" onclick="setRoleType('pm')" id="btnPM">T4PM · People Manager</button>
+            <button class="toggle-btn active" onclick="setRoleType('ic')" id="btnIC">T1–T5PF · Single Contributor</button>
+            <button class="toggle-btn" onclick="setRoleType('pm')" id="btnPM">T4PM/T5PM · People Manager</button>
+          </div>
+          <div class="toggle-group" id="gradeSubGroup" style="margin-top:8px;">
+            <button class="toggle-btn active" onclick="setGrade('T1')" id="btnT1">T1</button>
+            <button class="toggle-btn" onclick="setGrade('T2')" id="btnT2">T2</button>
+            <button class="toggle-btn" onclick="setGrade('T3')" id="btnT3">T3</button>
+            <button class="toggle-btn" onclick="setGrade('T4PF')" id="btnT4PF">T4PF</button>
+            <button class="toggle-btn" onclick="setGrade('T5PF')" id="btnT5PF">T5PF</button>
           </div>
         </div>
 
@@ -1611,10 +1626,33 @@ function goToStep(n) {
 // ══════════════════════════════════════════════════════
 //  STEP 1
 // ══════════════════════════════════════════════════════
+function setRoleCategory(c) {
+  state.roleCategory = c;
+  document.getElementById('btnHC').classList.toggle('active', c === 'hc');
+  document.getElementById('btnNonHC').classList.toggle('active', c === 'nonhc');
+  validateStep1();
+}
+
+function setGrade(g) {
+  state.grade = g;
+  ['T1','T2','T3','T4PF','T5PF'].forEach(function(id){
+    document.getElementById('btn'+id).classList.toggle('active', g === id);
+  });
+  validateStep1();
+}
+
 function setRoleType(t) {
   state.roleType = t;
+  state.grade = t === 'ic' ? 'T1' : null;
   document.getElementById('btnIC').classList.toggle('active', t === 'ic');
   document.getElementById('btnPM').classList.toggle('active', t === 'pm');
+  var gradeGroup = document.getElementById('gradeSubGroup');
+  gradeGroup.style.display = t === 'ic' ? '' : 'none';
+  if (t === 'ic') {
+    ['T1','T2','T3','T4PF','T5PF'].forEach(function(id){
+      document.getElementById('btn'+id).classList.toggle('active', id === 'T1');
+    });
+  }
   validateStep1();
 }
 
@@ -1652,22 +1690,22 @@ function validateStep1() {
 // ══════════════════════════════════════════════════════
 function renderStep2() {
   const skills = TECH_SKILLS_MAP[state.jobProfile] || [];
-  const maxSelect = Math.min(6, skills.length);
+  const maxSelect = Math.min(5, skills.length);
 
   // Update subtitle
   const subtitle = maxSelect === 0
     ? 'Core AI and Professional Skills are mandatory and pre-selected. No additional Tech skills apply for this role.'
-    : maxSelect < 6
+    : maxSelect < 5
       ? `Core AI and Professional Skills are mandatory and pre-selected. Choose up to ${maxSelect} Tech role-specific skills for your role.`
-      : 'Core AI and Professional Skills are mandatory and pre-selected. Choose exactly 6 Tech role-specific skills for your role.';
+      : 'Core AI and Professional Skills are mandatory and pre-selected. Choose exactly 5 Tech role-specific skills for your role.';
   document.getElementById('step2Subtitle').textContent = subtitle;
 
   // Update tech section header label
   const techLabel = maxSelect === 0
     ? 'TECH ROLE-SPECIFIC SKILLS — NONE FOR THIS ROLE'
-    : maxSelect < 6
+    : maxSelect < 5
       ? `TECH ROLE-SPECIFIC SKILLS — SELECT UP TO ${maxSelect}`
-      : 'TECH ROLE-SPECIFIC SKILLS — SELECT EXACTLY 6';
+      : 'TECH ROLE-SPECIFIC SKILLS — SELECT EXACTLY 5';
   document.querySelector('.tech-skills-header .skill-section-title').textContent = techLabel;
 
   // Core AI pills
@@ -1684,7 +1722,7 @@ function renderStep2() {
 
 function renderTechGrid() {
   const skills = TECH_SKILLS_MAP[state.jobProfile] || [];
-  const maxSelect = Math.min(6, skills.length);
+  const maxSelect = Math.min(5, skills.length);
   const selected = state.selectedTechSkills;
   const maxed = selected.length >= maxSelect;
   const grid = document.getElementById('techSkillGrid');
@@ -1721,7 +1759,7 @@ function renderTechGrid() {
 
 function toggleTechSkill(name) {
   const skills = TECH_SKILLS_MAP[state.jobProfile] || [];
-  const maxSelect = Math.min(6, skills.length);
+  const maxSelect = Math.min(5, skills.length);
   const idx = state.selectedTechSkills.indexOf(name);
   if (idx >= 0) {
     state.selectedTechSkills.splice(idx, 1);
