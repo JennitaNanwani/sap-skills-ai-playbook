@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Interviewer Questions Guide</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #1a1a2e;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    /* Cover */
+    .cover {
+      background: #1a237e;
+      color: #f48fb1;
+      text-align: center;
+      padding: 80px 40px;
+    }
+    .cover .sap-logo {
+      display: inline-block;
+      background: #0070f2;
+      color: white;
+      font-weight: bold;
+      font-size: 22px;
+      padding: 6px 14px;
+      border-radius: 3px;
+      margin-bottom: 60px;
+    }
+    .cover h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #f48fb1;
+    }
+
+    /* Section dividers */
+    .section-divider {
+      background: #1a237e;
+      color: #f48fb1;
+      text-align: center;
+      padding: 80px 40px;
+    }
+    .section-divider h2 {
+      font-size: 32px;
+      font-weight: bold;
+      color: #f48fb1;
+    }
+
+    /* Main content wrapper */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Table of contents */
+    .toc {
+      background: white;
+      padding: 40px;
+      margin: 30px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .toc h2 {
+      text-align: center;
+      font-size: 26px;
+      color: #1a237e;
+      margin-bottom: 30px;
+    }
+    .toc .toc-section {
+      margin-bottom: 20px;
+    }
+    .toc .toc-section-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #0070f2;
+      margin-bottom: 8px;
+    }
+    .toc .toc-section-title .page-num {
+      float: right;
+      color: #1a237e;
+    }
+    .toc-divider {
+      border: none;
+      border-top: 2px solid #1a237e;
+      margin-bottom: 12px;
+    }
+    .toc ul {
+      list-style: none;
+      padding-left: 16px;
+    }
+    .toc ul li {
+      color: #0070f2;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .toc ul li .page-num {
+      float: right;
+      color: #0070f2;
+    }
+
+    /* How to use box */
+    .how-to-use {
+      background: white;
+      padding: 40px;
+      margin: 30px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .how-to-use h2 {
+      background: #1a237e;
+      color: #f48fb1;
+      text-align: center;
+      padding: 12px;
+      font-size: 20px;
+      margin: -40px -40px 30px -40px;
+      border-radius: 8px 8px 0 0;
+    }
+    .how-to-use .rounded-box {
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 24px 30px;
+      margin-bottom: 24px;
+    }
+    .how-to-use .rounded-box p {
+      margin-bottom: 12px;
+    }
+    .how-to-use .rounded-box ul {
+      list-style: none;
+      padding-left: 10px;
+    }
+    .how-to-use .rounded-box ul li {
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+    .how-to-use .rounded-box ul li::before {
+      content: "❑";
+      position: absolute;
+      left: 0;
+      color: #cc0033;
+    }
+    .how-to-use .pro-tip h3 {
+      color: #cc0033;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .how-to-use .pro-tip ul li::before {
+      content: "➢";
+      color: #cc0033;
+    }
+
+    /* Skill card */
+    .skill-card {
+      background: white;
+      padding: 40px;
+      margin: 30px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .skill-card h2 {
+      background: #1a237e;
+      color: #f48fb1;
+      text-align: center;
+      padding: 12px;
+      font-size: 18px;
+      margin: -40px -40px 16px -40px;
+      border-radius: 8px 8px 0 0;
+    }
+    .skill-card .subtitle {
+      text-align: center;
+      color: #333;
+      font-size: 13px;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .skill-card .questions-box {
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 24px 30px;
+    }
+    .skill-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .skill-card ul li {
+      margin-bottom: 18px;
+      padding-left: 16px;
+      position: relative;
+    }
+    .skill-card ul li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: #1a237e;
+      font-size: 16px;
+    }
+    .skill-card ul li strong {
+      color: #1a237e;
+    }
+    .followup {
+      margin-top: 8px;
+      padding-left: 0;
+      color: #cc0033;
+      font-style: italic;
+      font-size: 13px;
+    }
+    .followup strong {
+      color: #cc0033 !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div><span class="sap-logo">SAP</span></div>
+  <h1>Tech Interviewer Questions Guide</h1>
+</div>
+
+<div class="content">
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+
+    <div class="toc-section">
+      <div class="toc-section-title">1. Tech T1–T4PF Professional Skills <span class="page-num">4</span></div>
+      <hr class="toc-divider">
+      <ul>
+        <li>Learning Agility <span class="page-num">5</span></li>
+        <li>Collaboration <span class="page-num">6</span></li>
+        <li>Complex Problem Solving <span class="page-num">7</span></li>
+        <li>Effective Communication <span class="page-num">9</span></li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title">2. Core AI Skills <span class="page-num">10</span></div>
+      <hr class="toc-divider">
+      <ul>
+        <li>AI Adoption Mindset <span class="page-num">11</span></li>
+        <li>Context Engineering <span class="page-num">12</span></li>
+        <li>AI Output Quality Assurance <span class="page-num">13</span></li>
+        <li>Agentic AI Day-to-Day Practice <span class="page-num">14</span></li>
+        <li>AI-Assisted Automation &amp; Prototyping <span class="page-num">15</span></li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title">3. Tech T4PM Professional Skills <span class="page-num">16</span></div>
+      <hr class="toc-divider">
+      <ul>
+        <li>Adaptive Leadership <span class="page-num">17</span></li>
+        <li>Complex Problem Solving <span class="page-num">18</span></li>
+        <li>Creative Thinking <span class="page-num">19</span></li>
+        <li>Customer Focus <span class="page-num">20</span></li>
+        <li>Effective Communication <span class="page-num">21</span></li>
+        <li>Employee Engagement <span class="page-num">22</span></li>
+        <li>Team Performance <span class="page-num">23</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- How to Use -->
+  <div class="how-to-use">
+    <h2>How to Use the Tech Interviewer Questions Guide</h2>
+
+    <div class="rounded-box">
+      <p><strong>Interviewers are expected to evaluate skills aligned to the job requirements, with clear ownership across the interview panel.</strong></p>
+      <p><strong>Core role-specific technical skills should be assessed in depth based on the needs of the role. Professional Skills and Core AI Skills can be assessed using the curated questions available in the Tech Interviewer Questions Guide.</strong></p>
+      <p>*This guide supports both Professional and Student hiring by providing role- and level-appropriate questions that enable consistent evaluation across experience levels.</p>
+      <ul>
+        <li>Professional Skills (Tech T1–T4 PF Hiring)</li>
+        <li>Core AI Skills</li>
+        <li>Professional Skills (T4 PM Hiring)</li>
+      </ul>
+    </div>
+
+    <div class="pro-tip">
+      <h3>Pro Tip</h3>
+      <ul>
+        <li><strong>Use the question guides to assess Professional Skills and Core AI Skills consistently.</strong></li>
+        <li><strong>Go deeper where needed using the suggested follow-up questions to validate depth, context, and real-world application.</strong></li>
+        <li><strong>Review the Tech role-specific skills to identify which ones need deeper evaluation. Questions for tech role-specific skills should be defined by the Hiring Manager and/or interviewer.</strong></li>
+        <li><strong>Hiring Managers may choose Codility to assess selected technical skills, and interviewers can leverage the Codility report and candidate solution for targeted follow-up questions.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- Section Divider: T1-T4PF -->
+<div class="section-divider">
+  <h2>Tech T1 - T4PF<br>Professional Skills</h2>
+</div>
+
+<div class="content">
+
+  <!-- Skill 1: Learning Agility -->
+  <div class="skill-card">
+    <h2>Professional Skill #1 – Learning Agility</h2>
+    <p class="subtitle">Continuously learns and applies new tools, technologies, and knowledge to solve problems and adapt to changing situations</p>
+    <div class="questions-box">
+      <ul>
+        <li>
+          <strong>Describe a time you had to quickly learn a completely new technology or concept. What steps did you take?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> What sources or tools did you rely on most while learning? Did you use any AI-based tools to accelerate your understanding? How?</p>
+        </li>
+        <li><strong>Share an example of using feedback or mentorship to strengthen a skill. How did you apply what you learned?</strong></li>
+        <li>
+          <strong>Describe a time you had to learn a new tool or approach to solve a technical problem. What was your learning approach?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you explore AI tools or assistants as part of your solution? How did it impact your speed or quality of output?</p>
+        </li>
+        <li><strong>Describe a time you had to learn a new AI tool (such as a coding assistant, ML library, or generative AI) to solve a technical problem. What was your learning approach, and what impact did it have?</strong></li>
+        <li><strong>Share an example of proactively learning a new AI capability to improve a development process, feature, or workflow. What motivated you, and what was the outcome?</strong></li>
+        <li><strong>Explain how AI tools accelerated your learning of a new technology, framework, or system. How did this support your problem-solving?</strong></li>
+        <li>
+          <strong>Describe a situation where you experimented with different approaches for debugging, testing, or design.</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> What options did you consider before choosing your approach? Did you include AI tools as part of your experimentation?</p>
+        </li>
+        <li><strong>Describe a situation where you learned from an unexpected failure or experiment. What adjustments did you make afterward?</strong></li>
+        <li><strong>Provide an example of how you continuously updated your knowledge or skills to adapt to changing requirements or technologies.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Skill 2: Collaboration -->
+  <div class="skill-card">
+    <h2>Professional Skill #2 – Collaboration</h2>
+    <p class="subtitle">Creates cross team relationships to achieve shared goals, using clear communication &amp; collaboration – supported by AI tools that improve alignment and decision making.</p>
+    <div class="questions-box">
+      <ul>
+        <li>
+          <strong>Describe a situation where you collaborated across teams to achieve a shared goal. What was your role, how did you ensure alignment, and what was the outcome?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you use any AI tools to support collaboration, alignment, or information sharing across teams? How did it impact the outcome?</p>
+        </li>
+        <li>
+          <strong>Share an example of how you have given or received feedback in a cross-team setting. How did this influence teamwork and project outcomes?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you use any AI-enabled tools—such as sentiment analysis, feedback analytics, copilots, or shared knowledge platforms—to gather, synthesize, or act on feedback across teams? How did these tools influence the quality of feedback, decision-making, or the final outcome?</p>
+        </li>
+        <li>
+          <strong>Tell me about a time when you had to navigate disagreement or conflict between teams. What steps did you take to restore alignment and maintain effective collaboration?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did AI tools play any role in helping clarify information, provide insights, or reduce ambiguity during the disagreement? How did you ensure those inputs were trusted?</p>
+        </li>
+        <li><strong>Describe a time you collaborated across teams using AI tools such as copilots, shared AI documentation, or knowledge systems. How did these tools improve alignment or decision quality?</strong></li>
+        <li><strong>Provide an example where AI-generated insights created confusion or differing interpretations across teams. How did you address the misalignment and guide the teams toward a shared decision?</strong></li>
+        <li><strong>Tell me about a situation where you introduced or recommended AI capabilities to enhance cross-team collaboration or improve a workflow. What solution did you propose, and what impact did it have?</strong></li>
+        <li><strong>Share an example where you designed, set up, or used an AI-enabled workflow or agent to support collaboration between multiple groups. What problem were you solving, and what was the result?</strong></li>
+        <li><strong>Describe a time when you had to adapt your own ideas or approach to support a broader team objective. How did you balance perspectives across teams, and what was the outcome?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Skill 3: Complex Problem Solving -->
+  <div class="skill-card">
+    <h2>Professional Skill #3 – Complex Problem Solving</h2>
+    <p class="subtitle">Identifies root causes of complex problems through systematic analysis and develops scalable solutions using appropriate tools, technologies, and AI where relevant</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Describe a situation where you used AI, machine learning, or intelligent automation to detect or diagnose a complex technical problem in a system. What was the impact?</strong></li>
+        <li>
+          <strong>Tell us about a time when you had to troubleshoot a critical performance or scalability issue in a production system.</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> What analysis methods and tools did you use? What was the outcome?</p>
+        </li>
+        <li><strong>Tell us about a time when you used AI models or data analytics to improve system performance, scalability, or reliability.</strong></li>
+        <li>
+          <strong>How have you detected anomalies, failures, or unusual system behaviour? What tools or models did you use?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Have you used AI or predictive analytics in this situation and what was the outcome?</p>
+        </li>
+        <li><strong>Tell us about a time when you designed a scalable solution to prevent a recurring technical problem. What architecture or strategy did you implement?</strong></li>
+        <li><strong>Describe a complex technical problem you faced in a system or application. How did you analyse the root cause and what solution did you implement?</strong></li>
+        <li><strong>Explain how you implemented automation or AI-driven scripts to reduce manual troubleshooting during production incidents.</strong></li>
+        <li><strong>Describe a scenario where you integrated AI capabilities into an existing application or legacy system. What architectural or design changes were required?</strong></li>
+        <li><strong>Explain a case where you used Generative AI tools to accelerate debugging, development, or system optimization.</strong></li>
+        <li><strong>Describe a problem that required analysing multiple systems or microservices. How did you isolate the root cause across services?</strong></li>
+        <li><strong>Give an example of when you had limited or unclear data while solving a technical issue. How did you make decisions and move forward?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Skill 4: Creative Thinking (T1-T4PF) -->
+  <div class="skill-card">
+    <h2>Professional Skill #4 – Creative Thinking</h2>
+    <p class="subtitle">Collaborates across teams to achieve shared goals and drives innovative solutions by applying new ideas, technologies, and AI where relevant.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Describe an innovative AI-driven solution to a tech problem or system improvement. What set it apart?</strong></li>
+        <li><strong>Tell us about a situation where standard approaches did not work and you had to think creatively to solve a technical problem. What did you do?</strong></li>
+        <li>
+          <strong>Tell me about a time you explored a new idea, technology that meaningfully improved a feature, process, or workflow. What inspired the exploration?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you use an AI capability and what impact did it create?</p>
+        </li>
+        <li><strong>Describe a time you developed an innovative solution to improve a system, product, or process. What was the idea and what impact did it create?</strong></li>
+        <li><strong>Describe a time you used AI agents or orchestrated multiple AI models to automate complex workflows. How did you ensure reliability, security, and responsible AI use?</strong></li>
+        <li><strong>Give an example where you introduced a new technology, design approach, or process improvement that significantly improved efficiency, performance, or user experience. What was the result?</strong></li>
+        <li>
+          <strong>Describe a situation where you combined creative thinking with automation to solve a challenge that could not be addressed through standard technical approaches.</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> What role did AI play in enabling or enhancing the automation you designed, and how did you ensure the outputs were reliable and accurate? (e.g., orchestration agents, predictive systems, generative automation)</p>
+        </li>
+        <li><strong>Describe AI tool experiments (gen AI, coding assistants, ML) for designing/prototyping. Outcome?</strong></li>
+        <li><strong>Share proposing a new AI approach for efficiency/UX/performance gains. Validation method?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Skill 5: Effective Communication (T1-T4PF) -->
+  <div class="skill-card">
+    <h2>Professional Skill #5 – Effective Communication</h2>
+    <p class="subtitle">Communicates effectively and professionally; adapts message to different stakeholder groups.</p>
+    <div class="questions-box">
+      <ul>
+        <li>
+          <strong>Describe a situation where you had to communicate complex data or analytical insights—such as model outputs, uncertainty, or system behavior—to non-technical stakeholders.</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> What was your responsibility, did you use AI to analyze insights, what steps did you take to ensure clarity, and what was the outcome?</p>
+        </li>
+        <li><strong>Share an example where you received unclear or incomplete feedback from a team member or stakeholder. What was your task, how did you seek clarification to improve mutual understanding, and what impact did this have on the project's progress?</strong></li>
+        <li>
+          <strong>Describe a situation where you used tools or platforms to improve communication, documentation, or knowledge-sharing within a development team.</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> What tools/platforms did you use (or did you use AI tools like Co-pilot, GPT)? What were you aiming to achieve, what actions did you take, and what outcomes followed?</p>
+        </li>
+        <li><strong>Provide an example of working with a distributed or cross-functional development team where requirements or system behavior were changing. What was your responsibility, how did you maintain alignment through communication, and what was the overall impact?</strong></li>
+        <li><strong>Tell me about a time when you collaborated with remote team members across time zones. What was your task, what actions did you take to ensure clear updates and alignment, and what was the result for team efficiency or delivery?</strong></li>
+        <li><strong>Describe a situation where an AI-generated recommendation, automated output, or dashboard caused confusion or mistrust among stakeholders. What was the context, how did you address concerns through communication, and what was the final outcome?</strong></li>
+        <li><strong>Share an experience from a fast-moving agile environment where you had to communicate decisions or updates based on evolving, incomplete, or probabilistic information. What was your role, how did you balance speed with clarity, and what results did you achieve?</strong></li>
+        <li><strong>Describe a time when you needed to explain a complex algorithm, architectural decision, or system workflow to a non-technical audience. What was your task, what actions did you take to simplify, and what was the result in their understanding or decision-making?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- Section Divider: Core AI Skills -->
+<div class="section-divider">
+  <h2>Core AI Skills</h2>
+</div>
+
+<div class="content">
+
+  <!-- AI Skill 1: AI Adoption Mindset -->
+  <div class="skill-card">
+    <h2>AI Skill #1 – AI Adoption Mindset</h2>
+    <p class="subtitle">Ability to embrace mindsets and behaviors that drive effective human–AI collaboration, outcome focus, experimentation, and workflow adaptation. Employees who excel in this skill are open to change, accountable, and results-oriented.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Walk me through a time you had to deliver faster or at a higher quality than possible with your usual methods. What new approaches or tools did you turn to?</strong></li>
+        <li><strong>Describe a time when you introduced your team to a new way of working. What role did you play in that transition and how did you handle resistance or skepticism?</strong></li>
+        <li><strong>How do you currently use AI tools in your personal or professional life, and what has that experience taught you about their strengths and limitations?</strong></li>
+        <li><strong>Tell me about a time you had to learn an AI-based tool or technology quickly. What was your approach, and what impact did it have on your work?</strong></li>
+        <li><strong>Describe a situation where you experimented with an AI-driven approach that didn't work as expected. What did you learn, and how did you adjust?</strong></li>
+        <li><strong>When faced with a repetitive or time-consuming task, how do you evaluate whether there's a smarter or more efficient way to accomplish it? Provide an example.</strong></li>
+        <li><strong>How do you decide when to rely on AI assistance versus your own expertise? Can you walk me through a real example?</strong></li>
+        <li><strong>Have you ever integrated a new AI capability into a workflow or process? What resistance did you face, and how did you navigate it?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AI Skill 2: Context Engineering -->
+  <div class="skill-card">
+    <h2>AI Skill #2 – Context Engineering</h2>
+    <p class="subtitle">Ability to design, refine, and optimize prompts or contextual inputs to elicit desired outputs from AI models, with effective application and alignment to MCP-based workflows and protocols. Employees who excel in this skill understand AI behaviors, possess strong analytical and language skills, and can tailor prompts for accuracy and relevance within established workflow guidelines.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>How do you define "context engineering" in the lifecycle of building an AI-powered system, and where does it sit relative to retrieval, modeling, and evaluation?</strong></li>
+        <li><strong>Walk me through your typical workflow for designing context or prompt instructions for a new task. What inputs do you gather, and how do you iterate?</strong></li>
+        <li><strong>How do you evaluate and monitor a context-augmented system before and after launch? Which metrics or signals do you rely on?</strong></li>
+        <li><strong>In a context-augmented system, what would you cache (e.g., retrieval results, embeddings, partial prompts)? How would you design your cache invalidation strategy?</strong></li>
+        <li><strong>How would you detect, rewrite, or restructure vague or poorly formed user queries to improve retrieval and response quality?</strong></li>
+        <li><strong>How do you design effective few-shot examples to guide model behavior? What criteria do you use to select, validate, or generate these examples?</strong></li>
+        <li><strong>Describe your process for evaluating whether a given context or prompt is effective. What qualitative and quantitative metrics do you use?</strong></li>
+        <li><strong>How do you test the robustness of a prompt or context when inputs become ambiguous, adversarial, or unexpected? What failure modes do you look for?</strong></li>
+        <li><strong>How do you incorporate safety, compliance, and role-based access rules into a prompt or context without degrading output quality?</strong></li>
+        <li><strong>Describe a scenario where an LLM could misinterpret context in a harmful or unintended way. How would you redesign the prompt, context, or system architecture to prevent this?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AI Skill 3: AI Output Quality Assurance -->
+  <div class="skill-card">
+    <h2>AI Skill #3 – AI Output Quality Assurance</h2>
+    <p class="subtitle">Ability to assess and ensure the correctness, completeness, safety, bias, and standards alignment of AI-generated outputs. Employees who excel in this skill apply structured checks and provide supporting evidence.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Tell me about an experience where an AI-generated response appeared reliable at first but later proved to be incorrect or incomplete. What steps did you take to verify the output, uncover the issue, and ensure a more accurate final result?</strong></li>
+        <li><strong>Have you encountered bias, hallucination, or unreliable responses from an AI system? What steps did you take to detect and address the issue?</strong></li>
+        <li><strong>What process do you follow to validate AI-generated code, analysis, or recommendations before relying on them in production or decision-making?</strong></li>
+        <li><strong>Describe a time when you had to compare AI-generated results with other sources (data, documentation, or expert input). How did you determine which information was correct?</strong></li>
+        <li><strong>If an AI tool repeatedly produces inconsistent or low-quality outputs, what steps would you take to improve the results or mitigate the issue?</strong></li>
+        <li><strong>How do you determine whether an AI-generated response is reliable enough to be used in a technical or business decision?</strong></li>
+        <li><strong>How do you balance the efficiency gained from AI tools with the need for human review, validation, and accountability?</strong></li>
+        <li><strong>When reviewing outputs such as code, reports, or system recommendations, how do you ensure they meet quality and reliability standards?</strong></li>
+        <li><strong>Describe a time when you had to validate information from multiple sources before making a technical decision. How did you confirm accuracy?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AI Skill 4: Agentic AI Day-to-Day Practice -->
+  <div class="skill-card">
+    <h2>AI Skill #4 – Agentic AI Day-to-Day Practice</h2>
+    <p class="subtitle">Ability to seamlessly integrate autonomous AI agents into daily personal workflows to automate complex, multi-step administrative tasks. Employees who excel in this skill focus on workflow mapping, time reclamation, and the critical auditing of agent-led outcomes to ensure operational accuracy.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Describe a situation where you used an AI tool or agent to solve a complex problem in a work setting (technical or business-related). What was the task, what actions did you take, and what was the outcome?</strong></li>
+        <li><strong>Tell me about a time when you used AI tools to support research, analysis, or decision-making. What were you trying to achieve, and how did AI contribute?</strong></li>
+        <li><strong>Share an example of using a coding assistant (such as GitHub Copilot or similar) to accelerate development, improve code quality, or troubleshoot an issue. What workflow improvements did you observe?</strong></li>
+        <li><strong>Provide an example where you used AI to organize your daily work, manage priorities, or track project progress. What specific AI capabilities did you rely on, and how did they impact your efficiency?</strong></li>
+        <li><strong>Describe a situation where AI systems, such as RAG-based search or retrieval tools, helped you gather information, analyze documents, or connect insights across large datasets. What was your role, and what results did you achieve?</strong></li>
+        <li><strong>Tell me about a time when you used AI to streamline or automate a recurring business or operational task (such as reporting, documentation, customer inquiries, or HR workflows). What steps did you take, and what was the outcome?</strong></li>
+        <li><strong>Share an example where an autonomous or semi-autonomous AI agent helped you troubleshoot, structure, or decompose a complex technical or business problem. What guidance did the AI provide, and how did it influence your solution?</strong></li>
+        <li><strong>Describe a situation where you combined multiple AI tools such as copilots, research agents, workflow automations, or document analyzers to complete a multi-step work process. What challenge were you addressing, and what value did the integrated AI workflow deliver?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AI Skill 5: AI-Assisted Automation & Prototyping -->
+  <div class="skill-card">
+    <h2>AI Skill #5 – AI-Assisted Automation &amp; Prototyping</h2>
+    <p class="subtitle">Ability to leverage AI tools to rapidly create low- and high-fidelity prototypes, facilitating iterative experimentation and feedback in the early stages of solution development. Employees who excel in this skill can efficiently transition from simple concepts to interactive, functional prototypes using appropriate software and AI capabilities.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Describe a situation in which you used a vibe-coding approach (natural language + AI tools) to build or modify a feature across multiple integrated systems.</strong></li>
+        <li><strong>Tell me about a time when you relied on AI-assisted coding to interact with existing system APIs, services, or microservices. How did you validate that the generated integration logic worked correctly?</strong></li>
+        <li><strong>Share an example where AI-generated code needed to fit into a larger system architecture. What challenges did you face, and how did you resolve them?</strong></li>
+        <li><strong>Describe a scenario in which you used vibe coding to troubleshoot or extend an integrated system. How did the AI support your debugging or design decisions?</strong></li>
+        <li><strong>Tell me about a time when AI-generated code introduced issues in system integration (e.g., breaking contracts, performance, or security concerns). How did you identify and fix the problem?</strong></li>
+        <li><strong>You prototype a working real-time integration using AI-assisted automation. What does 'ready for another team to deploy and maintain' mean to you, and what concrete steps do you take between 'it works on my machine' and that state?</strong></li>
+        <li><strong>You're using an AI assistant to add a new feature to an existing system, but it keeps suggesting changes that would break downstream consumers. How do you handle this, and how do you guide the AI within system constraints?</strong></li>
+        <li><strong>Give an example of when you combined multiple AI tools (e.g., coding assistant, API documentation retrieval, testing tools, CI/CD automation) to deliver a system-integrated solution. What workflow did you follow, and what value did the integration deliver?</strong></li>
+        <li><strong>Tell me about a situation where AI-generated output was technically correct but not suitable for production use. What was missing, and how did you improve the solution?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- Section Divider: T4PM -->
+<div class="section-divider">
+  <h2>Tech T4PM<br>Professional Skills</h2>
+</div>
+
+<div class="content">
+
+  <!-- T4PM Skill 1: Adaptive Leadership -->
+  <div class="skill-card">
+    <h2>Professional Skill #1 – Adaptive Leadership</h2>
+    <p class="subtitle">Adapts the approach and leadership style to navigate complexities in situations and bring out the best in people.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Tell me about a situation where you had to make a rapid leadership decision in an AI- or data-driven project without having complete information. What was your task, how did you manage risk and communicate the decision, and what was the outcome?</strong></li>
+        <li><strong>Share a situation where you had to tailor your leadership approach to manage a diverse team with different working styles or professional backgrounds. What actions did you take, and what outcome did you achieve?</strong></li>
+        <li>
+          <strong>Describe a situation where you had to streamline organizational goals or improve team performance.</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you use AI capabilities to streamline? What challenge were you addressing? What actions did you take, and what results followed?</p>
+        </li>
+        <li><strong>Describe a time when shifting business priorities required you to pivot your strategy mid-project. What was your responsibility, how did you realign your team, and what was the outcome?</strong></li>
+        <li><strong>Share an example of adapting your leadership style to drive adoption of an AI, automation, or cloud-based solution within your team. What resistance did you face, how did you influence stakeholders, and what was the impact?</strong></li>
+        <li><strong>Tell me about a situation when your team faced ambiguity or unclear direction during a critical initiative. What was your role, how did you provide clarity, and what was the result?</strong></li>
+        <li><strong>Provide an example where you used AI to reduce administrative burden or automate a workflow for your team. What actions did you take, and how did this affect team efficiency or morale?</strong></li>
+        <li><strong>Describe a time when you had to lead your team through a significant disruption, such as a process change, organizational shift, or unexpected workload increase. How did you adapt your leadership to support the team, and what was the result?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- T4PM Skill 2: Complex Problem Solving -->
+  <div class="skill-card">
+    <h2>Professional Skill #2 – Complex Problem Solving</h2>
+    <p class="subtitle">Assesses how the candidate breaks down ambiguous AI problems, applies logical analysis, and develops practical, adaptive solutions.</p>
+    <div class="questions-box">
+      <ul>
+        <li>
+          <strong>Describe a situation where you faced a complex technical or business problem with multiple possible root causes. What was your task, what actions did you take to analyse the issue and decide on a solution, and what was the result?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you introduce or encourage the use of AI tools within the team? How?</p>
+        </li>
+        <li><strong>Tell me about a situation where you led the diagnosis of a complex, high-impact issue with the help of AI. What was your approach?</strong></li>
+        <li><strong>Describe a situation where you had to make sense of conflicting or incomplete information to reach a decision. What was your approach?</strong></li>
+        <li>
+          <strong>Describe a time when you were responsible for leading a team through an ambiguous problem with several potential causes. How did you bring clarity, guide the investigation, and drive the group toward a solution?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you introduce or encourage the use of AI tools within the team? How?</p>
+        </li>
+        <li><strong>Tell me about a situation where you had to diagnose a complex problem in an AI or cloud system (e.g., model underperformance, data drift, or system latency). What was your task, how did you analyse the problem systematically, what actions did you take, and what was the result?</strong></li>
+        <li><strong>Describe a time when you solved a problem involving both technical complexity and customer impact in an AI or data-driven product. What was the situation, how did you gather data and stakeholder perspectives, what solution did you implement, and what outcome did you achieve?</strong></li>
+        <li><strong>Based on an example from your past – walk me through how you typically approach a large, ambiguous challenge. What steps do you take to get started? Which tools do you use?</strong></li>
+        <li><strong>Describe a time when you had to evaluate the effectiveness of your solution to a complex AI or technical problem. What was the situation, how did you measure success (e.g., model metrics, business KPIs), what adjustments did you make, and what results did you achieve?</strong></li>
+        <li><strong>Share an example of a problem where there was no perfect solution—only trade-offs. How did you evaluate your options and decide?</strong></li>
+        <li><strong>Can you share an example where you solved a significant problem with limited resources, time, or support? What made it work?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- T4PM Skill 3: Creative Thinking -->
+  <div class="skill-card">
+    <h2>Professional Skill #3 – Creative Thinking</h2>
+    <p class="subtitle">Creates and maintains working relationships across organizational boundaries to better achieve common goals.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>Tell me about a situation where you used creative thinking to solve a problem in an AI or data-driven project (e.g., improving model performance, rethinking data usage, or optimizing a workflow). What was your task, what innovative approach did you take, and what was the result?</strong></li>
+        <li><strong>Describe a situation where you had limited resources or time constraints. How did you creatively work within these limitations to accomplish your objectives?</strong></li>
+        <li><strong>Give an example of a time when you had to think outside the box to overcome a challenge. What was your process for generating alternative solutions, and how did you decide on the best course of action?</strong></li>
+        <li><strong>Describe a time when you collaborated with cross-functional teams (such as data scientists, engineers, and product managers) to develop an innovative AI or cloud-based solution. What was the situation, what role did you play in driving creativity, what actions did you take, and what outcome did you achieve?</strong></li>
+        <li><strong>Share an example where you had to think beyond conventional approaches to overcome a limitation in AI systems (e.g., limited data, biased models, or tooling constraints). What was your responsibility, how did you generate and evaluate alternative ideas, and what was the impact?</strong></li>
+        <li><strong>Describe a situation where you had to come up with an original solution to a problem when the usual approach was not working. What was your task, what actions did you take to think creatively and test new ideas, and what was the result?</strong></li>
+        <li>
+          <strong>Tell me about a time when you proposed a novel idea that challenged the status quo. What was the context, how did you gain stakeholder buy-in, what steps did you take to implement it, and what results did it deliver?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> What role did AI play in shaping or strengthening your proposal? Did you use AI to build prototypes, simulations, or business cases? How did you address concerns or risk related to AI Adoption?</p>
+        </li>
+        <li><strong>Describe a situation where you had tight timelines or limited resources while working on an AI or cloud initiative. What was your task, how did you creatively adapt your approach or leverage tools (e.g., AI copilots, automation), and what was the final outcome?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- T4PM Skill 4: Customer Focus -->
+  <div class="skill-card">
+    <h2>Professional Skill #4 – Customer Focus</h2>
+    <p class="subtitle">Understands customer needs and uses expertise, tools, and technologies (including AI where relevant) to deliver solutions that create value and ensure customer satisfaction.</p>
+    <div class="questions-box">
+      <ul>
+        <li>
+          <strong>Describe a time you identified a customer problem or pain point and implemented a technical solution to address it. What was the impact on the customer?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you explore whether AI could be part of the solution? How did you evaluate if AI was the right approach, and what was the impact on the customer?</p>
+        </li>
+        <li><strong>Describe using AI/data insights to grasp a customer issue and deliver a solution. What was the customer impact?</strong></li>
+        <li><strong>Can you share an example of how customer feedback led you to change or improve something in your work or processes?</strong></li>
+        <li><strong>Tell me about a time when you had to understand a customer's needs that weren't clearly expressed. How did you go about uncovering what they really needed?</strong></li>
+        <li>
+          <strong>Tell us about a situation where you had to balance technical constraints with customer needs. How did you decide on the best solution?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Did you consider an AI solution to balance technical constraints with customer needs &amp; expectations? How did you arrive at your final solution?</p>
+        </li>
+        <li>
+          <strong>Give an example of how you gathered customer feedback and used it to improve a product, system, or service. What changes did you implement and what was the outcome?</strong>
+          <p class="followup"><strong>Suggested follow up question –</strong> Give an example of how you used AI to gather and analyze customer feedback and used these insights to identify an improvement opportunity. How did you validate the findings, what changes did you implement, and what was the outcome?</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- T4PM Skill 5: Effective Communication -->
+  <div class="skill-card">
+    <h2>Professional Skill #5 – Effective Communication</h2>
+    <p class="subtitle">Communicates effectively and professionally; adapts message to different stakeholder groups while ensuring shared understanding – using AI insights when helpful to enhance clarity and alignment.</p>
+    <div class="questions-box">
+      <ul>
+        <li>
+          <strong>Tell me about a time you had to communicate complex analytical insights—such as model outputs, uncertainty, or system behavior—to non-technical stakeholders. What actions did you take to ensure clarity, and what was the result?</strong>
+          <p class="followup"><strong>Suggested follow-up question –</strong> Did you use any AI tools (e.g., summarization, visualization, copilots) to help simplify or communicate these insights? How did you ensure the outputs were accurate and not misleading?</p>
+        </li>
+        <li>
+          <strong>Share an example where you received unclear or incomplete input from a stakeholder. How did you seek clarity, and how did this impact project progress or decision-making?</strong>
+          <p class="followup"><strong>Suggested follow-up question –</strong> Did you use any AI tools to interpret, structure, or refine the input? How did you ensure the output didn't introduce bias or misinterpretation?</p>
+        </li>
+        <li><strong>Describe a situation where you used AI tools (copilots, chatbots, summarization, analytics platforms) to improve communication, documentation, or knowledge-sharing within your team. What outcomes did you achieve?</strong></li>
+        <li><strong>Provide an example of leading a distributed or cross-functional team during shifting requirements or system behavior. How did you maintain alignment and ensure effective communication?</strong></li>
+        <li><strong>Tell me about a time you collaborated with remote teams across time zones. How did you ensure clear updates, alignment, and continuity of work?</strong></li>
+        <li><strong>Share an experience where you had to communicate decisions or updates in a fast-moving environment with evolving or incomplete information. How did you balance speed, clarity, and accuracy?</strong></li>
+        <li><strong>Tell me about a time you had to explain a complex algorithm, architectural decision, or workflow to a non-technical audience. How did you simplify the message, and what was the outcome?</strong></li>
+        <li><strong>Describe a situation where conflicting interpretations—possibly from dashboards, metrics, or AI results—created misalignment. How did you clarify the message and bring the group back together?</strong></li>
+        <li><strong>Tell me about a time you had to deliver difficult or unwelcome news to a stakeholder or team. How did you approach the conversation, and what was the impact?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- T4PM Skill 6: Employee Engagement -->
+  <div class="skill-card">
+    <h2>Professional Skill #6 – Employee Engagement</h2>
+    <p class="subtitle">Continuously listens, understands, and acts in a manner that inspires engagement, high performance and well-being among employees.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>How do you ensure that tools or processes used to monitor engagement, including AI-powered ones, are applied ethically and in a way that preserves employee trust?</strong></li>
+        <li><strong>How do you tailor your engagement approach for different individuals, particularly across generations, cultures, or remote vs. in-office employees?</strong></li>
+        <li>
+          <strong>Describe a situation where signals from a workflow, feedback platform, or automated system alerted you to a potential team-engagement issue. How did you investigate it, communicate with your team, and drive positive change?</strong>
+          <p class="followup"><strong>Suggested follow-up question –</strong> Were any of these signals AI-generated or AI-interpreted? How did you validate that the insights were accurate before taking action?</p>
+        </li>
+        <li><strong>Describe how you have used data or AI-generated insights such as sentiment analysis or engagement dashboards to understand and act on employee engagement.</strong></li>
+        <li><strong>How do you understand the role of employee engagement in enhancing performance and creating a healthy work environment?</strong></li>
+        <li><strong>Tell me about a time employees expressed fear or uncertainty about change, AI, or restructuring. How did you address their concerns while keeping the team engaged?</strong></li>
+        <li>
+          <strong>Tell me about a time you leveraged tools or structured insights to personalize your coaching or support for team members. How did this influence engagement, ownership, or performance?</strong>
+          <p class="followup"><strong>Suggested follow-up question –</strong> Did you use any AI tools to generate or augment these insights? How did you ensure your approach remained fair and not overly reliant on automated suggestions?</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- T4PM Skill 7: Team Performance -->
+  <div class="skill-card">
+    <h2>Professional Skill #7 – Team Performance</h2>
+    <p class="subtitle">Supports teams in reaching their full potential by providing clear expectations and feedback on performance to maintain a productive and efficient work environment.</p>
+    <div class="questions-box">
+      <ul>
+        <li><strong>How do you describe the role of performance management in enabling a team to deliver consistently and grow over time?</strong></li>
+        <li><strong>Tell me about a time when automated insights or flagged risks slowed delivery or raised ethical concerns. How did you guide your team through it while maintaining productivity and clarity?</strong></li>
+        <li>
+          <strong>How do you set and communicate clear performance expectations to your team, especially when priorities shift or new information becomes available?</strong>
+          <p class="followup"><strong>Suggested follow-up question –</strong> Do you use any AI tools to help structure, track, or adapt these expectations? How do you ensure the outputs remain contextually accurate and fair?</p>
+        </li>
+        <li><strong>How do you use engagement indicators or tool-generated signals to understand team morale during setbacks, and how do you adjust performance expectations in response?</strong></li>
+        <li><strong>How do you use AI-driven engagement metrics to monitor and sustain team motivation during setbacks, while setting adaptive performance expectations?</strong></li>
+        <li>
+          <strong>Can you share an example of how you coached or empowered a team to reach its full potential? What approaches or tools supported your efforts?</strong>
+          <p class="followup"><strong>Suggested follow-up question –</strong> Did you use any AI tools to support coaching (e.g., feedback suggestions, skill insights)? How did you balance AI input with your own judgment?</p>
+        </li>
+        <li><strong>When addressing underperformance, how have you used structured guidance tools—such as scenario-based simulations or coaching assistants—to support team members, and what results did you see?</strong></li>
+        <li><strong>How do you use AI-powered collaboration tools (e.g., for meeting analysis) to pre-emptively spot and mitigate conflicts impacting team performance?</strong></li>
+        <li><strong>How do you provide feedback to your team to maintain productivity and efficiency?</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+</body>
+</html>
